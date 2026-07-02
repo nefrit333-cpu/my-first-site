@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dmitry Web — первый сайт</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-container">
+      <a class="logo" href="#">Dmitry Web</a>
+
+      <nav class="nav" id="siteNav">
+        <a href="#about">Обо мне</a>
+        <a href="#skills">Навыки</a>
+        <a href="#projects">Проекты</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему">
+          🌙
+        </button>
+
+        <button class="menu-button" id="menuButton" type="button" aria-label="Открыть меню" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <p class="label">Начинающий веб-разработчик</p>
+
+        <h1>Привет, я Дмитрий</h1>
+
+        <p class="description">
+          Я начинаю изучать разработку сайтов и хочу научиться создавать проекты для клиентов.
+        </p>
+
+        <h2>Чему я хочу научиться</h2>
+
+        <ul class="skills-list">
+          <li>Верстать красивые сайты</li>
+          <li>Писать JavaScript</li>
+          <li>Работать с React и Next.js</li>
+          <li>Создавать сайты для клиентов</li>
+        </ul>
+
+        <div class="actions">
+          <a class="button" href="#projects">Посмотреть проекты</a>
+          <a class="button-secondary" href="#skills">Посмотреть навыки</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-container">
+        <p class="label">Обо мне</p>
+
+        <h2 class="section-title">Я учусь создавать современные сайты</h2>
+
+        <p class="section-text">
+          Моя цель — освоить веб-разработку с нуля, научиться верстать красивые страницы,
+          работать с JavaScript, React и Next.js, а затем создавать сайты для клиентов и работодателей.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-container">
+        <p class="label">Навыки</p>
+
+        <h2 class="section-title">Что я изучаю</h2>
+
+        <div class="cards">
+          <div class="card">
+            <h3>HTML</h3>
+            <p>
+              HTML отвечает за структуру страницы: заголовки, текст, списки, кнопки,
+              ссылки, изображения и формы.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>CSS</h3>
+            <p>
+              CSS отвечает за внешний вид сайта: цвета, размеры, отступы, карточки,
+              тени, шрифты и адаптивность.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>JavaScript</h3>
+            <p>
+              JavaScript отвечает за поведение сайта: клики, формы, открытие меню,
+              интерактивные элементы и работу с данными.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-container">
+        <p class="label">Проекты</p>
+
+        <h2 class="section-title">Мои первые проекты</h2>
+
+        <p class="section-text">
+          Здесь собраны учебные проекты, которые постепенно можно будет превратить в настоящее портфолио.
+        </p>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-image">
+              <span>01</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Сайт-портфолио</h3>
+
+              <p>
+                Личный сайт с секциями, адаптивной версткой, мобильным меню и контактной формой.
+              </p>
+
+              <div class="project-tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+              </div>
+
+              <button
+                class="project-link"
+                type="button"
+                data-title="Сайт-портфолио"
+                data-description="Это первый полноценный учебный проект. В нём есть шапка, главный экран, секции, карточки навыков, блок проектов, контактная форма, мобильное меню и модальное окно. Такой проект можно дорабатывать и использовать как основу для будущего портфолио."
+              >
+                Подробнее
+              </button>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <span>02</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Лендинг услуги</h3>
+
+              <p>
+                Будущий проект: одностраничный сайт для услуги, эксперта или небольшой компании.
+              </p>
+
+              <div class="project-tags">
+                <span>Верстка</span>
+                <span>Адаптив</span>
+                <span>Форма</span>
+              </div>
+
+              <button
+                class="project-link"
+                type="button"
+                data-title="Лендинг услуги"
+                data-description="Лендинг — это одностраничный сайт, который продаёт услугу или продукт. Обычно в нём есть первый экран, преимущества, описание услуги, отзывы, цены и форма заявки. Такой тип сайта часто заказывают клиенты."
+              >
+                Подробнее
+              </button>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <span>03</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Сайт для клиента</h3>
+
+              <p>
+                Будущий коммерческий проект: сайт с блоками, заявкой, описанием услуг и контактами.
+              </p>
+
+              <div class="project-tags">
+                <span>Клиентский сайт</span>
+                <span>UX</span>
+                <span>SEO</span>
+              </div>
+
+              <button
+                class="project-link"
+                type="button"
+                data-title="Сайт для клиента"
+                data-description="Клиентский сайт должен не просто красиво выглядеть, а решать задачу бизнеса: объяснять услугу, вызывать доверие, приводить заявки и удобно работать на телефоне. Позже мы будем учиться собирать такие сайты по техническому заданию."
+              >
+                Подробнее
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="section-container">
+        <p class="label">FAQ</p>
+
+        <h2 class="section-title">Частые вопросы</h2>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Можно ли сделать сайт только на HTML и CSS?</span>
+              <strong>+</strong>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                Да, простой статичный сайт можно сделать на HTML и CSS. Но для интерактива:
+                меню, формы, модальные окна, фильтры и отправка данных — нужен JavaScript.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Зачем нужен JavaScript?</span>
+              <strong>+</strong>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                JavaScript отвечает за поведение сайта. Он позволяет реагировать на клики,
+                проверять формы, открывать окна, менять контент и работать с данными.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Когда переходить к React?</span>
+              <strong>+</strong>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                К React лучше переходить после уверенной базы: HTML, CSS, адаптив,
+                JavaScript, DOM, события, формы и работа с массивами.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Можно ли с таким сайтом идти в портфолио?</span>
+              <strong>+</strong>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                Да, но его нужно доработать: добавить реальные проекты, ссылки на GitHub,
+                описание задач, скриншоты, адаптив и аккуратный код.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacts">
+      <div class="section-container">
+        <p class="label">Контакты</p>
+
+        <h2 class="section-title">Связаться со мной</h2>
+
+        <p class="section-text">
+          Заполните форму, и позже мы научимся отправлять эти данные на почту или в Telegram.
+        </p>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name">Ваше имя</label>
+            <input type="text" id="name" placeholder="Например, Иван">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Ваш email</label>
+            <input type="email" id="email" placeholder="example@mail.com">
+          </div>
+
+          <div class="form-group">
+            <label for="message">Сообщение</label>
+            <textarea id="message" rows="5" placeholder="Напишите, какой сайт вам нужен"></textarea>
+          </div>
+
+          <button class="button" type="submit">Отправить заявку</button>
+
+          <p class="form-message" id="formMessage"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Dmitry Web. Мой первый сайт.</p>
+  </footer>
+
+  <div class="modal" id="projectModal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Закрыть окно">
+        ×
+      </button>
+
+      <p class="label">Проект</p>
+
+      <h2 class="modal-title" id="modalTitle">Название проекта</h2>
+
+      <p class="modal-text" id="modalText">
+        Описание проекта.
+      </p>
+
+      <a class="button" href="#contacts">Обсудить проект</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

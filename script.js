@@ -43,6 +43,27 @@ navLinks.forEach(function (link) {
   });
 });
 
+const scrollTopButton = document.querySelector("#scrollTopButton");
+
+function toggleScrollTopButton() {
+  if (window.scrollY > 500) {
+    scrollTopButton.classList.add("scroll-top-visible");
+  } else {
+    scrollTopButton.classList.remove("scroll-top-visible");
+  }
+}
+
+window.addEventListener("scroll", toggleScrollTopButton);
+
+scrollTopButton.addEventListener("click", function () {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+toggleScrollTopButton();
+
 const projectButtons = document.querySelectorAll(".project-link");
 const projectModal = document.querySelector("#projectModal");
 const modalOverlay = document.querySelector("#modalOverlay");

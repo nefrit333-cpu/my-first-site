@@ -24,22 +24,33 @@ const menuButton = document.querySelector("#menuButton");
 const siteNav = document.querySelector("#siteNav");
 const navLinks = document.querySelectorAll(".nav a");
 
-menuButton.addEventListener("click", function () {
-  siteNav.classList.toggle("nav-open");
+function closeMobileMenu() {
+  siteNav.classList.remove("nav-open");
+  menuButton.classList.remove("menu-button-open");
+  menuButton.setAttribute("aria-expanded", "false");
+  menuButton.setAttribute("aria-label", "Открыть меню");
+}
 
+function openMobileMenu() {
+  siteNav.classList.add("nav-open");
+  menuButton.classList.add("menu-button-open");
+  menuButton.setAttribute("aria-expanded", "true");
+  menuButton.setAttribute("aria-label", "Закрыть меню");
+}
+
+menuButton.addEventListener("click", function () {
   const isMenuOpen = siteNav.classList.contains("nav-open");
 
   if (isMenuOpen) {
-    menuButton.setAttribute("aria-expanded", "true");
+    closeMobileMenu();
   } else {
-    menuButton.setAttribute("aria-expanded", "false");
+    openMobileMenu();
   }
 });
 
 navLinks.forEach(function (link) {
   link.addEventListener("click", function () {
-    siteNav.classList.remove("nav-open");
-    menuButton.setAttribute("aria-expanded", "false");
+    closeMobileMenu();
   });
 });
 
@@ -100,6 +111,7 @@ modalContactButton.addEventListener("click", function () {
 document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     closeModal();
+    closeMobileMenu();
   }
 });
 

@@ -212,7 +212,8 @@ body.modal-is-open {
 .project-card,
 .faq-item,
 .contact-info,
-.contact-form {
+.contact-form,
+.release-card {
   background: var(--color-white);
   border-radius: var(--radius-large);
   box-shadow: var(--shadow-card);
@@ -239,7 +240,8 @@ body.modal-is-open {
 .project-card:hover,
 .faq-item:hover,
 .contact-info:hover,
-.contact-form:hover {
+.contact-form:hover,
+.release-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-card-hover);
 }
@@ -986,6 +988,73 @@ h2,
   font-weight: 700;
 }
 
+.release-section {
+  padding-top: 40px;
+}
+
+.release-card {
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.release-card::before {
+  content: "";
+  position: absolute;
+  right: -80px;
+  top: -80px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  opacity: 0.7;
+}
+
+.release-content {
+  position: relative;
+  z-index: 1;
+}
+
+.release-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.release-points {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+}
+
+.release-point {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: var(--radius-small);
+  background: var(--color-accent-soft);
+}
+
+.release-point strong {
+  min-width: 42px;
+  color: var(--color-accent);
+  font-size: 20px;
+}
+
+.release-point span {
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
 .footer {
   padding: 24px 20px;
   text-align: center;
@@ -1080,7 +1149,8 @@ h2,
   .hero-container,
   .about-grid,
   .skills-grid,
-  .contact-layout {
+  .contact-layout,
+  .release-card {
     grid-template-columns: 1fr;
   }
 
@@ -1221,7 +1291,8 @@ h2,
   .about-card,
   .skill-card,
   .contact-info,
-  .contact-form {
+  .contact-form,
+  .release-card {
     padding: 24px;
     border-radius: var(--radius-medium);
   }
@@ -1235,7 +1306,8 @@ h2,
   .project-card:hover,
   .faq-item:hover,
   .contact-info:hover,
-  .contact-form:hover {
+  .contact-form:hover,
+  .release-card:hover {
     transform: none;
   }
 
@@ -1249,7 +1321,8 @@ h2,
     font-size: 18px;
   }
 
-  .actions {
+  .actions,
+  .release-actions {
     flex-direction: column;
   }
 
@@ -1261,6 +1334,10 @@ h2,
   .section {
     padding: 56px 16px;
     scroll-margin-top: 70px;
+  }
+
+  .release-section {
+    padding-top: 24px;
   }
 
   .section-title {
@@ -1309,6 +1386,15 @@ h2,
 
   .contact-method:hover {
     transform: none;
+  }
+
+  .release-card::before {
+    right: -120px;
+    top: -120px;
+  }
+
+  .release-point {
+    align-items: flex-start;
   }
 
   .faq-question {

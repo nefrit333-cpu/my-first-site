@@ -1,863 +1,366 @@
-:root {
-  --color-bg: #f3f4f6;
-  --color-white: #ffffff;
-  --color-text: #111827;
-  --color-muted: #4b5563;
-  --color-border: #e5e7eb;
-  --color-input-border: #d1d5db;
-  --color-accent: #2563eb;
-  --color-accent-dark: #1d4ed8;
-  --color-accent-light: #dbeafe;
-  --color-accent-soft: #eff6ff;
-  --color-error: #dc2626;
-  --color-footer: #6b7280;
-  --color-nav-mobile: #f9fafb;
-
-  --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.08);
-  --shadow-card-hover: 0 18px 50px rgba(0, 0, 0, 0.14);
-  --shadow-hero: 0 20px 60px rgba(0, 0, 0, 0.12);
-  --shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.25);
-
-  --radius-small: 12px;
-  --radius-medium: 20px;
-  --radius-large: 24px;
-
-  --container-width: 1000px;
-  --content-width: 800px;
-
-  --transition-fast: 0.2s ease;
-  --transition-normal: 0.3s ease;
-}
-
-body.dark-theme {
-  --color-bg: #0f172a;
-  --color-white: #111827;
-  --color-text: #f9fafb;
-  --color-muted: #cbd5e1;
-  --color-border: #334155;
-  --color-input-border: #475569;
-  --color-accent: #60a5fa;
-  --color-accent-dark: #3b82f6;
-  --color-accent-light: #1e3a8a;
-  --color-accent-soft: #172554;
-  --color-footer: #94a3b8;
-  --color-nav-mobile: #1e293b;
-
-  --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.35);
-  --shadow-card-hover: 0 18px 55px rgba(0, 0, 0, 0.5);
-  --shadow-hero: 0 20px 60px rgba(0, 0, 0, 0.4);
-  --shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.55);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: var(--color-muted);
-  background: var(--color-bg);
-  transition: background var(--transition-normal), color var(--transition-normal);
-}
-
-body.modal-is-open {
-  overflow: hidden;
-}
-
-.header {
-  padding: 24px 20px;
-  background: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
-  transition: background var(--transition-normal), border-color var(--transition-normal);
-}
-
-.header-container {
-  max-width: var(--container-width);
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-}
-
-.logo {
-  color: var(--color-text);
-  font-size: 24px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.logo:hover {
-  color: var(--color-accent);
-}
-
-.nav {
-  display: flex;
-  gap: 24px;
-}
-
-.nav a {
-  color: var(--color-muted);
-  font-size: 16px;
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.nav a:hover {
-  color: var(--color-accent);
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.theme-toggle {
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--color-input-border);
-  border-radius: var(--radius-small);
-  background: var(--color-white);
-  color: var(--color-text);
-  font-size: 20px;
-  cursor: pointer;
-  transition: border-color var(--transition-fast), transform var(--transition-fast), background var(--transition-normal);
-}
-
-.theme-toggle:hover {
-  border-color: var(--color-accent);
-  transform: translateY(-2px);
-}
-
-.menu-button {
-  display: none;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 1px solid var(--color-input-border);
-  border-radius: var(--radius-small);
-  background: var(--color-white);
-  cursor: pointer;
-  transition: border-color var(--transition-fast), transform var(--transition-fast), background var(--transition-normal);
-}
-
-.menu-button:hover {
-  border-color: var(--color-accent);
-  transform: translateY(-2px);
-}
-
-.menu-button span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  margin: 5px auto;
-  background: var(--color-text);
-  border-radius: 999px;
-  transition: background var(--transition-normal);
-}
-
-.hero {
-  min-height: calc(100vh - 150px);
-  padding: 80px 20px;
-  display: flex;
-  align-items: center;
-}
-
-.container {
-  max-width: var(--content-width);
-  margin: 0 auto;
-  padding: 48px;
-  background: var(--color-white);
-  border-radius: var(--radius-large);
-  box-shadow: var(--shadow-hero);
-  transition: background var(--transition-normal), box-shadow var(--transition-normal), transform var(--transition-fast);
-}
-
-.container:hover {
-  transform: translateY(-3px);
-}
-
-.label {
-  margin: 0 0 16px;
-  color: var(--color-accent);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: color var(--transition-normal);
-}
-
-h1 {
-  margin: 0 0 24px;
-  font-size: 56px;
-  line-height: 1.1;
-  color: var(--color-text);
-  transition: color var(--transition-normal);
-}
-
-.description {
-  margin: 0 0 32px;
-  font-size: 20px;
-  line-height: 1.6;
-  color: var(--color-muted);
-  transition: color var(--transition-normal);
-}
-
-h2 {
-  margin: 0 0 16px;
-  font-size: 28px;
-  color: var(--color-text);
-  transition: color var(--transition-normal);
-}
-
-.skills-list {
-  margin: 0 0 32px;
-  padding-left: 24px;
-  font-size: 18px;
-  line-height: 1.7;
-}
-
-.actions {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px 28px;
-  border: none;
-  border-radius: var(--radius-small);
-  background: var(--color-accent);
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 700;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
-}
-
-.button:hover {
-  background: var(--color-accent-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
-}
-
-.button:active {
-  transform: translateY(0);
-}
-
-.button-secondary {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px 28px;
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-small);
-  background: var(--color-white);
-  color: var(--color-accent);
-  font-size: 18px;
-  font-weight: 700;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
-}
-
-.button-secondary:hover {
-  background: var(--color-accent-soft);
-  transform: translateY(-2px);
-}
-
-.button-secondary:active {
-  transform: translateY(0);
-}
-
-.section {
-  padding: 80px 20px;
-}
-
-.section-container {
-  max-width: var(--container-width);
-  margin: 0 auto;
-}
-
-.section-title {
-  margin: 0 0 24px;
-  font-size: 40px;
-  line-height: 1.2;
-  color: var(--color-text);
-  transition: color var(--transition-normal);
-}
-
-.section-text {
-  max-width: 760px;
-  margin: 0;
-  font-size: 20px;
-  line-height: 1.7;
-  color: var(--color-muted);
-  transition: color var(--transition-normal);
-}
-
-.cards {
-  display: flex;
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.card {
-  flex: 1;
-  padding: 32px;
-  background: var(--color-white);
-  border-radius: var(--radius-medium);
-  box-shadow: var(--shadow-card);
-  transition: background var(--transition-normal), box-shadow var(--transition-fast), transform var(--transition-fast);
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.card h3 {
-  margin: 0 0 12px;
-  font-size: 24px;
-  color: var(--color-text);
-  transition: color var(--transition-normal);
-}
-
-.card p {
-  margin: 0;
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--color-muted);
-  transition: color var(--transition-normal);
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.project-card {
-  overflow: hidden;
-  background: var(--color-white);
-  border-radius: var(--radius-large);
-  box-shadow: var(--shadow-card);
-  transition: background var(--transition-normal), box-shadow var(--transition-fast), transform var(--transition-fast);
-}
-
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.project-image {
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--color-accent-light);
-  transition: background var(--transition-normal);
-}
-
-.project-image span {
-  color: var(--color-accent);
-  font-size: 56px;
-  font-weight: 700;
-  transition: color var(--transition-normal), transform var(--transition-fast);
-}
-
-.project-card:hover .project-image span {
-  transform: scale(1.08);
-}
-
-.project-content {
-  padding: 28px;
-}
-
-.project-content h3 {
-  margin: 0 0 12px;
-  font-size: 24px;
-  color: var(--color-text);
-  transition: color var(--transition-normal);
-}
-
-.project-content p {
-  margin: 0 0 20px;
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--color-muted);
-  transition: color var(--transition-normal);
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-
-.project-tags span {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-  font-size: 14px;
-  font-weight: 700;
-  transition: background var(--transition-normal), color var(--transition-normal);
-}
-
-.project-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.project-action-link {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 14px;
-  border: 1px solid var(--color-accent);
-  border-radius: 999px;
-  color: var(--color-accent);
-  background: var(--color-white);
-  font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
-}
-
-.project-action-link:hover {
-  background: var(--color-accent);
-  color: #ffffff;
-  transform: translateY(-2px);
-}
-
-.project-link {
-  padding: 0;
-  border: none;
-  background: none;
-  color: var(--color-accent);
-  font-family: Arial, sans-serif;
-  font-size: 17px;
-  font-weight: 700;
-  text-decoration: none;
-  cursor: pointer;
-  transition: color var(--transition-fast);
-}
-
-.project-link:hover {
-  color: var(--color-accent-dark);
-}
-
-.faq-list {
-  max-width: 760px;
-  margin-top: 32px;
-}
-
-.faq-item {
-  margin-bottom: 16px;
-  background: var(--color-white);
-  border-radius: var(--radius-medium);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-  transition: background var(--transition-normal), box-shadow var(--transition-fast), transform var(--transition-fast);
-}
-
-.faq-item:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.faq-question {
-  width: 100%;
-  padding: 24px;
-  border: none;
-  background: var(--color-white);
-  color: var(--color-text);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  font-size: 20px;
-  font-weight: 700;
-  text-align: left;
-  cursor: pointer;
-  transition: background var(--transition-normal), color var(--transition-normal);
-}
-
-.faq-question strong {
-  color: var(--color-accent);
-  font-size: 28px;
-  line-height: 1;
-  transition: color var(--transition-normal), transform var(--transition-fast);
-}
-
-.faq-answer {
-  display: none;
-  padding: 0 24px 24px;
-}
-
-.faq-answer p {
-  margin: 0;
-  color: var(--color-muted);
-  font-size: 17px;
-  line-height: 1.7;
-  transition: color var(--transition-normal);
-}
-
-.faq-item.faq-open .faq-answer {
-  display: block;
-}
-
-.faq-item.faq-open .faq-question strong {
-  transform: rotate(45deg);
-}
-
-.contact-form {
-  max-width: 640px;
-  margin-top: 32px;
-  padding: 32px;
-  background: var(--color-white);
-  border-radius: var(--radius-large);
-  box-shadow: var(--shadow-card);
-  transition: background var(--transition-normal), box-shadow var(--transition-fast);
-}
-
-.contact-form:hover {
-  box-shadow: var(--shadow-card-hover);
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--color-text);
-  font-size: 16px;
-  font-weight: 700;
-  transition: color var(--transition-normal);
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 16px;
-  border: 1px solid var(--color-input-border);
-  border-radius: var(--radius-small);
-  background: var(--color-white);
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  color: var(--color-text);
-  outline: none;
-  transition: border-color var(--transition-fast), background var(--transition-normal), color var(--transition-normal), box-shadow var(--transition-fast);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: var(--color-muted);
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 4px var(--color-accent-soft);
-}
-
-.form-message {
-  margin: 20px 0 0;
-  color: var(--color-accent);
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.footer {
-  padding: 24px 20px;
-  text-align: center;
-  color: var(--color-footer);
-  background: var(--color-white);
-  border-top: 1px solid var(--color-border);
-  transition: background var(--transition-normal), border-color var(--transition-normal), color var(--transition-normal);
-}
-
-.scroll-top {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  z-index: 90;
-  width: 44px;
-  height: 44px;
-  border: none;
-  border-radius: 50%;
-  background: var(--color-accent);
-  color: #ffffff;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1;
-  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.28);
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(12px) scale(0.92);
-  transition:
-    opacity var(--transition-fast),
-    visibility var(--transition-fast),
-    transform var(--transition-fast),
-    background var(--transition-fast),
-    box-shadow var(--transition-fast);
-}
-
-.scroll-top.scroll-top-visible {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0) scale(1);
-}
-
-.scroll-top:hover {
-  background: var(--color-accent-dark);
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.38);
-}
-
-.scroll-top:active {
-  transform: translateY(0) scale(0.98);
-}
-
-.modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  z-index: 100;
-}
-
-.modal.modal-open {
-  display: block;
-}
-
-.modal-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(17, 24, 39, 0.7);
-}
-
-.modal-content {
-  position: relative;
-  z-index: 101;
-  max-width: 640px;
-  margin: 80px auto;
-  padding: 40px;
-  background: var(--color-white);
-  border-radius: var(--radius-large);
-  box-shadow: var(--shadow-modal);
-  animation: modalFadeIn 0.25s ease;
-  transition: background var(--transition-normal), box-shadow var(--transition-normal);
-}
-
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(16px) scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 50%;
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-size: 28px;
-  line-height: 1;
-  cursor: pointer;
-  transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-normal);
-}
-
-.modal-close:hover {
-  background: var(--color-border);
-  transform: rotate(90deg);
-}
-
-.modal-title {
-  margin: 0 0 20px;
-  font-size: 36px;
-  line-height: 1.2;
-  color: var(--color-text);
-  transition: color var(--transition-normal);
-}
-
-.modal-text {
-  margin: 0 0 28px;
-  font-size: 18px;
-  line-height: 1.7;
-  color: var(--color-muted);
-  transition: color var(--transition-normal);
-}
-
-@media (max-width: 900px) {
-  .projects-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .header {
-    padding: 16px;
-  }
-
-  .header-container {
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .header-actions {
-    margin-left: auto;
-  }
-
-  .menu-button {
-    display: block;
-  }
-
-  .nav {
-    order: 3;
-    display: none;
-    width: 100%;
-    padding: 16px;
-    flex-direction: column;
-    gap: 12px;
-    background: var(--color-nav-mobile);
-    border-radius: 16px;
-  }
-
-  .nav.nav-open {
-    display: flex;
-  }
-
-  .nav a {
-    padding: 12px;
-    background: var(--color-white);
-    border-radius: 10px;
-  }
-
-  .hero {
-    min-height: auto;
-    padding: 40px 16px;
-  }
-
-  .container {
-    padding: 32px 24px;
-    border-radius: var(--radius-medium);
-  }
-
-  .container:hover {
-    transform: none;
-  }
-
-  h1 {
-    font-size: 40px;
-  }
-
-  .description {
-    font-size: 18px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
-
-  .skills-list {
-    font-size: 16px;
-  }
-
-  .actions {
-    flex-direction: column;
-  }
-
-  .button,
-  .button-secondary {
-    width: 100%;
-  }
-
-  .section {
-    padding: 56px 16px;
-  }
-
-  .section-title {
-    font-size: 32px;
-  }
-
-  .section-text {
-    font-size: 18px;
-  }
-
-  .cards {
-    flex-direction: column;
-  }
-
-  .card {
-    padding: 24px;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project-content {
-    padding: 24px;
-  }
-
-  .faq-question {
-    padding: 20px;
-    font-size: 18px;
-  }
-
-  .faq-answer {
-    padding: 0 20px 20px;
-  }
-
-  .contact-form {
-    padding: 24px;
-  }
-
-  .scroll-top {
-    right: 16px;
-    bottom: 16px;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
-
-  .modal-content {
-    width: calc(100% - 32px);
-    margin: 80px auto;
-    padding: 32px 24px;
-  }
-
-  .modal-title {
-    font-size: 30px;
-  }
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dmitriy Web — первый сайт</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header" id="top">
+    <div class="header-container">
+      <a class="logo" href="#">Dmitriy Web</a>
+
+      <nav class="nav" id="siteNav">
+        <a href="#about">Обо мне</a>
+        <a href="#skills">Навыки</a>
+        <a href="#projects">Проекты</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему">
+          🌙
+        </button>
+
+        <button class="menu-button" id="menuButton" type="button" aria-label="Открыть меню" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <p class="label">Начинающий веб-разработчик</p>
+
+        <h1>Привет, я Дмитрий</h1>
+
+        <p class="description">
+          Я начинаю изучать разработку сайтов и хочу научиться создавать проекты для клиентов.
+        </p>
+
+        <h2>Чему я хочу научиться</h2>
+
+        <ul class="skills-list">
+          <li>Верстать красивые сайты</li>
+          <li>Писать JavaScript</li>
+          <li>Работать с React и Next.js</li>
+          <li>Создавать сайты для клиентов</li>
+        </ul>
+
+        <div class="actions">
+          <a class="button" href="#projects">Посмотреть проекты</a>
+          <a class="button-secondary" href="#skills">Посмотреть навыки</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-container">
+        <p class="label">Обо мне</p>
+
+        <h2 class="section-title">Я учусь создавать современные сайты</h2>
+
+        <p class="section-text">
+          Моя цель — освоить веб-разработку с нуля, научиться верстать красивые страницы,
+          работать с JavaScript, React и Next.js, а затем создавать сайты для клиентов и работодателей.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-container">
+        <p class="label">Навыки</p>
+
+        <h2 class="section-title">Что я изучаю</h2>
+
+        <div class="cards">
+          <div class="card">
+            <h3>HTML</h3>
+            <p>
+              HTML отвечает за структуру страницы: заголовки, текст, списки, кнопки,
+              ссылки, изображения и формы.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>CSS</h3>
+            <p>
+              CSS отвечает за внешний вид сайта: цвета, размеры, отступы, карточки,
+              тени, шрифты и адаптивность.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>JavaScript</h3>
+            <p>
+              JavaScript отвечает за поведение сайта: клики, формы, открытие меню,
+              интерактивные элементы и работу с данными.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-container">
+        <p class="label">Проекты</p>
+
+        <h2 class="section-title">Мои первые проекты</h2>
+
+        <p class="section-text">
+          Здесь собраны учебные проекты, которые постепенно можно будет превратить в настоящее портфолио.
+        </p>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-image">
+              <span>01</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Учебный сайт-портфолио</h3>
+
+              <p>
+                Мой первый опубликованный сайт на HTML, CSS и JavaScript. В проекте есть адаптив,
+                тёмная тема, модальные окна, FAQ, форма и кнопка возврата наверх.
+              </p>
+
+              <div class="project-tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>GitHub Pages</span>
+              </div>
+
+              <div class="project-actions">
+                <a
+                  class="project-action-link"
+                  href="https://nefrit333-cpu.github.io/my-first-site/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Открыть сайт
+                </a>
+
+                <a
+                  class="project-action-link"
+                  href="https://github.com/nefrit333-cpu/my-first-site"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              </div>
+
+              <button
+                class="project-link"
+                type="button"
+                data-title="Учебный сайт-портфолио"
+                data-description="Это мой первый опубликованный учебный проект. В нём есть HTML-структура, CSS-стили, адаптивная верстка, мобильное меню, тёмная тема, FAQ-аккордеон, модальное окно, проверка формы и кнопка возврата наверх. Проект опубликован через GitHub Pages."
+              >
+                Подробнее
+              </button>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <span>02</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Лендинг услуги</h3>
+
+              <p>
+                Будущий проект: одностраничный сайт для услуги, эксперта или небольшой компании.
+              </p>
+
+              <div class="project-tags">
+                <span>Верстка</span>
+                <span>Адаптив</span>
+                <span>Форма</span>
+              </div>
+
+              <button
+                class="project-link"
+                type="button"
+                data-title="Лендинг услуги"
+                data-description="Лендинг — это одностраничный сайт, который продаёт услугу или продукт. Обычно в нём есть первый экран, преимущества, описание услуги, отзывы, цены и форма заявки. Такой тип сайта часто заказывают клиенты."
+              >
+                Подробнее
+              </button>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <span>03</span>
+            </div>
+
+            <div class="project-content">
+              <h3>Сайт для клиента</h3>
+
+              <p>
+                Будущий коммерческий проект: сайт с блоками, заявкой, описанием услуг и контактами.
+              </p>
+
+              <div class="project-tags">
+                <span>Клиентский сайт</span>
+                <span>UX</span>
+                <span>SEO</span>
+              </div>
+
+              <button
+                class="project-link"
+                type="button"
+                data-title="Сайт для клиента"
+                data-description="Клиентский сайт должен не просто красиво выглядеть, а решать задачу бизнеса: объяснять услугу, вызывать доверие, приводить заявки и удобно работать на телефоне. Позже мы будем учиться собирать такие сайты по техническому заданию."
+              >
+                Подробнее
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="section-container">
+        <p class="label">FAQ</p>
+
+        <h2 class="section-title">Частые вопросы</h2>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Можно ли сделать сайт только на HTML и CSS?</span>
+              <strong>+</strong>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                Да, простой статичный сайт можно сделать на HTML и CSS. Но для интерактива:
+                меню, формы, модальные окна, фильтры и отправка данных — нужен JavaScript.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Зачем нужен JavaScript?</span>
+              <strong>+</strong>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                JavaScript отвечает за поведение сайта. Он позволяет реагировать на клики,
+                проверять формы, открывать окна, менять контент и работать с данными.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Когда переходить к React?</span>
+              <strong>+</strong>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                К React лучше переходить после уверенной базы: HTML, CSS, адаптив,
+                JavaScript, DOM, события, формы и работа с массивами.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Можно ли с таким сайтом идти в портфолио?</span>
+              <strong>+</strong>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                Да, но его нужно доработать: добавить реальные проекты, ссылки на GitHub,
+                описание задач, скриншоты, адаптив и аккуратный код.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacts">
+      <div class="section-container">
+        <p class="label">Контакты</p>
+
+        <h2 class="section-title">Связаться со мной</h2>
+
+        <p class="section-text">
+          Заполните форму, и позже мы научимся отправлять эти данные на почту или в Telegram.
+        </p>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name">Ваше имя</label>
+            <input type="text" id="name" placeholder="Например, Иван">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Ваш email</label>
+            <input type="email" id="email" placeholder="example@mail.com">
+          </div>
+
+          <div class="form-group">
+            <label for="message">Сообщение</label>
+            <textarea id="message" rows="5" placeholder="Напишите, какой сайт вам нужен"></textarea>
+          </div>
+
+          <button class="button" type="submit">Отправить заявку</button>
+
+          <p class="form-message" id="formMessage"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Dmitriy Web. Учебный сайт-портфолио</p>
+  </footer>
+
+  <button class="scroll-top" id="scrollTopButton" type="button" aria-label="Вернуться наверх">
+    ↑
+  </button>
+
+  <div class="modal" id="projectModal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Закрыть окно">
+        ×
+      </button>
+
+      <p class="label">Проект</p>
+
+      <h2 class="modal-title" id="modalTitle">Название проекта</h2>
+
+      <p class="modal-text" id="modalText">
+        Описание проекта.
+      </p>
+
+      <a class="button" href="#contacts">Обсудить проект</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

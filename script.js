@@ -1,22 +1,24 @@
 const themeToggle = document.querySelector("#themeToggle");
 const savedTheme = localStorage.getItem("theme");
 
-if (savedTheme === "dark") {
-  document.body.classList.add("dark-theme");
+if (savedTheme === "light") {
+  document.body.classList.add("light-theme");
+  themeToggle.textContent = "🌙";
+} else {
   themeToggle.textContent = "☀️";
 }
 
 themeToggle.addEventListener("click", function () {
-  document.body.classList.toggle("dark-theme");
+  document.body.classList.toggle("light-theme");
 
-  const isDarkTheme = document.body.classList.contains("dark-theme");
+  const isLightTheme = document.body.classList.contains("light-theme");
 
-  if (isDarkTheme) {
-    themeToggle.textContent = "☀️";
-    localStorage.setItem("theme", "dark");
-  } else {
+  if (isLightTheme) {
     themeToggle.textContent = "🌙";
     localStorage.setItem("theme", "light");
+  } else {
+    themeToggle.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
   }
 });
 

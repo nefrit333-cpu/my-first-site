@@ -1,577 +1,1012 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dmitriy Web — первый сайт</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <header class="header" id="top">
-    <div class="header-container">
-      <a class="logo" href="#">Dmitriy Web</a>
-
-      <nav class="nav" id="siteNav">
-        <a href="#about">Обо мне</a>
-        <a href="#skills">Навыки</a>
-        <a href="#projects">Проекты</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contacts">Контакты</a>
-      </nav>
-
-      <div class="header-actions">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему">
-          🌙
-        </button>
-
-        <button class="menu-button" id="menuButton" type="button" aria-label="Открыть меню" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-
-    <section class="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <p class="label">Frontend-разработчик в обучении</p>
-
-          <h1 class="hero-title">
-            Создаю сайты и развиваюсь во <span>frontend</span>
-          </h1>
-
-          <p class="description">
-            Я изучаю HTML, CSS, JavaScript, Git и GitHub, собираю первые проекты
-            и постепенно превращаю учебный сайт в настоящее портфолио разработчика.
-          </p>
-
-          <div class="hero-stack">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>Git</span>
-            <span>GitHub Pages</span>
-          </div>
-
-          <div class="actions">
-            <a class="button" href="#projects">Смотреть проекты</a>
-            <a class="button-secondary" href="#contacts">Связаться</a>
-          </div>
-
-          <p class="hero-note">
-            Сейчас фокус: адаптивная верстка, интерактивность, GitHub Pages и подготовка к React.
-          </p>
-        </div>
-
-        <aside class="hero-card">
-          <p class="hero-card-label">Текущий прогресс</p>
-
-          <h2>Первое портфолио</h2>
-
-          <p>
-            Проект уже опубликован онлайн, подключён к GitHub и постепенно дорабатывается
-            как настоящий сайт frontend-разработчика.
-          </p>
-
-          <div class="hero-progress-list">
-            <div class="hero-progress-item">
-              <strong>01</strong>
-              <span>HTML-структура</span>
-            </div>
-
-            <div class="hero-progress-item">
-              <strong>02</strong>
-              <span>CSS-адаптив</span>
-            </div>
-
-            <div class="hero-progress-item">
-              <strong>03</strong>
-              <span>JavaScript UI</span>
-            </div>
-
-            <div class="hero-progress-item">
-              <strong>04</strong>
-              <span>GitHub Pages</span>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="section-container">
-        <p class="label">Обо мне</p>
-
-        <h2 class="section-title">Я развиваюсь как frontend-разработчик</h2>
-
-        <div class="about-grid">
-          <div class="about-main">
-            <p>
-              Я изучаю веб-разработку с нуля и шаг за шагом собираю своё первое портфолио.
-              Сейчас мой основной фокус — уверенно освоить HTML, CSS, JavaScript, адаптивную
-              верстку, работу с Git, GitHub и публикацию сайтов через GitHub Pages.
-            </p>
-
-            <p>
-              Для меня важно не просто копировать код, а понимать, как устроена страница:
-              где находится структура, где стили, как работает интерактивность и как изменения
-              попадают из локального проекта в живую версию сайта.
-            </p>
-
-            <p>
-              Моя ближайшая цель — собрать несколько аккуратных учебных проектов, научиться
-              уверенно дорабатывать интерфейсы и подготовиться к переходу на React и Next.js.
-            </p>
-          </div>
-
-          <aside class="about-card">
-            <h3>Мой фокус</h3>
-
-            <ul class="about-list">
-              <li>Чистая HTML-структура</li>
-              <li>Адаптивная CSS-верстка</li>
-              <li>JavaScript-интерактивность</li>
-              <li>Работа через Git и GitHub</li>
-              <li>Публикация проектов онлайн</li>
-            </ul>
-          </aside>
-        </div>
-
-        <div class="about-stats">
-          <div class="about-stat">
-            <strong>HTML</strong>
-            <span>структура сайта</span>
-          </div>
-
-          <div class="about-stat">
-            <strong>CSS</strong>
-            <span>адаптив и стили</span>
-          </div>
-
-          <div class="about-stat">
-            <strong>JS</strong>
-            <span>логика интерфейса</span>
-          </div>
-
-          <div class="about-stat">
-            <strong>GitHub</strong>
-            <span>код и деплой</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="skills">
-      <div class="section-container">
-        <p class="label">Навыки</p>
-
-        <h2 class="section-title">Что я изучаю и применяю</h2>
-
-        <p class="section-text">
-          Мой текущий стек — основа frontend-разработки. Я изучаю не только синтаксис,
-          но и то, как применять навыки в реальном интерфейсе: от структуры страницы
-          до публикации сайта в интернете.
-        </p>
-
-        <div class="skills-grid">
-          <article class="skill-card">
-            <div class="skill-card-top">
-              <div class="skill-icon">HTML</div>
-
-              <div>
-                <h3>HTML</h3>
-                <p>Структура страницы</p>
-              </div>
-            </div>
-
-            <div class="skill-level">
-              <span>Текущий уровень</span>
-              <strong>База уверенно</strong>
-            </div>
-
-            <div class="skill-progress">
-              <span class="skill-progress-fill skill-progress-html"></span>
-            </div>
-
-            <ul class="skill-list">
-              <li>Секции сайта</li>
-              <li>Навигация и ссылки</li>
-              <li>Формы и поля ввода</li>
-              <li>Семантическая структура</li>
-            </ul>
-
-            <p class="skill-result">
-              Применяю для сборки понятной структуры сайта и подготовки блоков под стилизацию.
-            </p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-card-top">
-              <div class="skill-icon">CSS</div>
-
-              <div>
-                <h3>CSS</h3>
-                <p>Внешний вид и адаптив</p>
-              </div>
-            </div>
-
-            <div class="skill-level">
-              <span>Текущий уровень</span>
-              <strong>Активная практика</strong>
-            </div>
-
-            <div class="skill-progress">
-              <span class="skill-progress-fill skill-progress-css"></span>
-            </div>
-
-            <ul class="skill-list">
-              <li>Flexbox и Grid</li>
-              <li>Адаптивная верстка</li>
-              <li>Цвета, отступы, тени</li>
-              <li>Анимации и hover-эффекты</li>
-            </ul>
-
-            <p class="skill-result">
-              Использую для создания аккуратного интерфейса, мобильной версии и визуальных состояний.
-            </p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-card-top">
-              <div class="skill-icon">JS</div>
-
-              <div>
-                <h3>JavaScript</h3>
-                <p>Интерактивность интерфейса</p>
-              </div>
-            </div>
-
-            <div class="skill-level">
-              <span>Текущий уровень</span>
-              <strong>В процессе</strong>
-            </div>
-
-            <div class="skill-progress">
-              <span class="skill-progress-fill skill-progress-js"></span>
-            </div>
-
-            <ul class="skill-list">
-              <li>Клики и события</li>
-              <li>Мобильное меню</li>
-              <li>Модальные окна</li>
-              <li>FAQ-аккордеон и форма</li>
-            </ul>
-
-            <p class="skill-result">
-              Добавляю поведение сайту: открытие меню, проверку формы, модалки и плавные FAQ-ответы.
-            </p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-card-top">
-              <div class="skill-icon">GIT</div>
-
-              <div>
-                <h3>Git и GitHub</h3>
-                <p>Версии и публикация</p>
-              </div>
-            </div>
-
-            <div class="skill-level">
-              <span>Текущий уровень</span>
-              <strong>Рабочая база</strong>
-            </div>
-
-            <div class="skill-progress">
-              <span class="skill-progress-fill skill-progress-git"></span>
-            </div>
-
-            <ul class="skill-list">
-              <li>git status / add / commit</li>
-              <li>git push</li>
-              <li>GitHub-репозиторий</li>
-              <li>GitHub Pages</li>
-            </ul>
-
-            <p class="skill-result">
-              Фиксирую изменения, отправляю код на GitHub и обновляю живую версию сайта.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <div class="section-container">
-        <p class="label">Проекты</p>
-
-        <h2 class="section-title">Мои первые проекты</h2>
-
-        <p class="section-text">
-          Здесь собраны учебные проекты, которые постепенно можно будет превратить в настоящее портфолио.
-        </p>
-
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-image">
-              <span>01</span>
-            </div>
-
-            <div class="project-content">
-              <h3>Учебный сайт-портфолио</h3>
-
-              <p>
-                Мой первый опубликованный сайт на HTML, CSS и JavaScript. В проекте есть адаптив,
-                тёмная тема, модальные окна, FAQ, форма и кнопка возврата наверх.
-              </p>
-
-              <div class="project-tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>GitHub Pages</span>
-              </div>
-
-              <div class="project-footer">
-                <div class="project-actions">
-                  <a
-                    class="project-action-link"
-                    href="https://nefrit333-cpu.github.io/my-first-site/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Открыть сайт
-                  </a>
-
-                  <a
-                    class="project-action-link"
-                    href="https://github.com/nefrit333-cpu/my-first-site"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GitHub
-                  </a>
-                </div>
-
-                <button
-                  class="project-link"
-                  type="button"
-                  data-title="Учебный сайт-портфолио"
-                  data-description="Это мой первый опубликованный учебный проект. В нём есть HTML-структура, CSS-стили, адаптивная верстка, мобильное меню, тёмная тема, FAQ-аккордеон, модальное окно, проверка формы и кнопка возврата наверх. Проект опубликован через GitHub Pages."
-                >
-                  Подробнее
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-image">
-              <span>02</span>
-            </div>
-
-            <div class="project-content">
-              <h3>Лендинг услуги</h3>
-
-              <p>
-                Будущий проект: одностраничный сайт для услуги, эксперта или небольшой компании.
-              </p>
-
-              <div class="project-tags">
-                <span>Верстка</span>
-                <span>Адаптив</span>
-                <span>Форма</span>
-              </div>
-
-              <div class="project-footer">
-                <button
-                  class="project-link"
-                  type="button"
-                  data-title="Лендинг услуги"
-                  data-description="Лендинг — это одностраничный сайт, который продаёт услугу или продукт. Обычно в нём есть первый экран, преимущества, описание услуги, отзывы, цены и форма заявки. Такой тип сайта часто заказывают клиенты."
-                >
-                  Подробнее
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-image">
-              <span>03</span>
-            </div>
-
-            <div class="project-content">
-              <h3>Сайт для клиента</h3>
-
-              <p>
-                Будущий коммерческий проект: сайт с блоками, заявкой, описанием услуг и контактами.
-              </p>
-
-              <div class="project-tags">
-                <span>Клиентский сайт</span>
-                <span>UX</span>
-                <span>SEO</span>
-              </div>
-
-              <div class="project-footer">
-                <button
-                  class="project-link"
-                  type="button"
-                  data-title="Сайт для клиента"
-                  data-description="Клиентский сайт должен не просто красиво выглядеть, а решать задачу бизнеса: объяснять услугу, вызывать доверие, приводить заявки и удобно работать на телефоне. Позже мы будем учиться собирать такие сайты по техническому заданию."
-                >
-                  Подробнее
-                </button>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="section-container">
-        <p class="label">FAQ</p>
-
-        <h2 class="section-title">Частые вопросы</h2>
-
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer1">
-              <span>Можно ли сделать сайт только на HTML и CSS?</span>
-              <strong class="faq-icon">+</strong>
-            </button>
-
-            <div class="faq-answer" id="faqAnswer1" aria-hidden="true">
-              <div class="faq-answer-inner">
-                <p>
-                  Да, простой статичный сайт можно сделать на HTML и CSS. Но для интерактива:
-                  меню, формы, модальные окна, фильтры и отправка данных — нужен JavaScript.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer2">
-              <span>Зачем нужен JavaScript?</span>
-              <strong class="faq-icon">+</strong>
-            </button>
-
-            <div class="faq-answer" id="faqAnswer2" aria-hidden="true">
-              <div class="faq-answer-inner">
-                <p>
-                  JavaScript отвечает за поведение сайта. Он позволяет реагировать на клики,
-                  проверять формы, открывать окна, менять контент и работать с данными.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer3">
-              <span>Когда переходить к React?</span>
-              <strong class="faq-icon">+</strong>
-            </button>
-
-            <div class="faq-answer" id="faqAnswer3" aria-hidden="true">
-              <div class="faq-answer-inner">
-                <p>
-                  К React лучше переходить после уверенной базы: HTML, CSS, адаптив,
-                  JavaScript, DOM, события, формы и работа с массивами.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer4">
-              <span>Можно ли с таким сайтом идти в портфолио?</span>
-              <strong class="faq-icon">+</strong>
-            </button>
-
-            <div class="faq-answer" id="faqAnswer4" aria-hidden="true">
-              <div class="faq-answer-inner">
-                <p>
-                  Да, но его нужно доработать: добавить реальные проекты, ссылки на GitHub,
-                  описание задач, скриншоты, адаптив и аккуратный код.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contacts">
-      <div class="section-container">
-        <p class="label">Контакты</p>
-
-        <h2 class="section-title">Связаться со мной</h2>
-
-        <p class="section-text">
-          Заполните форму, и позже мы научимся отправлять эти данные на почту или в Telegram.
-        </p>
-
-        <form class="contact-form" id="contactForm" novalidate>
-          <div class="form-group">
-            <label for="name">Ваше имя</label>
-            <input type="text" id="name" placeholder="Например, Иван">
-          </div>
-
-          <div class="form-group">
-            <label for="email">Ваш email</label>
-            <input type="email" id="email" placeholder="example@mail.com">
-          </div>
-
-          <div class="form-group">
-            <label for="message">Сообщение</label>
-            <textarea id="message" rows="5" placeholder="Напишите, какой сайт вам нужен"></textarea>
-          </div>
-
-          <button class="button" type="submit">Отправить заявку</button>
-
-          <p class="form-message" id="formMessage"></p>
-        </form>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <p>© 2026 Dmitriy Web. Учебный сайт-портфолио</p>
-  </footer>
-
-  <button class="scroll-top" id="scrollTopButton" type="button" aria-label="Вернуться наверх">
-    ↑
-  </button>
-
-  <div class="modal" id="projectModal">
-    <div class="modal-overlay" id="modalOverlay"></div>
-
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose" type="button" aria-label="Закрыть окно">
-        ×
-      </button>
-
-      <p class="label">Проект</p>
-
-      <h2 class="modal-title" id="modalTitle">Название проекта</h2>
-
-      <p class="modal-text" id="modalText">
-        Описание проекта.
-      </p>
-
-      <a class="button" href="#contacts">Обсудить проект</a>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+:root {
+  --color-bg: #0f172a;
+  --color-white: #111827;
+  --color-text: #f9fafb;
+  --color-muted: #cbd5e1;
+  --color-border: #334155;
+  --color-input-border: #475569;
+  --color-accent: #60a5fa;
+  --color-accent-dark: #3b82f6;
+  --color-accent-light: #1e3a8a;
+  --color-accent-soft: #172554;
+  --color-error: #dc2626;
+  --color-footer: #94a3b8;
+  --color-nav-mobile: #1e293b;
+
+  --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 18px 55px rgba(0, 0, 0, 0.5);
+  --shadow-hero: 0 20px 60px rgba(0, 0, 0, 0.4);
+  --shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.55);
+
+  --radius-small: 12px;
+  --radius-medium: 20px;
+  --radius-large: 24px;
+
+  --container-width: 1000px;
+
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+body.light-theme {
+  --color-bg: #f3f4f6;
+  --color-white: #ffffff;
+  --color-text: #111827;
+  --color-muted: #4b5563;
+  --color-border: #e5e7eb;
+  --color-input-border: #d1d5db;
+  --color-accent: #2563eb;
+  --color-accent-dark: #1d4ed8;
+  --color-accent-light: #dbeafe;
+  --color-accent-soft: #eff6ff;
+  --color-footer: #6b7280;
+  --color-nav-mobile: #f9fafb;
+
+  --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 18px 50px rgba(0, 0, 0, 0.14);
+  --shadow-hero: 0 20px 60px rgba(0, 0, 0, 0.12);
+  --shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--color-muted);
+  background: var(--color-bg);
+  transition: background var(--transition-normal), color var(--transition-normal);
+}
+
+body.modal-is-open {
+  overflow: hidden;
+}
+
+.header {
+  padding: 24px 20px;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.logo {
+  color: var(--color-text);
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--color-accent);
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav a {
+  color: var(--color-muted);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--color-accent);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle,
+.menu-button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-small);
+  background: var(--color-white);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.theme-toggle {
+  font-size: 20px;
+}
+
+.menu-button {
+  display: none;
+  padding: 0;
+}
+
+.menu-button span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 5px auto;
+  background: var(--color-text);
+  border-radius: 999px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.menu-button.menu-button-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-button.menu-button-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-button.menu-button-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.hero {
+  min-height: calc(100vh - 90px);
+  padding: 80px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-container {
+  max-width: var(--container-width);
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 32px;
+}
+
+.hero-content,
+.hero-card,
+.about-main,
+.about-card,
+.about-stat,
+.skill-card,
+.project-card,
+.faq-item,
+.contact-form {
+  background: var(--color-white);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-card);
+}
+
+.hero-content {
+  padding: 48px;
+}
+
+.hero-card {
+  padding: 36px;
+}
+
+.hero-content:hover,
+.hero-card:hover,
+.about-main:hover,
+.about-card:hover,
+.about-stat:hover,
+.skill-card:hover,
+.project-card:hover,
+.faq-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.label,
+.hero-card-label {
+  margin: 0 0 16px;
+  color: var(--color-accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero-title {
+  max-width: 620px;
+  margin: 0 0 24px;
+  color: var(--color-text);
+  font-size: clamp(42px, 5vw, 62px);
+  line-height: 1.03;
+  letter-spacing: -1.5px;
+}
+
+.hero-title span {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  color: var(--color-accent);
+}
+
+.hero-title span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  z-index: -1;
+  height: 10px;
+  background: var(--color-accent-soft);
+  border-radius: 999px;
+}
+
+.description,
+.section-text {
+  margin: 0 0 28px;
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.hero-stack,
+.project-tags,
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hero-stack {
+  margin-bottom: 32px;
+}
+
+.hero-stack span,
+.project-tags span {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.button,
+.button-secondary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 28px;
+  border-radius: var(--radius-small);
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button {
+  border: none;
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+.button-secondary {
+  border: 1px solid var(--color-accent);
+  background: var(--color-white);
+  color: var(--color-accent);
+}
+
+.button:hover {
+  background: var(--color-accent-dark);
+}
+
+.button-secondary:hover {
+  background: var(--color-accent-soft);
+}
+
+.hero-note {
+  margin: 22px 0 0;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.hero-card h2,
+h2,
+.section-title {
+  color: var(--color-text);
+}
+
+.hero-card h2 {
+  margin: 0 0 16px;
+  font-size: 28px;
+}
+
+.hero-card p {
+  margin: 0 0 24px;
+  color: var(--color-muted);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.hero-progress-list {
+  display: grid;
+  gap: 12px;
+}
+
+.hero-progress-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: var(--radius-small);
+  background: var(--color-accent-soft);
+}
+
+.hero-progress-item strong {
+  min-width: 42px;
+  color: var(--color-accent);
+  font-size: 20px;
+}
+
+.hero-progress-item span {
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.section {
+  padding: 80px 20px;
+}
+
+.section-container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.section-title {
+  margin: 0 0 24px;
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.about-main,
+.about-card {
+  padding: 32px;
+}
+
+.about-main p {
+  margin: 0 0 18px;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.about-card h3 {
+  margin: 0 0 20px;
+  color: var(--color-text);
+  font-size: 24px;
+}
+
+.about-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-list li {
+  position: relative;
+  margin-bottom: 14px;
+  padding-left: 28px;
+}
+
+.about-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.about-stat {
+  padding: 24px;
+}
+
+.about-stat strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-accent);
+  font-size: 24px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.skill-card {
+  padding: 28px;
+}
+
+.skill-card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.skill-icon {
+  min-width: 58px;
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.skill-card h3 {
+  margin: 0 0 6px;
+  color: var(--color-text);
+  font-size: 24px;
+}
+
+.skill-card-top p {
+  margin: 0;
+  font-size: 15px;
+}
+
+.skill-level {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.skill-level strong {
+  color: var(--color-accent);
+}
+
+.skill-progress {
+  height: 8px;
+  margin-bottom: 22px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+}
+
+.skill-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+.skill-progress-html {
+  width: 72%;
+}
+
+.skill-progress-css {
+  width: 65%;
+}
+
+.skill-progress-js {
+  width: 46%;
+}
+
+.skill-progress-git {
+  width: 58%;
+}
+
+.skill-list {
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.skill-list li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 16px;
+}
+
+.skill-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  color: var(--color-accent);
+  font-size: 24px;
+}
+
+.skill-result {
+  margin: 0;
+  padding: 16px;
+  border-radius: var(--radius-small);
+  background: var(--color-accent-soft);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.project-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-image {
+  height: 180px;
+  min-height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-accent-light);
+}
+
+.project-image span {
+  color: var(--color-accent);
+  font-size: 56px;
+  font-weight: 700;
+}
+
+.project-content {
+  flex: 1;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-content h3 {
+  margin: 0 0 12px;
+  color: var(--color-text);
+  font-size: 24px;
+}
+
+.project-content p {
+  margin: 0 0 20px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.project-footer {
+  margin-top: auto;
+}
+
+.project-actions {
+  margin-bottom: 20px;
+}
+
+.project-action-link {
+  padding: 10px 14px;
+  border: 1px solid var(--color-accent);
+  border-radius: 999px;
+  color: var(--color-accent);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.project-link {
+  width: fit-content;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-accent);
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.faq-list {
+  max-width: 760px;
+  margin-top: 32px;
+}
+
+.faq-item {
+  margin-bottom: 16px;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+.faq-item.faq-open {
+  border-color: var(--color-accent);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 24px;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-item.faq-open .faq-question span {
+  color: var(--color-accent);
+}
+
+.faq-icon {
+  min-width: 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.faq-item.faq-open .faq-icon {
+  background: var(--color-accent);
+  color: #ffffff;
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: max-height 0.35s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+
+.faq-item.faq-open .faq-answer {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-answer-inner {
+  padding: 0 24px 24px;
+}
+
+.faq-answer p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.contact-form {
+  max-width: 640px;
+  margin-top: 32px;
+  padding: 32px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-small);
+  background: var(--color-white);
+  color: var(--color-text);
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+.form-message {
+  margin: 20px 0 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.footer {
+  padding: 24px 20px;
+  text-align: center;
+  color: var(--color-footer);
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border);
+}
+
+.scroll-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 90;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.92);
+  transition: opacity var(--transition-fast), visibility var(--transition-fast), transform var(--transition-fast);
+}
+
+.scroll-top.scroll-top-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 100;
+}
+
+.modal.modal-open {
+  display: block;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.7);
+}
+
+.modal-content {
+  position: relative;
+  z-index: 101;
+  max-width: 640px;
+  margin: 80px auto;
+  padding: 40px;
+  background: var(--color-white);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-modal);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.modal-title {
+  margin: 0 0 20px;
+  color: var(--color-text);
+  font-size: 36px;
+}
+
+.modal-text {
+  margin: 0 0 28px;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .hero-container,
+  .about-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 14px 16px;
+  }
+
+  .header-container {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .logo {
+    font-size: 23px;
+  }
+
+  .header-actions {
+    margin-left: auto;
+    padding: 4px;
+    gap: 6px;
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    background: var(--color-nav-mobile);
+  }
+
+  .theme-toggle,
+  .menu-button {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+  }
+
+  .menu-button {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .menu-button.menu-button-open {
+    background: var(--color-accent);
+  }
+
+  .menu-button.menu-button-open span {
+    background: #ffffff;
+  }
+
+  .nav {
+    order: 3;
+    display: flex;
+    width: 100%;
+    max-height: 0;
+    padding: 0 16px;
+    overflow: hidden;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--color-nav-mobile);
+    border-radius: 18px;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: max-height 0.35s ease, padding 0.35s ease, opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .nav.nav-open {
+    max-height: 420px;
+    padding: 16px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav a {
+    padding: 13px 14px;
+    background: var(--color-white);
+    border-radius: 12px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 40px 16px;
+  }
+
+  .hero-content,
+  .hero-card,
+  .about-main,
+  .about-card,
+  .skill-card,
+  .contact-form {
+    padding: 24px;
+    border-radius: var(--radius-medium);
+  }
+
+  .hero-title {
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+
+  .description,
+  .section-text {
+    font-size: 18px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .button,
+  .button-secondary {
+    width: 100%;
+  }
+
+  .section {
+    padding: 56px 16px;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+  .about-stats,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-card-top {
+    align-items: flex-start;
+  }
+
+  .skill-level {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .faq-question {
+    padding: 20px;
+    font-size: 18px;
+  }
+
+  .faq-answer-inner {
+    padding: 0 20px 20px;
+  }
+
+  .scroll-top {
+    right: 16px;
+    bottom: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-content {
+    width: calc(100% - 32px);
+    margin: 80px auto;
+    padding: 32px 24px;
+  }
+}

@@ -104,13 +104,39 @@ body.modal-is-open {
 }
 
 .nav a {
+  position: relative;
   color: var(--color-muted);
   font-size: 16px;
   text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--transition-fast);
 }
 
 .nav a:hover {
   color: var(--color-accent);
+}
+
+.nav a:hover::after,
+.nav a.nav-link-active::after {
+  transform: scaleX(1);
+}
+
+.nav a.nav-link-active {
+  color: var(--color-accent);
+  font-weight: 700;
 }
 
 .header-actions {
@@ -377,6 +403,7 @@ h2,
 
 .section {
   padding: 80px 20px;
+  scroll-margin-top: 90px;
 }
 
 .section-container {
@@ -1174,6 +1201,15 @@ h2,
     border-radius: 12px;
   }
 
+  .nav a::after {
+    display: none;
+  }
+
+  .nav a.nav-link-active {
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+  }
+
   .hero {
     min-height: auto;
     padding: 40px 16px;
@@ -1224,6 +1260,7 @@ h2,
 
   .section {
     padding: 56px 16px;
+    scroll-margin-top: 70px;
   }
 
   .section-title {

@@ -80,6 +80,43 @@ navLinks.forEach(function (link) {
   });
 });
 
+const sections = document.querySelectorAll("section[id]");
+
+function updateActiveNavLink() {
+  let activeSectionId = "";
+
+  sections.forEach(function (section) {
+    const sectionTop = section.offsetTop - 160;
+    const sectionBottom = sectionTop + section.offsetHeight;
+
+    if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+      activeSectionId = section.id;
+    }
+  });
+
+  const isPageBottom =
+    window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 5;
+
+  if (isPageBottom) {
+    activeSectionId = "contacts";
+  }
+
+  navLinks.forEach(function (link) {
+    const href = link.getAttribute("href");
+
+    if (href === "#" + activeSectionId) {
+      link.classList.add("nav-link-active");
+    } else {
+      link.classList.remove("nav-link-active");
+    }
+  });
+}
+
+window.addEventListener("scroll", updateActiveNavLink);
+window.addEventListener("resize", updateActiveNavLink);
+
+updateActiveNavLink();
+
 const scrollTopButton = document.querySelector("#scrollTopButton");
 
 function toggleScrollTopButton() {

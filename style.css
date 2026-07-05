@@ -185,6 +185,7 @@ body.modal-is-open {
 .skill-card,
 .project-card,
 .faq-item,
+.contact-info,
 .contact-form {
   background: var(--color-white);
   border-radius: var(--radius-large);
@@ -210,7 +211,9 @@ body.modal-is-open {
 .about-stat:hover,
 .skill-card:hover,
 .project-card:hover,
-.faq-item:hover {
+.faq-item:hover,
+.contact-info:hover,
+.contact-form:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-card-hover);
 }
@@ -852,9 +855,72 @@ h2,
   line-height: 1.7;
 }
 
-.contact-form {
-  max-width: 640px;
+.contact-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 24px;
+  align-items: start;
   margin-top: 32px;
+}
+
+.contact-info {
+  padding: 32px;
+}
+
+.contact-info h3 {
+  margin: 0 0 16px;
+  color: var(--color-text);
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.contact-info p {
+  margin: 0 0 24px;
+  color: var(--color-muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.contact-methods {
+  display: grid;
+  gap: 14px;
+}
+
+.contact-method {
+  display: block;
+  padding: 16px;
+  border-radius: var(--radius-small);
+  background: var(--color-accent-soft);
+  text-decoration: none;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.contact-method:hover {
+  transform: translateX(4px);
+}
+
+.contact-method span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-method strong {
+  display: block;
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.contact-form {
+  max-width: none;
+  margin-top: 0;
   padding: 32px;
 }
 
@@ -879,6 +945,12 @@ h2,
   color: var(--color-text);
   font-family: Arial, sans-serif;
   font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
 }
 
 .form-message {
@@ -980,7 +1052,8 @@ h2,
 @media (max-width: 900px) {
   .hero-container,
   .about-grid,
-  .skills-grid {
+  .skills-grid,
+  .contact-layout {
     grid-template-columns: 1fr;
   }
 
@@ -1111,6 +1184,7 @@ h2,
   .about-main,
   .about-card,
   .skill-card,
+  .contact-info,
   .contact-form {
     padding: 24px;
     border-radius: var(--radius-medium);
@@ -1123,7 +1197,9 @@ h2,
   .about-stat:hover,
   .skill-card:hover,
   .project-card:hover,
-  .faq-item:hover {
+  .faq-item:hover,
+  .contact-info:hover,
+  .contact-form:hover {
     transform: none;
   }
 
@@ -1184,6 +1260,18 @@ h2,
   .project-link {
     min-height: 40px;
     padding: 10px 16px;
+  }
+
+  .contact-layout {
+    gap: 18px;
+  }
+
+  .contact-info h3 {
+    font-size: 24px;
+  }
+
+  .contact-method:hover {
+    transform: none;
   }
 
   .faq-question {

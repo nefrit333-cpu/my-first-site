@@ -597,29 +597,57 @@
         <h2 class="section-title">Связаться со мной</h2>
 
         <p class="section-text">
-          Заполните форму, и позже мы научимся отправлять эти данные на почту или в Telegram.
+          Напишите мне, если хотите обсудить учебный проект, сайт для портфолио или будущую задачу по верстке.
         </p>
 
-        <form class="contact-form" id="contactForm" novalidate>
-          <div class="form-group">
-            <label for="name">Ваше имя</label>
-            <input type="text" id="name" placeholder="Например, Иван">
-          </div>
+        <div class="contact-layout">
+          <aside class="contact-info">
+            <h3>Как со мной связаться</h3>
 
-          <div class="form-group">
-            <label for="email">Ваш email</label>
-            <input type="email" id="email" placeholder="example@mail.com">
-          </div>
+            <p>
+              Сейчас форма работает как учебная: она проверяет поля и показывает сообщение об отправке.
+              Позже мы подключим реальную отправку данных на почту или в Telegram.
+            </p>
 
-          <div class="form-group">
-            <label for="message">Сообщение</label>
-            <textarea id="message" rows="5" placeholder="Напишите, какой сайт вам нужен"></textarea>
-          </div>
+            <div class="contact-methods">
+              <a class="contact-method" href="https://github.com/nefrit333-cpu" target="_blank" rel="noopener noreferrer">
+                <span>GitHub</span>
+                <strong>Посмотреть код проектов</strong>
+              </a>
 
-          <button class="button" type="submit">Отправить заявку</button>
+              <a class="contact-method" href="https://nefrit333-cpu.github.io/my-first-site/" target="_blank" rel="noopener noreferrer">
+                <span>Сайт</span>
+                <strong>Открыть живую версию</strong>
+              </a>
 
-          <p class="form-message" id="formMessage"></p>
-        </form>
+              <div class="contact-method">
+                <span>Telegram</span>
+                <strong>Подключим на следующих уроках</strong>
+              </div>
+            </div>
+          </aside>
+
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="name">Ваше имя</label>
+              <input type="text" id="name" placeholder="Например, Иван">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Ваш email</label>
+              <input type="email" id="email" placeholder="example@mail.com">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Сообщение</label>
+              <textarea id="message" rows="5" placeholder="Напишите, какой сайт вам нужен"></textarea>
+            </div>
+
+            <button class="button" type="submit">Отправить заявку</button>
+
+            <p class="form-message" id="formMessage"></p>
+          </form>
+        </div>
       </div>
     </section>
 

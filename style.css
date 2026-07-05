@@ -603,10 +603,39 @@ h2,
   flex-direction: column;
 }
 
-.project-content h3 {
+.project-header {
+  margin-bottom: 14px;
+}
+
+.project-status {
+  width: fit-content;
   margin: 0 0 12px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.project-status-live {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.project-status-progress {
+  color: #facc15;
+  background: rgba(250, 204, 21, 0.12);
+}
+
+.project-status-plan {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.project-content h3 {
+  margin: 0;
   color: var(--color-text);
   font-size: 24px;
+  line-height: 1.2;
 }
 
 .project-content p {
@@ -615,8 +644,71 @@ h2,
   line-height: 1.6;
 }
 
+.project-details {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.project-detail {
+  padding: 14px;
+  border-radius: var(--radius-small);
+  background: var(--color-accent-soft);
+}
+
+.project-detail span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--color-accent);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.project-detail strong {
+  display: block;
+  color: var(--color-text);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.project-done {
+  margin-bottom: 20px;
+}
+
+.project-done h4 {
+  margin: 0 0 10px;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.project-done ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.project-done li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.project-done li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
 .project-tags {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .project-footer {
@@ -906,7 +998,7 @@ h2,
     position: sticky;
     top: 0;
     z-index: 80;
-    padding: 8px 16px;
+    padding: 0 16px;
   }
 
   .header.header-floating {
@@ -930,6 +1022,7 @@ h2,
     border: 1px solid var(--color-accent);
     border-radius: 999px;
     background: var(--color-nav-mobile);
+    transform: translateY(3px);
   }
 
   .theme-toggle,
@@ -1077,10 +1170,6 @@ h2,
 
   .project-content {
     padding: 24px;
-  }
-
-  .project-tags {
-    margin-bottom: 18px;
   }
 
   .project-footer {

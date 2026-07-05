@@ -22,6 +22,30 @@ themeToggle.addEventListener("click", function () {
   }
 });
 
+const header = document.querySelector(".header");
+
+function toggleFloatingHeader() {
+  const heroCard = document.querySelector(".hero-card");
+
+  if (!header || !heroCard) {
+    return;
+  }
+
+  const isMobile = window.innerWidth <= 768;
+  const triggerPoint = heroCard.offsetTop - 20;
+
+  if (isMobile && window.scrollY >= triggerPoint) {
+    header.classList.add("header-floating");
+  } else {
+    header.classList.remove("header-floating");
+  }
+}
+
+window.addEventListener("scroll", toggleFloatingHeader);
+window.addEventListener("resize", toggleFloatingHeader);
+
+toggleFloatingHeader();
+
 const menuButton = document.querySelector("#menuButton");
 const siteNav = document.querySelector("#siteNav");
 const navLinks = document.querySelectorAll(".nav a");

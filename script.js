@@ -105,6 +105,26 @@ document.addEventListener("keydown", function (event) {
 
 const faqItems = document.querySelectorAll(".faq-item");
 
+function closeFaqItem(item) {
+  const question = item.querySelector(".faq-question");
+  const answer = item.querySelector(".faq-answer");
+
+  item.classList.remove("faq-open");
+  question.setAttribute("aria-expanded", "false");
+  answer.setAttribute("aria-hidden", "true");
+  answer.style.maxHeight = null;
+}
+
+function openFaqItem(item) {
+  const question = item.querySelector(".faq-question");
+  const answer = item.querySelector(".faq-answer");
+
+  item.classList.add("faq-open");
+  question.setAttribute("aria-expanded", "true");
+  answer.setAttribute("aria-hidden", "false");
+  answer.style.maxHeight = answer.scrollHeight + "px";
+}
+
 faqItems.forEach(function (item) {
   const question = item.querySelector(".faq-question");
 
@@ -112,11 +132,21 @@ faqItems.forEach(function (item) {
     const isOpen = item.classList.contains("faq-open");
 
     faqItems.forEach(function (currentItem) {
-      currentItem.classList.remove("faq-open");
+      closeFaqItem(currentItem);
     });
 
     if (!isOpen) {
-      item.classList.add("faq-open");
+      openFaqItem(item);
+    }
+  });
+});
+
+window.addEventListener("resize", function () {
+  faqItems.forEach(function (item) {
+    const answer = item.querySelector(".faq-answer");
+
+    if (item.classList.contains("faq-open")) {
+      answer.style.maxHeight = answer.scrollHeight + "px";
     }
   });
 });

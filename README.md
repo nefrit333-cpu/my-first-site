@@ -6,8 +6,10 @@
 ![CSS](https://img.shields.io/badge/CSS-адаптив-blue)
 ![JavaScript](https://img.shields.io/badge/JavaScript-интерактивность-yellow)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-online-brightgreen)
+![Prettier](https://img.shields.io/badge/Prettier-formatting-pink)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-checks-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-v1.2-blue)
+![Version](https://img.shields.io/badge/version-v1.3-blue)
 
 Это мой первый учебный сайт-портфолио, который я создаю в процессе изучения frontend-разработки.
 
@@ -26,10 +28,10 @@
 Актуальная версия проекта:
 
 ```text
-v1.2 — Улучшение README и визуального превью
+v1.3 — Настройка качества кода и автоматических проверок
 ```
 
-[Открыть релиз v1.2](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.2)
+[Открыть релиз v1.3](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.3)
 
 ## Стек проекта
 
@@ -41,6 +43,9 @@ v1.2 — Улучшение README и визуального превью
 - Git
 - GitHub
 - GitHub Pages
+- npm
+- Prettier
+- GitHub Actions
 
 ## Что реализовано
 
@@ -70,16 +75,26 @@ v1.2 — Улучшение README и визуального превью
 - CHANGELOG.md с историей изменений
 - LICENSE с MIT-лицензией
 - .gitignore для чистоты репозитория
+- .editorconfig для единого стиля редактора
+- Prettier для форматирования кода
+- GitHub Actions для проверки форматирования
 - GitHub Release v1.0
 - GitHub Release v1.1
 - GitHub Release v1.2
+- GitHub Release v1.3
 - визуальное превью проекта в README
 
 ## Структура проекта
 
 ```text
 my-first-site/
+├── .editorconfig
 ├── .gitignore
+├── .github/
+│   └── workflows/
+│       └── format-check.yml
+├── .prettierignore
+├── .prettierrc
 ├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
@@ -87,6 +102,8 @@ my-first-site/
 │   └── preview.svg
 ├── favicon.svg
 ├── index.html
+├── package-lock.json
+├── package.json
 ├── robots.txt
 ├── script.js
 ├── sitemap.xml
@@ -138,6 +155,29 @@ my-first-site/
 - robots.txt
 - sitemap.xml
 
+## Качество кода
+
+В проект добавлены инструменты для поддержания аккуратного кода:
+
+- .editorconfig
+- Prettier
+- npm scripts
+- GitHub Actions
+
+Проверить форматирование можно командой:
+
+```bash
+npm run format:check
+```
+
+Автоматически отформатировать файлы можно командой:
+
+```bash
+npm run format
+```
+
+После каждого push GitHub автоматически запускает проверку форматирования через GitHub Actions.
+
 ## Документация проекта
 
 В репозитории есть:
@@ -146,6 +186,10 @@ my-first-site/
 - `CHANGELOG.md` — история изменений
 - `LICENSE` — лицензия проекта
 - `.gitignore` — список файлов, которые Git не должен отслеживать
+- `.editorconfig` — правила форматирования для редактора
+- `.prettierrc` — настройки Prettier
+- `.prettierignore` — исключения для Prettier
+- `package.json` — npm-настройки проекта
 - `robots.txt` — правила для поисковых роботов
 - `sitemap.xml` — карта сайта
 - `assets/preview.svg` — визуальное превью проекта
@@ -179,6 +223,9 @@ my-first-site/
 - добавлении лицензии проекта
 - оформлении репозитория как frontend-проекта
 - добавлении визуального превью проекта
+- подключении npm
+- настройке Prettier
+- добавлении автоматической проверки через GitHub Actions
 
 ## Версии проекта
 
@@ -191,12 +238,12 @@ my-first-site/
 - [v1.0 — Первый релиз портфолио](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.0)
 - [v1.1 — Техническое оформление проекта](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.1)
 - [v1.2 — Улучшение README и визуального превью](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.2)
+- [v1.3 — Настройка качества кода и автоматических проверок](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.3)
 
 ## Планы развития
 
 Дальше планируется:
 
-- добавить реальный скриншот проекта в README
 - добавить реальные проекты в портфолио
 - улучшить мобильную версию
 - подключить реальную отправку формы
@@ -217,7 +264,7 @@ my-first-site/
 
 Проект находится в активной разработке.
 
-Текущая версия: `v1.2`
+Текущая версия: `v1.3`
 
 ## Автор
 

@@ -39,3 +39,4 @@
 ```text
 assets/
 └── preview.svg
+```

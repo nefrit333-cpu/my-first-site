@@ -1,0 +1,23 @@
+{
+  "name": "my-first-site",
+  "version": "1.2.0",
+  "description": "Учебный сайт-портфолио frontend-разработчика на HTML, CSS и JavaScript",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "keywords": [
+    "html",
+    "css",
+    "javascript",
+    "frontend",
+    "portfolio",
+    "github-pages"
+  ],
+  "author": "Dmitriy Web",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

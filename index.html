@@ -1,778 +1,813 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Dmitriy Web — учебный сайт-портфолио frontend-разработчика</title>
+    <title>Dmitriy Web — учебный сайт-портфолио frontend-разработчика</title>
 
-  <meta
-    name="description"
-    content="Учебный сайт-портфолио Dmitriy Web. Первый frontend-проект на HTML, CSS и JavaScript с адаптивной версткой, тёмной темой, FAQ, формой, GitHub Pages и README."
-  >
+    <meta
+      name="description"
+      content="Учебный сайт-портфолио Dmitriy Web. Первый frontend-проект на HTML, CSS и JavaScript с адаптивной версткой, тёмной темой, FAQ, формой, GitHub Pages и README."
+    />
 
-  <meta
-    name="keywords"
-    content="frontend, html, css, javascript, github pages, портфолио, учебный сайт, веб-разработка, frontend-разработчик"
-  >
+    <meta
+      name="keywords"
+      content="frontend, html, css, javascript, github pages, портфолио, учебный сайт, веб-разработка, frontend-разработчик"
+    />
 
-  <meta name="author" content="Dmitriy Web">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0f172a">
+    <meta name="author" content="Dmitriy Web" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0f172a" />
 
-  <link rel="canonical" href="https://nefrit333-cpu.github.io/my-first-site/">
+    <link rel="canonical" href="https://nefrit333-cpu.github.io/my-first-site/" />
 
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="ru_RU">
-  <meta property="og:site_name" content="Dmitriy Web">
-  <meta property="og:title" content="Dmitriy Web — учебный сайт-портфолио">
-  <meta
-    property="og:description"
-    content="Первый учебный frontend-проект на HTML, CSS и JavaScript. Адаптивная верстка, интерактивность, GitHub Pages и развитие портфолио."
-  >
-  <meta property="og:url" content="https://nefrit333-cpu.github.io/my-first-site/">
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Dmitriy Web" />
+    <meta property="og:title" content="Dmitriy Web — учебный сайт-портфолио" />
+    <meta
+      property="og:description"
+      content="Первый учебный frontend-проект на HTML, CSS и JavaScript. Адаптивная верстка, интерактивность, GitHub Pages и развитие портфолио."
+    />
+    <meta property="og:url" content="https://nefrit333-cpu.github.io/my-first-site/" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Dmitriy Web — учебный сайт-портфолио">
-  <meta
-    name="twitter:description"
-    content="Учебный frontend-проект на HTML, CSS и JavaScript с публикацией через GitHub Pages."
-  >
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Dmitriy Web — учебный сайт-портфолио" />
+    <meta
+      name="twitter:description"
+      content="Учебный frontend-проект на HTML, CSS и JavaScript с публикацией через GitHub Pages."
+    />
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header" id="top">
+      <div class="header-container">
+        <a class="logo" href="#">Dmitriy Web</a>
 
-  <header class="header" id="top">
-    <div class="header-container">
-      <a class="logo" href="#">Dmitriy Web</a>
+        <nav class="nav" id="siteNav">
+          <a href="#about">Обо мне</a>
+          <a href="#skills">Навыки</a>
+          <a href="#projects">Проекты</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
 
-      <nav class="nav" id="siteNav">
-        <a href="#about">Обо мне</a>
-        <a href="#skills">Навыки</a>
-        <a href="#projects">Проекты</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contacts">Контакты</a>
-      </nav>
+        <div class="header-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему">
+            🌙
+          </button>
 
-      <div class="header-actions">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему">
-          🌙
-        </button>
-
-        <button class="menu-button" id="menuButton" type="button" aria-label="Открыть меню" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-
-    <section class="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <p class="label">Frontend-разработчик в обучении</p>
-
-          <h1 class="hero-title">
-            Создаю сайты и развиваюсь во <span>frontend</span>
-          </h1>
-
-          <p class="description">
-            Я изучаю HTML, CSS, JavaScript, Git и GitHub, собираю первые проекты
-            и постепенно превращаю учебный сайт в настоящее портфолио разработчика.
-          </p>
-
-          <div class="hero-stack">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>Git</span>
-            <span>GitHub Pages</span>
-          </div>
-
-          <div class="actions">
-            <a class="button" href="#projects">Смотреть проекты</a>
-            <a class="button-secondary" href="#contacts">Связаться</a>
-          </div>
-
-          <p class="hero-note">
-            Сейчас фокус: адаптивная верстка, интерактивность, GitHub Pages и подготовка к React.
-          </p>
+          <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Открыть меню"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
+      </div>
+    </header>
 
-        <aside class="hero-card">
-          <p class="hero-card-label">Текущий прогресс</p>
+    <main>
+      <section class="hero">
+        <div class="hero-container">
+          <div class="hero-content">
+            <p class="label">Frontend-разработчик в обучении</p>
 
-          <h2>Первое портфолио</h2>
+            <h1 class="hero-title">Создаю сайты и развиваюсь во <span>frontend</span></h1>
 
-          <p>
-            Проект уже опубликован онлайн, подключён к GitHub и постепенно дорабатывается
-            как настоящий сайт frontend-разработчика.
-          </p>
+            <p class="description">
+              Я изучаю HTML, CSS, JavaScript, Git и GitHub, собираю первые проекты и постепенно
+              превращаю учебный сайт в настоящее портфолио разработчика.
+            </p>
 
-          <div class="hero-progress-list">
-            <div class="hero-progress-item">
-              <strong>01</strong>
-              <span>HTML-структура</span>
-            </div>
-
-            <div class="hero-progress-item">
-              <strong>02</strong>
-              <span>CSS-адаптив</span>
-            </div>
-
-            <div class="hero-progress-item">
-              <strong>03</strong>
-              <span>JavaScript UI</span>
-            </div>
-
-            <div class="hero-progress-item">
-              <strong>04</strong>
+            <div class="hero-stack">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Git</span>
               <span>GitHub Pages</span>
             </div>
-          </div>
-        </aside>
-      </div>
-    </section>
 
-    <section class="section" id="about">
-      <div class="section-container">
-        <p class="label">Обо мне</p>
+            <div class="actions">
+              <a class="button" href="#projects">Смотреть проекты</a>
+              <a class="button-secondary" href="#contacts">Связаться</a>
+            </div>
 
-        <h2 class="section-title">Я развиваюсь как frontend-разработчик</h2>
-
-        <div class="about-grid">
-          <div class="about-main">
-            <p>
-              Я изучаю веб-разработку с нуля и шаг за шагом собираю своё первое портфолио.
-              Сейчас мой основной фокус — уверенно освоить HTML, CSS, JavaScript, адаптивную
-              верстку, работу с Git, GitHub и публикацию сайтов через GitHub Pages.
+            <p class="hero-note">
+              Сейчас фокус: адаптивная верстка, интерактивность, GitHub Pages и подготовка к React.
             </p>
+          </div>
+
+          <aside class="hero-card">
+            <p class="hero-card-label">Текущий прогресс</p>
+
+            <h2>Первое портфолио</h2>
 
             <p>
-              Для меня важно не просто копировать код, а понимать, как устроена страница:
-              где находится структура, где стили, как работает интерактивность и как изменения
-              попадают из локального проекта в живую версию сайта.
+              Проект уже опубликован онлайн, подключён к GitHub и постепенно дорабатывается как
+              настоящий сайт frontend-разработчика.
             </p>
 
-            <p>
-              Моя ближайшая цель — собрать несколько аккуратных учебных проектов, научиться
-              уверенно дорабатывать интерфейсы и подготовиться к переходу на React и Next.js.
-            </p>
-          </div>
-
-          <aside class="about-card">
-            <h3>Мой фокус</h3>
-
-            <ul class="about-list">
-              <li>Чистая HTML-структура</li>
-              <li>Адаптивная CSS-верстка</li>
-              <li>JavaScript-интерактивность</li>
-              <li>Работа через Git и GitHub</li>
-              <li>Публикация проектов онлайн</li>
-            </ul>
-          </aside>
-        </div>
-
-        <div class="about-stats">
-          <div class="about-stat">
-            <strong>HTML</strong>
-            <span>структура сайта</span>
-          </div>
-
-          <div class="about-stat">
-            <strong>CSS</strong>
-            <span>адаптив и стили</span>
-          </div>
-
-          <div class="about-stat">
-            <strong>JS</strong>
-            <span>логика интерфейса</span>
-          </div>
-
-          <div class="about-stat">
-            <strong>GitHub</strong>
-            <span>код и деплой</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="skills">
-      <div class="section-container">
-        <p class="label">Навыки</p>
-
-        <h2 class="section-title">Что я изучаю и применяю</h2>
-
-        <p class="section-text">
-          Мой текущий стек — основа frontend-разработки. Я изучаю не только синтаксис,
-          но и то, как применять навыки в реальном интерфейсе: от структуры страницы
-          до публикации сайта в интернете.
-        </p>
-
-        <div class="skills-grid">
-          <article class="skill-card">
-            <div class="skill-card-top">
-              <div class="skill-icon">HTML</div>
-
-              <div>
-                <h3>HTML</h3>
-                <p>Структура страницы</p>
-              </div>
-            </div>
-
-            <div class="skill-level">
-              <span>Текущий уровень</span>
-              <strong>База уверенно</strong>
-            </div>
-
-            <div class="skill-progress">
-              <span class="skill-progress-fill skill-progress-html"></span>
-            </div>
-
-            <ul class="skill-list">
-              <li>Секции сайта</li>
-              <li>Навигация и ссылки</li>
-              <li>Формы и поля ввода</li>
-              <li>Семантическая структура</li>
-            </ul>
-
-            <p class="skill-result">
-              Применяю для сборки понятной структуры сайта и подготовки блоков под стилизацию.
-            </p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-card-top">
-              <div class="skill-icon">CSS</div>
-
-              <div>
-                <h3>CSS</h3>
-                <p>Внешний вид и адаптив</p>
-              </div>
-            </div>
-
-            <div class="skill-level">
-              <span>Текущий уровень</span>
-              <strong>Активная практика</strong>
-            </div>
-
-            <div class="skill-progress">
-              <span class="skill-progress-fill skill-progress-css"></span>
-            </div>
-
-            <ul class="skill-list">
-              <li>Flexbox и Grid</li>
-              <li>Адаптивная верстка</li>
-              <li>Цвета, отступы, тени</li>
-              <li>Анимации и hover-эффекты</li>
-            </ul>
-
-            <p class="skill-result">
-              Использую для создания аккуратного интерфейса, мобильной версии и визуальных состояний.
-            </p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-card-top">
-              <div class="skill-icon">JS</div>
-
-              <div>
-                <h3>JavaScript</h3>
-                <p>Интерактивность интерфейса</p>
-              </div>
-            </div>
-
-            <div class="skill-level">
-              <span>Текущий уровень</span>
-              <strong>В процессе</strong>
-            </div>
-
-            <div class="skill-progress">
-              <span class="skill-progress-fill skill-progress-js"></span>
-            </div>
-
-            <ul class="skill-list">
-              <li>Клики и события</li>
-              <li>Мобильное меню</li>
-              <li>Модальные окна</li>
-              <li>FAQ-аккордеон и форма</li>
-            </ul>
-
-            <p class="skill-result">
-              Добавляю поведение сайту: открытие меню, проверку формы, модалки и плавные FAQ-ответы.
-            </p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-card-top">
-              <div class="skill-icon">GIT</div>
-
-              <div>
-                <h3>Git и GitHub</h3>
-                <p>Версии и публикация</p>
-              </div>
-            </div>
-
-            <div class="skill-level">
-              <span>Текущий уровень</span>
-              <strong>Рабочая база</strong>
-            </div>
-
-            <div class="skill-progress">
-              <span class="skill-progress-fill skill-progress-git"></span>
-            </div>
-
-            <ul class="skill-list">
-              <li>git status / add / commit</li>
-              <li>git push</li>
-              <li>GitHub-репозиторий</li>
-              <li>GitHub Pages</li>
-            </ul>
-
-            <p class="skill-result">
-              Фиксирую изменения, отправляю код на GitHub и обновляю живую версию сайта.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <div class="section-container">
-        <p class="label">Проекты</p>
-
-        <h2 class="section-title">Мои первые проекты</h2>
-
-        <p class="section-text">
-          Здесь собраны учебные проекты, которые постепенно превращаются в настоящее портфолио.
-          Каждый проект показывает конкретный навык: верстку, адаптив, интерактивность и публикацию онлайн.
-        </p>
-
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-image">
-              <span>01</span>
-            </div>
-
-            <div class="project-content">
-              <div class="project-header">
-                <p class="project-status project-status-live">Опубликован</p>
-                <h3>Учебный сайт-портфолио</h3>
+            <div class="hero-progress-list">
+              <div class="hero-progress-item">
+                <strong>01</strong>
+                <span>HTML-структура</span>
               </div>
 
-              <p>
-                Первый опубликованный сайт на HTML, CSS и JavaScript. В проекте уже есть
-                адаптив, тёмная тема, FAQ, модальные окна, форма, GitHub Pages и кнопка возврата наверх.
-              </p>
-
-              <div class="project-details">
-                <div class="project-detail">
-                  <span>Задача</span>
-                  <strong>Собрать личное портфолио</strong>
-                </div>
-
-                <div class="project-detail">
-                  <span>Результат</span>
-                  <strong>Сайт опубликован онлайн</strong>
-                </div>
+              <div class="hero-progress-item">
+                <strong>02</strong>
+                <span>CSS-адаптив</span>
               </div>
 
-              <div class="project-done">
-                <h4>Что сделано</h4>
-
-                <ul>
-                  <li>Собрана структура страницы</li>
-                  <li>Настроена адаптивная верстка</li>
-                  <li>Добавлена интерактивность на JavaScript</li>
-                  <li>Проект опубликован через GitHub Pages</li>
-                </ul>
+              <div class="hero-progress-item">
+                <strong>03</strong>
+                <span>JavaScript UI</span>
               </div>
 
-              <div class="project-tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
+              <div class="hero-progress-item">
+                <strong>04</strong>
                 <span>GitHub Pages</span>
               </div>
-
-              <div class="project-footer">
-                <div class="project-actions">
-                  <a
-                    class="project-action-link"
-                    href="https://nefrit333-cpu.github.io/my-first-site/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Открыть сайт
-                  </a>
-
-                  <a
-                    class="project-action-link"
-                    href="https://github.com/nefrit333-cpu/my-first-site"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GitHub
-                  </a>
-                </div>
-
-                <button
-                  class="project-link"
-                  type="button"
-                  data-title="Учебный сайт-портфолио"
-                  data-description="Это мой первый опубликованный учебный проект. В нём есть HTML-структура, CSS-стили, адаптивная верстка, мобильное меню, тёмная тема, FAQ-аккордеон, модальное окно, проверка формы и кнопка возврата наверх. Проект опубликован через GitHub Pages."
-                >
-                  Подробнее
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-image">
-              <span>02</span>
-            </div>
-
-            <div class="project-content">
-              <div class="project-header">
-                <p class="project-status project-status-progress">Следующий проект</p>
-                <h3>Лендинг услуги</h3>
-              </div>
-
-              <p>
-                Будущий учебный проект: одностраничный сайт для услуги, эксперта или небольшой компании.
-                Такой формат часто нужен клиентам.
-              </p>
-
-              <div class="project-details">
-                <div class="project-detail">
-                  <span>Задача</span>
-                  <strong>Сделать продающий лендинг</strong>
-                </div>
-
-                <div class="project-detail">
-                  <span>Фокус</span>
-                  <strong>Блоки, форма и адаптив</strong>
-                </div>
-              </div>
-
-              <div class="project-done">
-                <h4>Что будет сделано</h4>
-
-                <ul>
-                  <li>Первый экран с оффером</li>
-                  <li>Блок преимуществ</li>
-                  <li>Форма заявки</li>
-                  <li>Адаптив под мобильные устройства</li>
-                </ul>
-              </div>
-
-              <div class="project-tags">
-                <span>Верстка</span>
-                <span>Адаптив</span>
-                <span>Форма</span>
-              </div>
-
-              <div class="project-footer">
-                <button
-                  class="project-link"
-                  type="button"
-                  data-title="Лендинг услуги"
-                  data-description="Лендинг — это одностраничный сайт, который продаёт услугу или продукт. Обычно в нём есть первый экран, преимущества, описание услуги, отзывы, цены и форма заявки. Такой тип сайта часто заказывают клиенты."
-                >
-                  Подробнее
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-image">
-              <span>03</span>
-            </div>
-
-            <div class="project-content">
-              <div class="project-header">
-                <p class="project-status project-status-plan">В планах</p>
-                <h3>Сайт для клиента</h3>
-              </div>
-
-              <p>
-                Будущий коммерческий проект: сайт с понятной структурой, описанием услуг,
-                заявкой, контактами и акцентом на удобство пользователя.
-              </p>
-
-              <div class="project-details">
-                <div class="project-detail">
-                  <span>Задача</span>
-                  <strong>Решить задачу бизнеса</strong>
-                </div>
-
-                <div class="project-detail">
-                  <span>Фокус</span>
-                  <strong>UX, доверие и заявки</strong>
-                </div>
-              </div>
-
-              <div class="project-done">
-                <h4>Что будет сделано</h4>
-
-                <ul>
-                  <li>Структура под услугу клиента</li>
-                  <li>Контактный блок</li>
-                  <li>Описание преимуществ</li>
-                  <li>Оптимизация под мобильную версию</li>
-                </ul>
-              </div>
-
-              <div class="project-tags">
-                <span>Клиентский сайт</span>
-                <span>UX</span>
-                <span>SEO</span>
-              </div>
-
-              <div class="project-footer">
-                <button
-                  class="project-link"
-                  type="button"
-                  data-title="Сайт для клиента"
-                  data-description="Клиентский сайт должен не просто красиво выглядеть, а решать задачу бизнеса: объяснять услугу, вызывать доверие, приводить заявки и удобно работать на телефоне. Позже мы будем учиться собирать такие сайты по техническому заданию."
-                >
-                  Подробнее
-                </button>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="section-container">
-        <p class="label">FAQ</p>
-
-        <h2 class="section-title">Частые вопросы</h2>
-
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer1">
-              <span>Можно ли сделать сайт только на HTML и CSS?</span>
-              <strong class="faq-icon">+</strong>
-            </button>
-
-            <div class="faq-answer" id="faqAnswer1" aria-hidden="true">
-              <div class="faq-answer-inner">
-                <p>
-                  Да, простой статичный сайт можно сделать на HTML и CSS. Но для интерактива:
-                  меню, формы, модальные окна, фильтры и отправка данных — нужен JavaScript.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer2">
-              <span>Зачем нужен JavaScript?</span>
-              <strong class="faq-icon">+</strong>
-            </button>
-
-            <div class="faq-answer" id="faqAnswer2" aria-hidden="true">
-              <div class="faq-answer-inner">
-                <p>
-                  JavaScript отвечает за поведение сайта. Он позволяет реагировать на клики,
-                  проверять формы, открывать окна, менять контент и работать с данными.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer3">
-              <span>Когда переходить к React?</span>
-              <strong class="faq-icon">+</strong>
-            </button>
-
-            <div class="faq-answer" id="faqAnswer3" aria-hidden="true">
-              <div class="faq-answer-inner">
-                <p>
-                  К React лучше переходить после уверенной базы: HTML, CSS, адаптив,
-                  JavaScript, DOM, события, формы и работа с массивами.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer4">
-              <span>Можно ли с таким сайтом идти в портфолио?</span>
-              <strong class="faq-icon">+</strong>
-            </button>
-
-            <div class="faq-answer" id="faqAnswer4" aria-hidden="true">
-              <div class="faq-answer-inner">
-                <p>
-                  Да, но его нужно доработать: добавить реальные проекты, ссылки на GitHub,
-                  описание задач, скриншоты, адаптив и аккуратный код.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contacts">
-      <div class="section-container">
-        <p class="label">Контакты</p>
-
-        <h2 class="section-title">Связаться со мной</h2>
-
-        <p class="section-text">
-          Напишите мне, если хотите обсудить учебный проект, сайт для портфолио или будущую задачу по верстке.
-        </p>
-
-        <div class="contact-layout">
-          <aside class="contact-info">
-            <h3>Как со мной связаться</h3>
-
-            <p>
-              Сейчас форма работает как учебная: она проверяет поля и показывает сообщение об отправке.
-              Позже мы подключим реальную отправку данных на почту или в Telegram.
-            </p>
-
-            <div class="contact-methods">
-              <a class="contact-method" href="https://github.com/nefrit333-cpu" target="_blank" rel="noopener noreferrer">
-                <span>GitHub</span>
-                <strong>Посмотреть код проектов</strong>
-              </a>
-
-              <a class="contact-method" href="https://nefrit333-cpu.github.io/my-first-site/" target="_blank" rel="noopener noreferrer">
-                <span>Сайт</span>
-                <strong>Открыть живую версию</strong>
-              </a>
-
-              <div class="contact-method">
-                <span>Telegram</span>
-                <strong>Подключим на следующих уроках</strong>
-              </div>
             </div>
           </aside>
-
-          <form class="contact-form" id="contactForm" novalidate>
-            <div class="form-group">
-              <label for="name">Ваше имя</label>
-              <input type="text" id="name" placeholder="Например, Иван">
-            </div>
-
-            <div class="form-group">
-              <label for="email">Ваш email</label>
-              <input type="email" id="email" placeholder="example@mail.com">
-            </div>
-
-            <div class="form-group">
-              <label for="message">Сообщение</label>
-              <textarea id="message" rows="5" placeholder="Напишите, какой сайт вам нужен"></textarea>
-            </div>
-
-            <button class="button" type="submit">Отправить заявку</button>
-
-            <p class="form-message" id="formMessage"></p>
-          </form>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section release-section">
-      <div class="section-container">
-        <div class="release-card">
-          <div class="release-content">
-            <p class="label">Релиз v1.0</p>
+      <section class="section" id="about">
+        <div class="section-container">
+          <p class="label">Обо мне</p>
 
-            <h2 class="section-title">Первый релиз портфолио готов</h2>
+          <h2 class="section-title">Я развиваюсь как frontend-разработчик</h2>
 
-            <p class="section-text">
-              Это первая завершённая версия моего учебного сайта-портфолио. В проекте уже есть
-              адаптивная верстка, интерактивность на JavaScript, публикация через GitHub Pages
-              и понятная структура будущего портфолио frontend-разработчика.
-            </p>
+          <div class="about-grid">
+            <div class="about-main">
+              <p>
+                Я изучаю веб-разработку с нуля и шаг за шагом собираю своё первое портфолио. Сейчас
+                мой основной фокус — уверенно освоить HTML, CSS, JavaScript, адаптивную верстку,
+                работу с Git, GitHub и публикацию сайтов через GitHub Pages.
+              </p>
 
-            <div class="release-actions">
-              <a
-                class="button"
-                href="https://github.com/nefrit333-cpu/my-first-site"
-                target="_blank"
-                rel="noopener noreferrer"
+              <p>
+                Для меня важно не просто копировать код, а понимать, как устроена страница: где
+                находится структура, где стили, как работает интерактивность и как изменения
+                попадают из локального проекта в живую версию сайта.
+              </p>
+
+              <p>
+                Моя ближайшая цель — собрать несколько аккуратных учебных проектов, научиться
+                уверенно дорабатывать интерфейсы и подготовиться к переходу на React и Next.js.
+              </p>
+            </div>
+
+            <aside class="about-card">
+              <h3>Мой фокус</h3>
+
+              <ul class="about-list">
+                <li>Чистая HTML-структура</li>
+                <li>Адаптивная CSS-верстка</li>
+                <li>JavaScript-интерактивность</li>
+                <li>Работа через Git и GitHub</li>
+                <li>Публикация проектов онлайн</li>
+              </ul>
+            </aside>
+          </div>
+
+          <div class="about-stats">
+            <div class="about-stat">
+              <strong>HTML</strong>
+              <span>структура сайта</span>
+            </div>
+
+            <div class="about-stat">
+              <strong>CSS</strong>
+              <span>адаптив и стили</span>
+            </div>
+
+            <div class="about-stat">
+              <strong>JS</strong>
+              <span>логика интерфейса</span>
+            </div>
+
+            <div class="about-stat">
+              <strong>GitHub</strong>
+              <span>код и деплой</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="section-container">
+          <p class="label">Навыки</p>
+
+          <h2 class="section-title">Что я изучаю и применяю</h2>
+
+          <p class="section-text">
+            Мой текущий стек — основа frontend-разработки. Я изучаю не только синтаксис, но и то,
+            как применять навыки в реальном интерфейсе: от структуры страницы до публикации сайта в
+            интернете.
+          </p>
+
+          <div class="skills-grid">
+            <article class="skill-card">
+              <div class="skill-card-top">
+                <div class="skill-icon">HTML</div>
+
+                <div>
+                  <h3>HTML</h3>
+                  <p>Структура страницы</p>
+                </div>
+              </div>
+
+              <div class="skill-level">
+                <span>Текущий уровень</span>
+                <strong>База уверенно</strong>
+              </div>
+
+              <div class="skill-progress">
+                <span class="skill-progress-fill skill-progress-html"></span>
+              </div>
+
+              <ul class="skill-list">
+                <li>Секции сайта</li>
+                <li>Навигация и ссылки</li>
+                <li>Формы и поля ввода</li>
+                <li>Семантическая структура</li>
+              </ul>
+
+              <p class="skill-result">
+                Применяю для сборки понятной структуры сайта и подготовки блоков под стилизацию.
+              </p>
+            </article>
+
+            <article class="skill-card">
+              <div class="skill-card-top">
+                <div class="skill-icon">CSS</div>
+
+                <div>
+                  <h3>CSS</h3>
+                  <p>Внешний вид и адаптив</p>
+                </div>
+              </div>
+
+              <div class="skill-level">
+                <span>Текущий уровень</span>
+                <strong>Активная практика</strong>
+              </div>
+
+              <div class="skill-progress">
+                <span class="skill-progress-fill skill-progress-css"></span>
+              </div>
+
+              <ul class="skill-list">
+                <li>Flexbox и Grid</li>
+                <li>Адаптивная верстка</li>
+                <li>Цвета, отступы, тени</li>
+                <li>Анимации и hover-эффекты</li>
+              </ul>
+
+              <p class="skill-result">
+                Использую для создания аккуратного интерфейса, мобильной версии и визуальных
+                состояний.
+              </p>
+            </article>
+
+            <article class="skill-card">
+              <div class="skill-card-top">
+                <div class="skill-icon">JS</div>
+
+                <div>
+                  <h3>JavaScript</h3>
+                  <p>Интерактивность интерфейса</p>
+                </div>
+              </div>
+
+              <div class="skill-level">
+                <span>Текущий уровень</span>
+                <strong>В процессе</strong>
+              </div>
+
+              <div class="skill-progress">
+                <span class="skill-progress-fill skill-progress-js"></span>
+              </div>
+
+              <ul class="skill-list">
+                <li>Клики и события</li>
+                <li>Мобильное меню</li>
+                <li>Модальные окна</li>
+                <li>FAQ-аккордеон и форма</li>
+              </ul>
+
+              <p class="skill-result">
+                Добавляю поведение сайту: открытие меню, проверку формы, модалки и плавные
+                FAQ-ответы.
+              </p>
+            </article>
+
+            <article class="skill-card">
+              <div class="skill-card-top">
+                <div class="skill-icon">GIT</div>
+
+                <div>
+                  <h3>Git и GitHub</h3>
+                  <p>Версии и публикация</p>
+                </div>
+              </div>
+
+              <div class="skill-level">
+                <span>Текущий уровень</span>
+                <strong>Рабочая база</strong>
+              </div>
+
+              <div class="skill-progress">
+                <span class="skill-progress-fill skill-progress-git"></span>
+              </div>
+
+              <ul class="skill-list">
+                <li>git status / add / commit</li>
+                <li>git push</li>
+                <li>GitHub-репозиторий</li>
+                <li>GitHub Pages</li>
+              </ul>
+
+              <p class="skill-result">
+                Фиксирую изменения, отправляю код на GitHub и обновляю живую версию сайта.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-container">
+          <p class="label">Проекты</p>
+
+          <h2 class="section-title">Мои первые проекты</h2>
+
+          <p class="section-text">
+            Здесь собраны учебные проекты, которые постепенно превращаются в настоящее портфолио.
+            Каждый проект показывает конкретный навык: верстку, адаптив, интерактивность и
+            публикацию онлайн.
+          </p>
+
+          <div class="projects-grid">
+            <article class="project-card">
+              <div class="project-image">
+                <span>01</span>
+              </div>
+
+              <div class="project-content">
+                <div class="project-header">
+                  <p class="project-status project-status-live">Опубликован</p>
+                  <h3>Учебный сайт-портфолио</h3>
+                </div>
+
+                <p>
+                  Первый опубликованный сайт на HTML, CSS и JavaScript. В проекте уже есть адаптив,
+                  тёмная тема, FAQ, модальные окна, форма, GitHub Pages и кнопка возврата наверх.
+                </p>
+
+                <div class="project-details">
+                  <div class="project-detail">
+                    <span>Задача</span>
+                    <strong>Собрать личное портфолио</strong>
+                  </div>
+
+                  <div class="project-detail">
+                    <span>Результат</span>
+                    <strong>Сайт опубликован онлайн</strong>
+                  </div>
+                </div>
+
+                <div class="project-done">
+                  <h4>Что сделано</h4>
+
+                  <ul>
+                    <li>Собрана структура страницы</li>
+                    <li>Настроена адаптивная верстка</li>
+                    <li>Добавлена интерактивность на JavaScript</li>
+                    <li>Проект опубликован через GitHub Pages</li>
+                  </ul>
+                </div>
+
+                <div class="project-tags">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JavaScript</span>
+                  <span>GitHub Pages</span>
+                </div>
+
+                <div class="project-footer">
+                  <div class="project-actions">
+                    <a
+                      class="project-action-link"
+                      href="https://nefrit333-cpu.github.io/my-first-site/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Открыть сайт
+                    </a>
+
+                    <a
+                      class="project-action-link"
+                      href="https://github.com/nefrit333-cpu/my-first-site"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      GitHub
+                    </a>
+                  </div>
+
+                  <button
+                    class="project-link"
+                    type="button"
+                    data-title="Учебный сайт-портфолио"
+                    data-description="Это мой первый опубликованный учебный проект. В нём есть HTML-структура, CSS-стили, адаптивная верстка, мобильное меню, тёмная тема, FAQ-аккордеон, модальное окно, проверка формы и кнопка возврата наверх. Проект опубликован через GitHub Pages."
+                  >
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-image">
+                <span>02</span>
+              </div>
+
+              <div class="project-content">
+                <div class="project-header">
+                  <p class="project-status project-status-progress">Следующий проект</p>
+                  <h3>Лендинг услуги</h3>
+                </div>
+
+                <p>
+                  Будущий учебный проект: одностраничный сайт для услуги, эксперта или небольшой
+                  компании. Такой формат часто нужен клиентам.
+                </p>
+
+                <div class="project-details">
+                  <div class="project-detail">
+                    <span>Задача</span>
+                    <strong>Сделать продающий лендинг</strong>
+                  </div>
+
+                  <div class="project-detail">
+                    <span>Фокус</span>
+                    <strong>Блоки, форма и адаптив</strong>
+                  </div>
+                </div>
+
+                <div class="project-done">
+                  <h4>Что будет сделано</h4>
+
+                  <ul>
+                    <li>Первый экран с оффером</li>
+                    <li>Блок преимуществ</li>
+                    <li>Форма заявки</li>
+                    <li>Адаптив под мобильные устройства</li>
+                  </ul>
+                </div>
+
+                <div class="project-tags">
+                  <span>Верстка</span>
+                  <span>Адаптив</span>
+                  <span>Форма</span>
+                </div>
+
+                <div class="project-footer">
+                  <button
+                    class="project-link"
+                    type="button"
+                    data-title="Лендинг услуги"
+                    data-description="Лендинг — это одностраничный сайт, который продаёт услугу или продукт. Обычно в нём есть первый экран, преимущества, описание услуги, отзывы, цены и форма заявки. Такой тип сайта часто заказывают клиенты."
+                  >
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-image">
+                <span>03</span>
+              </div>
+
+              <div class="project-content">
+                <div class="project-header">
+                  <p class="project-status project-status-plan">В планах</p>
+                  <h3>Сайт для клиента</h3>
+                </div>
+
+                <p>
+                  Будущий коммерческий проект: сайт с понятной структурой, описанием услуг, заявкой,
+                  контактами и акцентом на удобство пользователя.
+                </p>
+
+                <div class="project-details">
+                  <div class="project-detail">
+                    <span>Задача</span>
+                    <strong>Решить задачу бизнеса</strong>
+                  </div>
+
+                  <div class="project-detail">
+                    <span>Фокус</span>
+                    <strong>UX, доверие и заявки</strong>
+                  </div>
+                </div>
+
+                <div class="project-done">
+                  <h4>Что будет сделано</h4>
+
+                  <ul>
+                    <li>Структура под услугу клиента</li>
+                    <li>Контактный блок</li>
+                    <li>Описание преимуществ</li>
+                    <li>Оптимизация под мобильную версию</li>
+                  </ul>
+                </div>
+
+                <div class="project-tags">
+                  <span>Клиентский сайт</span>
+                  <span>UX</span>
+                  <span>SEO</span>
+                </div>
+
+                <div class="project-footer">
+                  <button
+                    class="project-link"
+                    type="button"
+                    data-title="Сайт для клиента"
+                    data-description="Клиентский сайт должен не просто красиво выглядеть, а решать задачу бизнеса: объяснять услугу, вызывать доверие, приводить заявки и удобно работать на телефоне. Позже мы будем учиться собирать такие сайты по техническому заданию."
+                  >
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="section-container">
+          <p class="label">FAQ</p>
+
+          <h2 class="section-title">Частые вопросы</h2>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <button
+                class="faq-question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faqAnswer1"
               >
-                Открыть GitHub
-              </a>
+                <span>Можно ли сделать сайт только на HTML и CSS?</span>
+                <strong class="faq-icon">+</strong>
+              </button>
 
-              <a class="button-secondary" href="#contacts">
-                Связаться
-              </a>
-            </div>
-          </div>
-
-          <div class="release-points">
-            <div class="release-point">
-              <strong>01</strong>
-              <span>Сайт опубликован онлайн</span>
-            </div>
-
-            <div class="release-point">
-              <strong>02</strong>
-              <span>Код хранится на GitHub</span>
+              <div class="faq-answer" id="faqAnswer1" aria-hidden="true">
+                <div class="faq-answer-inner">
+                  <p>
+                    Да, простой статичный сайт можно сделать на HTML и CSS. Но для интерактива:
+                    меню, формы, модальные окна, фильтры и отправка данных — нужен JavaScript.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div class="release-point">
-              <strong>03</strong>
-              <span>Есть адаптивная версия</span>
+            <div class="faq-item">
+              <button
+                class="faq-question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faqAnswer2"
+              >
+                <span>Зачем нужен JavaScript?</span>
+                <strong class="faq-icon">+</strong>
+              </button>
+
+              <div class="faq-answer" id="faqAnswer2" aria-hidden="true">
+                <div class="faq-answer-inner">
+                  <p>
+                    JavaScript отвечает за поведение сайта. Он позволяет реагировать на клики,
+                    проверять формы, открывать окна, менять контент и работать с данными.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div class="release-point">
-              <strong>04</strong>
-              <span>Добавлена интерактивность</span>
+            <div class="faq-item">
+              <button
+                class="faq-question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faqAnswer3"
+              >
+                <span>Когда переходить к React?</span>
+                <strong class="faq-icon">+</strong>
+              </button>
+
+              <div class="faq-answer" id="faqAnswer3" aria-hidden="true">
+                <div class="faq-answer-inner">
+                  <p>
+                    К React лучше переходить после уверенной базы: HTML, CSS, адаптив, JavaScript,
+                    DOM, события, формы и работа с массивами.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button
+                class="faq-question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faqAnswer4"
+              >
+                <span>Можно ли с таким сайтом идти в портфолио?</span>
+                <strong class="faq-icon">+</strong>
+              </button>
+
+              <div class="faq-answer" id="faqAnswer4" aria-hidden="true">
+                <div class="faq-answer-inner">
+                  <p>
+                    Да, но его нужно доработать: добавить реальные проекты, ссылки на GitHub,
+                    описание задач, скриншоты, адаптив и аккуратный код.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+
+      <section class="section" id="contacts">
+        <div class="section-container">
+          <p class="label">Контакты</p>
+
+          <h2 class="section-title">Связаться со мной</h2>
+
+          <p class="section-text">
+            Напишите мне, если хотите обсудить учебный проект, сайт для портфолио или будущую задачу
+            по верстке.
+          </p>
+
+          <div class="contact-layout">
+            <aside class="contact-info">
+              <h3>Как со мной связаться</h3>
+
+              <p>
+                Сейчас форма работает как учебная: она проверяет поля и показывает сообщение об
+                отправке. Позже мы подключим реальную отправку данных на почту или в Telegram.
+              </p>
+
+              <div class="contact-methods">
+                <a
+                  class="contact-method"
+                  href="https://github.com/nefrit333-cpu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>GitHub</span>
+                  <strong>Посмотреть код проектов</strong>
+                </a>
+
+                <a
+                  class="contact-method"
+                  href="https://nefrit333-cpu.github.io/my-first-site/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>Сайт</span>
+                  <strong>Открыть живую версию</strong>
+                </a>
+
+                <div class="contact-method">
+                  <span>Telegram</span>
+                  <strong>Подключим на следующих уроках</strong>
+                </div>
+              </div>
+            </aside>
+
+            <form class="contact-form" id="contactForm" novalidate>
+              <div class="form-group">
+                <label for="name">Ваше имя</label>
+                <input type="text" id="name" placeholder="Например, Иван" />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Ваш email</label>
+                <input type="email" id="email" placeholder="example@mail.com" />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Сообщение</label>
+                <textarea
+                  id="message"
+                  rows="5"
+                  placeholder="Напишите, какой сайт вам нужен"
+                ></textarea>
+              </div>
+
+              <button class="button" type="submit">Отправить заявку</button>
+
+              <p class="form-message" id="formMessage"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="section release-section">
+        <div class="section-container">
+          <div class="release-card">
+            <div class="release-content">
+              <p class="label">Релиз v1.0</p>
+
+              <h2 class="section-title">Первый релиз портфолио готов</h2>
+
+              <p class="section-text">
+                Это первая завершённая версия моего учебного сайта-портфолио. В проекте уже есть
+                адаптивная верстка, интерактивность на JavaScript, публикация через GitHub Pages и
+                понятная структура будущего портфолио frontend-разработчика.
+              </p>
+
+              <div class="release-actions">
+                <a
+                  class="button"
+                  href="https://github.com/nefrit333-cpu/my-first-site"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Открыть GitHub
+                </a>
+
+                <a class="button-secondary" href="#contacts"> Связаться </a>
+              </div>
+            </div>
+
+            <div class="release-points">
+              <div class="release-point">
+                <strong>01</strong>
+                <span>Сайт опубликован онлайн</span>
+              </div>
+
+              <div class="release-point">
+                <strong>02</strong>
+                <span>Код хранится на GitHub</span>
+              </div>
+
+              <div class="release-point">
+                <strong>03</strong>
+                <span>Есть адаптивная версия</span>
+              </div>
+
+              <div class="release-point">
+                <strong>04</strong>
+                <span>Добавлена интерактивность</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 Dmitriy Web. Учебный сайт-портфолио</p>
+    </footer>
+
+    <button class="scroll-top" id="scrollTopButton" type="button" aria-label="Вернуться наверх">
+      ↑
+    </button>
+
+    <div class="modal" id="projectModal">
+      <div class="modal-overlay" id="modalOverlay"></div>
+
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose" type="button" aria-label="Закрыть окно">
+          ×
+        </button>
+
+        <p class="label">Проект</p>
+
+        <h2 class="modal-title" id="modalTitle">Название проекта</h2>
+
+        <p class="modal-text" id="modalText">Описание проекта.</p>
+
+        <a class="button" href="#contacts">Обсудить проект</a>
       </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <p>© 2026 Dmitriy Web. Учебный сайт-портфолио</p>
-  </footer>
-
-  <button class="scroll-top" id="scrollTopButton" type="button" aria-label="Вернуться наверх">
-    ↑
-  </button>
-
-  <div class="modal" id="projectModal">
-    <div class="modal-overlay" id="modalOverlay"></div>
-
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose" type="button" aria-label="Закрыть окно">
-        ×
-      </button>
-
-      <p class="label">Проект</p>
-
-      <h2 class="modal-title" id="modalTitle">Название проекта</h2>
-
-      <p class="modal-text" id="modalText">
-        Описание проекта.
-      </p>
-
-      <a class="button" href="#contacts">Обсудить проект</a>
     </div>
-  </div>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

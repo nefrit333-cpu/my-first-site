@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nefrit333-cpu.github.io/my-first-site/sitemap.xml

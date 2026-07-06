@@ -1,5 +1,7 @@
 # Dmitriy Web — учебный сайт-портфолио
 
+![Превью проекта](assets/preview.svg)
+
 ![HTML](https://img.shields.io/badge/HTML-структура-orange)
 ![CSS](https://img.shields.io/badge/CSS-адаптив-blue)
 ![JavaScript](https://img.shields.io/badge/JavaScript-интерактивность-yellow)
@@ -70,6 +72,7 @@ v1.1 — Техническое оформление проекта
 - .gitignore для чистоты репозитория
 - GitHub Release v1.0
 - GitHub Release v1.1
+- визуальное превью проекта в README
 
 ## Структура проекта
 
@@ -79,6 +82,8 @@ my-first-site/
 ├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
+├── assets/
+│   └── preview.svg
 ├── favicon.svg
 ├── index.html
 ├── robots.txt
@@ -187,7 +192,7 @@ my-first-site/
 
 Дальше планируется:
 
-- добавить скриншот проекта в README
+- добавить реальный скриншот проекта в README
 - добавить реальные проекты в портфолио
 - улучшить мобильную версию
 - подключить реальную отправку формы

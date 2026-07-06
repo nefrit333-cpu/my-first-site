@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build folders
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Archives
+*.zip
+*.rar
+*.7z
+
+# Git
+.git/
+
+# Generated or external files
+coverage/

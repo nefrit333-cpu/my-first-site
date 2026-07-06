@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Документация проекта
+    url: https://github.com/nefrit333-cpu/my-first-site#readme
+    about: Перед созданием задачи можно посмотреть README проекта.
+  - name: Живая версия сайта
+    url: https://nefrit333-cpu.github.io/my-first-site/
+    about: Открыть опубликованную версию сайта на GitHub Pages.

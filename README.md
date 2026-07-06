@@ -30,7 +30,7 @@
 - адаптивная верстка под desktop и mobile
 - шапка сайта с навигацией
 - мобильное бургер-меню
-- переключение светлой и темной темы
+- переключение светлой и тёмной темы
 - активное меню при прокрутке страницы
 - блок “Обо мне”
 - блок навыков
@@ -40,13 +40,30 @@
 - контактная форма с валидацией
 - кнопка возврата наверх
 - финальный блок релиза v1.0
+- SEO meta-теги
+- Open Graph meta-теги
+- Twitter Card meta-теги
+- favicon
+- robots.txt
+- sitemap.xml
 - публикация сайта через GitHub Pages
+- README.md с описанием проекта
+- CHANGELOG.md с историей изменений
+- LICENSE с MIT-лицензией
+- .gitignore для чистоты репозитория
+- GitHub Release v1.0
 
 ## Структура проекта
 
 ```text
 my-first-site/
+├── .gitignore
+├── CHANGELOG.md
+├── LICENSE
+├── README.md
+├── favicon.svg
 ├── index.html
-├── style.css
+├── robots.txt
 ├── script.js
-└── README.md
+├── sitemap.xml
+└── style.css

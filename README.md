@@ -7,7 +7,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-интерактивность-yellow)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-online-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-v1.1-blue)
+![Version](https://img.shields.io/badge/version-v1.2-blue)
 
 Это мой первый учебный сайт-портфолио, который я создаю в процессе изучения frontend-разработки.
 
@@ -26,10 +26,10 @@
 Актуальная версия проекта:
 
 ```text
-v1.1 — Техническое оформление проекта
+v1.2 — Улучшение README и визуального превью
 ```
 
-[Открыть релиз v1.1](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.1)
+[Открыть релиз v1.2](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.2)
 
 ## Стек проекта
 
@@ -72,6 +72,7 @@ v1.1 — Техническое оформление проекта
 - .gitignore для чистоты репозитория
 - GitHub Release v1.0
 - GitHub Release v1.1
+- GitHub Release v1.2
 - визуальное превью проекта в README
 
 ## Структура проекта
@@ -147,6 +148,7 @@ my-first-site/
 - `.gitignore` — список файлов, которые Git не должен отслеживать
 - `robots.txt` — правила для поисковых роботов
 - `sitemap.xml` — карта сайта
+- `assets/preview.svg` — визуальное превью проекта
 
 ## Чему я научился в этом проекте
 
@@ -176,6 +178,7 @@ my-first-site/
 - добавлении robots.txt и sitemap.xml
 - добавлении лицензии проекта
 - оформлении репозитория как frontend-проекта
+- добавлении визуального превью проекта
 
 ## Версии проекта
 
@@ -187,6 +190,7 @@ my-first-site/
 
 - [v1.0 — Первый релиз портфолио](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.0)
 - [v1.1 — Техническое оформление проекта](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.1)
+- [v1.2 — Улучшение README и визуального превью](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.2)
 
 ## Планы развития
 
@@ -213,7 +217,7 @@ my-first-site/
 
 Проект находится в активной разработке.
 
-Текущая версия: `v1.1`
+Текущая версия: `v1.2`
 
 ## Автор
 

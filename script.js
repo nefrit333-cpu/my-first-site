@@ -322,109 +322,200 @@ const contactForm = document.querySelector("#contactForm");
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
 const messageInput = document.querySelector("#message");
+const nameError = document.querySelector("#nameError");
+const emailError = document.querySelector("#emailError");
+const messageError = document.querySelector("#messageError");
 const formMessage = document.querySelector("#formMessage");
 const submitButton = contactForm.querySelector("button[type='submit']");
+
+const formFields = [
+  {
+    input: nameInput,
+    error: nameError
+  },
+  {
+    input: emailInput,
+    error: emailError
+  },
+  {
+    input: messageInput,
+    error: messageError
+  }
+];
 
 formMessage.setAttribute("role", "status");
 formMessage.setAttribute("aria-live", "polite");
 
+formFields.forEach(function (field) {
+  field.error.setAttribute("role", "status");
+  field.error.setAttribute("aria-live", "polite");
+  field.input.setAttribute("aria-invalid", "false");
+});
+
 function isEmailValid(email) {
-  return email.includes("@") && email.includes(".");
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function isOnlyNumbers(value) {
   return /^\d+$/.test(value);
 }
 
-function showError(text) {
-  formMessage.textContent = text;
-  formMessage.style.color = "#dc2626";
+function setFieldError(input, errorElement, message) {
+  input.classList.add("form-field-error");
+  input.setAttribute("aria-invalid", "true");
+  errorElement.textContent = message;
 }
 
-function showSuccess(text) {
+function clearFieldError(input, errorElement) {
+  input.classList.remove("form-field-error");
+  input.setAttribute("aria-invalid", "false");
+  errorElement.textContent = "";
+}
+
+function clearAllFieldErrors() {
+  formFields.forEach(function (field) {
+    clearFieldError(field.input, field.error);
+  });
+}
+
+function showFormError(text) {
   formMessage.textContent = text;
-  formMessage.style.color = "var(--color-accent)";
+  formMessage.classList.remove("form-message-success");
+  formMessage.classList.add("form-message-error");
+}
+
+function showFormSuccess(text) {
+  formMessage.textContent = text;
+  formMessage.classList.remove("form-message-error");
+  formMessage.classList.add("form-message-success");
 }
 
 function clearFormMessage() {
   formMessage.textContent = "";
+  formMessage.classList.remove("form-message-error");
+  formMessage.classList.remove("form-message-success");
 }
 
 function startLoading() {
   submitButton.disabled = true;
   submitButton.textContent = "Отправляем...";
   submitButton.setAttribute("aria-busy", "true");
-  submitButton.style.opacity = "0.7";
-  submitButton.style.cursor = "not-allowed";
+  submitButton.classList.add("button-loading");
 }
 
 function stopLoading() {
   submitButton.disabled = false;
   submitButton.textContent = "Отправить заявку";
   submitButton.setAttribute("aria-busy", "false");
-  submitButton.style.opacity = "1";
-  submitButton.style.cursor = "pointer";
+  submitButton.classList.remove("button-loading");
 }
 
-nameInput.addEventListener("input", clearFormMessage);
-emailInput.addEventListener("input", clearFormMessage);
-messageInput.addEventListener("input", clearFormMessage);
+function validateName() {
+  const name = nameInput.value.trim();
+
+  if (name === "") {
+    setFieldError(nameInput, nameError, "Введите ваше имя.");
+    return false;
+  }
+
+  if (name.length < 2) {
+    setFieldError(nameInput, nameError, "Имя должно быть не короче 2 символов.");
+    return false;
+  }
+
+  if (isOnlyNumbers(name)) {
+    setFieldError(nameInput, nameError, "Имя не должно состоять только из цифр.");
+    return false;
+  }
+
+  clearFieldError(nameInput, nameError);
+  return true;
+}
+
+function validateEmail() {
+  const email = emailInput.value.trim();
+
+  if (email === "") {
+    setFieldError(emailInput, emailError, "Введите ваш email.");
+    return false;
+  }
+
+  if (!isEmailValid(email)) {
+    setFieldError(emailInput, emailError, "Введите корректный email.");
+    return false;
+  }
+
+  clearFieldError(emailInput, emailError);
+  return true;
+}
+
+function validateMessage() {
+  const message = messageInput.value.trim();
+
+  if (message === "") {
+    setFieldError(messageInput, messageError, "Введите сообщение.");
+    return false;
+  }
+
+  if (message.length < 10) {
+    setFieldError(messageInput, messageError, "Сообщение должно быть не короче 10 символов.");
+    return false;
+  }
+
+  clearFieldError(messageInput, messageError);
+  return true;
+}
+
+function focusFirstInvalidField() {
+  const firstInvalidField = formFields.find(function (field) {
+    return field.input.getAttribute("aria-invalid") === "true";
+  });
+
+  if (firstInvalidField) {
+    firstInvalidField.input.focus();
+  }
+}
+
+nameInput.addEventListener("input", function () {
+  clearFieldError(nameInput, nameError);
+  clearFormMessage();
+});
+
+emailInput.addEventListener("input", function () {
+  clearFieldError(emailInput, emailError);
+  clearFormMessage();
+});
+
+messageInput.addEventListener("input", function () {
+  clearFieldError(messageInput, messageError);
+  clearFormMessage();
+});
 
 contactForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-  const message = messageInput.value.trim();
+  clearFormMessage();
+  clearAllFieldErrors();
 
-  if (name === "") {
-    showError("Введите ваше имя.");
-    nameInput.focus();
-    return;
-  }
+  const isNameValid = validateName();
+  const isEmailValidValue = validateEmail();
+  const isMessageValid = validateMessage();
 
-  if (name.length < 2) {
-    showError("Имя должно быть не короче 2 символов.");
-    nameInput.focus();
-    return;
-  }
-
-  if (isOnlyNumbers(name)) {
-    showError("Имя не должно состоять только из цифр.");
-    nameInput.focus();
-    return;
-  }
-
-  if (email === "") {
-    showError("Введите ваш email.");
-    emailInput.focus();
-    return;
-  }
-
-  if (!isEmailValid(email)) {
-    showError("Введите корректный email.");
-    emailInput.focus();
-    return;
-  }
-
-  if (message === "") {
-    showError("Введите сообщение.");
-    messageInput.focus();
-    return;
-  }
-
-  if (message.length < 10) {
-    showError("Сообщение должно быть не короче 10 символов.");
-    messageInput.focus();
+  if (!isNameValid || !isEmailValidValue || !isMessageValid) {
+    showFormError("Проверьте поля формы и исправьте ошибки.");
+    focusFirstInvalidField();
     return;
   }
 
   startLoading();
 
   setTimeout(function () {
-    showSuccess(`${name}, спасибо! Заявка успешно отправлена.`);
+    const name = nameInput.value.trim();
+
+    showFormSuccess(`${name}, спасибо! Заявка успешно отправлена. Я свяжусь с вами позже.`);
 
     contactForm.reset();
+    clearAllFieldErrors();
 
     stopLoading();
   }, 1000);

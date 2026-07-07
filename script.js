@@ -1,11 +1,23 @@
 const themeToggle = document.querySelector("#themeToggle");
 const savedTheme = localStorage.getItem("theme");
 
+function updateThemeButton(isLightTheme) {
+  if (isLightTheme) {
+    themeToggle.textContent = "🌙";
+    themeToggle.setAttribute("aria-label", "Включить тёмную тему");
+    themeToggle.setAttribute("aria-pressed", "true");
+  } else {
+    themeToggle.textContent = "☀️";
+    themeToggle.setAttribute("aria-label", "Включить светлую тему");
+    themeToggle.setAttribute("aria-pressed", "false");
+  }
+}
+
 if (savedTheme === "light") {
   document.body.classList.add("light-theme");
-  themeToggle.textContent = "🌙";
+  updateThemeButton(true);
 } else {
-  themeToggle.textContent = "☀️";
+  updateThemeButton(false);
 }
 
 themeToggle.addEventListener("click", function () {
@@ -14,12 +26,12 @@ themeToggle.addEventListener("click", function () {
   const isLightTheme = document.body.classList.contains("light-theme");
 
   if (isLightTheme) {
-    themeToggle.textContent = "🌙";
     localStorage.setItem("theme", "light");
   } else {
-    themeToggle.textContent = "☀️";
     localStorage.setItem("theme", "dark");
   }
+
+  updateThemeButton(isLightTheme);
 });
 
 const header = document.querySelector(".header");
@@ -49,6 +61,9 @@ toggleFloatingHeader();
 const menuButton = document.querySelector("#menuButton");
 const siteNav = document.querySelector("#siteNav");
 const navLinks = document.querySelectorAll(".nav a");
+
+siteNav.setAttribute("aria-label", "Основная навигация");
+menuButton.setAttribute("aria-controls", "siteNav");
 
 function closeMobileMenu() {
   siteNav.classList.remove("nav-open");
@@ -106,8 +121,10 @@ function updateActiveNavLink() {
 
     if (href === "#" + activeSectionId) {
       link.classList.add("nav-link-active");
+      link.setAttribute("aria-current", "page");
     } else {
       link.classList.remove("nav-link-active");
+      link.removeAttribute("aria-current");
     }
   });
 }
@@ -142,39 +159,114 @@ const projectButtons = document.querySelectorAll(".project-link");
 const projectModal = document.querySelector("#projectModal");
 const modalOverlay = document.querySelector("#modalOverlay");
 const modalClose = document.querySelector("#modalClose");
+const modalContent = projectModal.querySelector(".modal-content");
 const modalTitle = document.querySelector("#modalTitle");
 const modalText = document.querySelector("#modalText");
 const modalContactButton = projectModal.querySelector(".button");
 
+let lastFocusedElement = null;
+
+projectModal.setAttribute("role", "dialog");
+projectModal.setAttribute("aria-modal", "true");
+projectModal.setAttribute("aria-labelledby", "modalTitle");
+projectModal.setAttribute("aria-describedby", "modalText");
+projectModal.setAttribute("aria-hidden", "true");
+modalContent.setAttribute("tabindex", "-1");
+
+function getModalFocusableElements() {
+  return modalContent.querySelectorAll(
+    "a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex='-1'])"
+  );
+}
+
+function openModal(button) {
+  const title = button.dataset.title;
+  const description = button.dataset.description;
+
+  lastFocusedElement = button;
+
+  modalTitle.textContent = title;
+  modalText.textContent = description;
+
+  projectModal.classList.add("modal-open");
+  projectModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-is-open");
+
+  setTimeout(function () {
+    modalClose.focus();
+  }, 0);
+}
+
+function closeModal(options = {}) {
+  const shouldRestoreFocus = options.restoreFocus !== false;
+  const isModalOpen = projectModal.classList.contains("modal-open");
+
+  if (!isModalOpen) {
+    return;
+  }
+
+  projectModal.classList.remove("modal-open");
+  projectModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-is-open");
+
+  if (shouldRestoreFocus && lastFocusedElement) {
+    lastFocusedElement.focus();
+  }
+
+  lastFocusedElement = null;
+}
+
+function trapModalFocus(event) {
+  const focusableElements = Array.from(getModalFocusableElements());
+
+  if (focusableElements.length === 0) {
+    return;
+  }
+
+  const firstFocusableElement = focusableElements[0];
+  const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+  if (event.shiftKey && document.activeElement === firstFocusableElement) {
+    event.preventDefault();
+    lastFocusableElement.focus();
+  }
+
+  if (!event.shiftKey && document.activeElement === lastFocusableElement) {
+    event.preventDefault();
+    firstFocusableElement.focus();
+  }
+}
+
 projectButtons.forEach(function (button) {
   button.addEventListener("click", function () {
-    const title = button.dataset.title;
-    const description = button.dataset.description;
-
-    modalTitle.textContent = title;
-    modalText.textContent = description;
-
-    projectModal.classList.add("modal-open");
-    document.body.classList.add("modal-is-open");
+    openModal(button);
   });
 });
 
-function closeModal() {
-  projectModal.classList.remove("modal-open");
-  document.body.classList.remove("modal-is-open");
-}
-
-modalClose.addEventListener("click", closeModal);
-modalOverlay.addEventListener("click", closeModal);
-
-modalContactButton.addEventListener("click", function () {
+modalClose.addEventListener("click", function () {
   closeModal();
 });
 
+modalOverlay.addEventListener("click", function () {
+  closeModal();
+});
+
+modalContactButton.addEventListener("click", function () {
+  closeModal({
+    restoreFocus: false
+  });
+});
+
 document.addEventListener("keydown", function (event) {
+  const isModalOpen = projectModal.classList.contains("modal-open");
+
   if (event.key === "Escape") {
     closeModal();
     closeMobileMenu();
+  }
+
+  if (isModalOpen && event.key === "Tab") {
+    trapModalFocus(event);
   }
 });
 
@@ -233,6 +325,9 @@ const messageInput = document.querySelector("#message");
 const formMessage = document.querySelector("#formMessage");
 const submitButton = contactForm.querySelector("button[type='submit']");
 
+formMessage.setAttribute("role", "status");
+formMessage.setAttribute("aria-live", "polite");
+
 function isEmailValid(email) {
   return email.includes("@") && email.includes(".");
 }
@@ -258,6 +353,7 @@ function clearFormMessage() {
 function startLoading() {
   submitButton.disabled = true;
   submitButton.textContent = "Отправляем...";
+  submitButton.setAttribute("aria-busy", "true");
   submitButton.style.opacity = "0.7";
   submitButton.style.cursor = "not-allowed";
 }
@@ -265,6 +361,7 @@ function startLoading() {
 function stopLoading() {
   submitButton.disabled = false;
   submitButton.textContent = "Отправить заявку";
+  submitButton.setAttribute("aria-busy", "false");
   submitButton.style.opacity = "1";
   submitButton.style.cursor = "pointer";
 }
@@ -282,36 +379,43 @@ contactForm.addEventListener("submit", function (event) {
 
   if (name === "") {
     showError("Введите ваше имя.");
+    nameInput.focus();
     return;
   }
 
   if (name.length < 2) {
     showError("Имя должно быть не короче 2 символов.");
+    nameInput.focus();
     return;
   }
 
   if (isOnlyNumbers(name)) {
     showError("Имя не должно состоять только из цифр.");
+    nameInput.focus();
     return;
   }
 
   if (email === "") {
     showError("Введите ваш email.");
+    emailInput.focus();
     return;
   }
 
   if (!isEmailValid(email)) {
     showError("Введите корректный email.");
+    emailInput.focus();
     return;
   }
 
   if (message === "") {
     showError("Введите сообщение.");
+    messageInput.focus();
     return;
   }
 
   if (message.length < 10) {
     showError("Сообщение должно быть не короче 10 символов.");
+    messageInput.focus();
     return;
   }
 

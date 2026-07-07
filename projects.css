@@ -219,6 +219,65 @@
   border-color: var(--color-accent-dark);
 }
 
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.contact-method:focus-visible,
+.faq-question:focus-visible,
+.project-action-link:focus-visible,
+.project-link:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px rgba(96, 165, 250, 0.18);
+}
+
+body.light-theme a:focus-visible,
+body.light-theme button:focus-visible,
+body.light-theme input:focus-visible,
+body.light-theme textarea:focus-visible,
+body.light-theme .contact-method:focus-visible,
+body.light-theme .faq-question:focus-visible,
+body.light-theme .project-action-link:focus-visible,
+body.light-theme .project-link:focus-visible {
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.16);
+}
+
+.nav a:focus-visible {
+  color: var(--color-accent);
+}
+
+.button:focus-visible,
+.button-secondary:focus-visible,
+.project-action-link:focus-visible,
+.project-link:focus-visible {
+  transform: translateY(-2px);
+}
+
+.project-card:focus-within,
+.faq-item:focus-within,
+.contact-info:focus-within,
+.contact-form:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.modal-close:focus-visible,
+.scroll-top:focus-visible,
+.theme-toggle:focus-visible,
+.menu-button:focus-visible {
+  outline-offset: 5px;
+}
+
 @media (max-width: 900px) {
   .projects-intro {
     grid-template-columns: 1fr;
@@ -838,5 +897,20 @@
 @media (hover: none) {
   .projects-section .project-card:hover::before {
     opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto;
+    transition-duration: 0.01ms;
   }
 }

@@ -9,7 +9,7 @@
 ![Prettier](https://img.shields.io/badge/Prettier-formatting-pink)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-checks-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-v1.4-blue)
+![Version](https://img.shields.io/badge/version-v1.5-blue)
 
 Это мой первый учебный сайт-портфолио, который я создаю в процессе изучения frontend-разработки.
 
@@ -28,10 +28,10 @@
 Актуальная версия проекта:
 
 ```text
-v1.4 — Документация участия и безопасности
+v1.5 — Шаблоны Issues и Pull Request
 ```
 
-[Открыть релиз v1.4](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.4)
+[Открыть релиз v1.5](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.5)
 
 ## Стек проекта
 
@@ -80,11 +80,14 @@ v1.4 — Документация участия и безопасности
 - .editorconfig для единого стиля редактора
 - Prettier для форматирования кода
 - GitHub Actions для проверки форматирования
+- шаблоны GitHub Issues
+- шаблон Pull Request
 - GitHub Release v1.0
 - GitHub Release v1.1
 - GitHub Release v1.2
 - GitHub Release v1.3
 - GitHub Release v1.4
+- GitHub Release v1.5
 - визуальное превью проекта в README
 
 ## Структура проекта
@@ -94,8 +97,13 @@ my-first-site/
 ├── .editorconfig
 ├── .gitignore
 ├── .github/
-│   └── workflows/
-│       └── format-check.yml
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   ├── config.yml
+│   │   └── feature_request.md
+│   ├── workflows/
+│   │   └── format-check.yml
+│   └── pull_request_template.md
 ├── .prettierignore
 ├── .prettierrc
 ├── CHANGELOG.md
@@ -183,6 +191,45 @@ npm run format
 
 После каждого push GitHub автоматически запускает проверку форматирования через GitHub Actions.
 
+## GitHub Issues и Pull Request
+
+В проект добавлены шаблоны для задач и изменений.
+
+Шаблоны Issues находятся здесь:
+
+```text
+.github/ISSUE_TEMPLATE/
+```
+
+В проекте есть два основных шаблона задач:
+
+```text
+1. Сообщить об ошибке
+2. Предложить улучшение
+```
+
+Также добавлены контактные ссылки:
+
+```text
+1. Документация проекта
+2. Живая версия сайта
+```
+
+Шаблон Pull Request находится здесь:
+
+```text
+.github/pull_request_template.md
+```
+
+Он помогает описать:
+
+- что изменено
+- зачем это нужно
+- как проверить изменения
+- какие проверки качества выполнены
+- связаны ли изменения с Issues
+- нужны ли скриншоты
+
 ## Документация проекта
 
 В репозитории есть:
@@ -197,6 +244,8 @@ npm run format
 - `.prettierrc` — настройки Prettier
 - `.prettierignore` — исключения для Prettier
 - `package.json` — npm-настройки проекта
+- `.github/ISSUE_TEMPLATE` — шаблоны GitHub Issues
+- `.github/pull_request_template.md` — шаблон Pull Request
 - `robots.txt` — правила для поисковых роботов
 - `sitemap.xml` — карта сайта
 - `assets/preview.svg` — визуальное превью проекта
@@ -265,6 +314,8 @@ npm run format
 - создании CONTRIBUTING.md
 - создании SECURITY.md
 - оформлении документации участия и безопасности
+- создании шаблонов GitHub Issues
+- создании шаблона Pull Request
 
 ## Версии проекта
 
@@ -279,6 +330,7 @@ npm run format
 - [v1.2 — Улучшение README и визуального превью](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.2)
 - [v1.3 — Настройка качества кода и автоматических проверок](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.3)
 - [v1.4 — Документация участия и безопасности](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.4)
+- [v1.5 — Шаблоны Issues и Pull Request](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.5)
 
 ## Планы развития
 
@@ -304,7 +356,7 @@ npm run format
 
 Проект находится в активной разработке.
 
-Текущая версия: `v1.4`
+Текущая версия: `v1.5`
 
 ## Автор
 

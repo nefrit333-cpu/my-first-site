@@ -9,7 +9,7 @@
 ![Prettier](https://img.shields.io/badge/Prettier-formatting-pink)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-checks-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-v1.5-blue)
+![Version](https://img.shields.io/badge/version-v1.6-blue)
 
 Это мой первый учебный сайт-портфолио, который я создаю в процессе изучения frontend-разработки.
 
@@ -28,10 +28,10 @@
 Актуальная версия проекта:
 
 ```text
-v1.5 — Шаблоны Issues и Pull Request
+v1.6 — Улучшение блока проектов через Pull Request
 ```
 
-[Открыть релиз v1.5](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.5)
+[Открыть релиз v1.6](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.6)
 
 ## Стек проекта
 
@@ -58,7 +58,10 @@ v1.5 — Шаблоны Issues и Pull Request
 - активное меню при прокрутке страницы
 - блок “Обо мне”
 - блок навыков
-- блок проектов
+- улучшенный блок проектов
+- карточки статистики в блоке проектов
+- статусы проектов с индикаторами
+- блоки результата для проектов
 - модальные окна для проектов
 - FAQ-аккордеон
 - контактная форма с валидацией
@@ -82,12 +85,14 @@ v1.5 — Шаблоны Issues и Pull Request
 - GitHub Actions для проверки форматирования
 - шаблоны GitHub Issues
 - шаблон Pull Request
+- первый рабочий цикл через Issue, ветку, Pull Request и merge
 - GitHub Release v1.0
 - GitHub Release v1.1
 - GitHub Release v1.2
 - GitHub Release v1.3
 - GitHub Release v1.4
 - GitHub Release v1.5
+- GitHub Release v1.6
 - визуальное превью проекта в README
 
 ## Структура проекта
@@ -117,6 +122,7 @@ my-first-site/
 ├── index.html
 ├── package-lock.json
 ├── package.json
+├── projects.css
 ├── robots.txt
 ├── script.js
 ├── sitemap.xml
@@ -139,7 +145,21 @@ my-first-site/
 
 ### Проекты
 
-В разделе проектов собраны первые учебные проекты. Основной проект — этот сайт-портфолио.
+Раздел проектов был улучшен в версии `v1.6`.
+
+Теперь в нём есть:
+
+- вводный блок с описанием
+- карточки статистики
+- три карточки проектов
+- статусы проектов с индикаторами
+- дополнительные метки проектов
+- блоки задачи и результата
+- кнопки для открытия сайта и GitHub
+- модальные окна “Подробнее”
+- улучшенная адаптивность
+
+Основной проект — этот сайт-портфолио. Он оформлен как первый опубликованный frontend-кейс.
 
 ### FAQ
 
@@ -230,6 +250,40 @@ npm run format
 - связаны ли изменения с Issues
 - нужны ли скриншоты
 
+## Рабочий процесс разработки
+
+В версии `v1.6` проект впервые прошёл полноценный рабочий цикл через GitHub:
+
+```text
+Issue → feature-ветка → изменения → Pull Request → merge в main
+```
+
+Для улучшения блока проектов была создана задача:
+
+```text
+Issue #1 — [Feature]: Улучшить блок проектов
+```
+
+Для разработки была создана отдельная ветка:
+
+```text
+feature/improve-projects-block
+```
+
+Изменения были отправлены через Pull Request:
+
+```text
+Pull Request #2 — Улучшил блок проектов
+```
+
+После проверки Pull Request был объединён в основную ветку:
+
+```text
+main
+```
+
+Это приближает проект к реальному рабочему процессу frontend-разработки.
+
 ## Документация проекта
 
 В репозитории есть:
@@ -246,6 +300,7 @@ npm run format
 - `package.json` — npm-настройки проекта
 - `.github/ISSUE_TEMPLATE` — шаблоны GitHub Issues
 - `.github/pull_request_template.md` — шаблон Pull Request
+- `projects.css` — дополнительные стили для улучшенного блока проектов
 - `robots.txt` — правила для поисковых роботов
 - `sitemap.xml` — карта сайта
 - `assets/preview.svg` — визуальное превью проекта
@@ -316,6 +371,12 @@ npm run format
 - оформлении документации участия и безопасности
 - создании шаблонов GitHub Issues
 - создании шаблона Pull Request
+- создании первой Issue
+- создании отдельной feature-ветки
+- работе через Pull Request
+- связывании Pull Request с Issue через `Closes #1`
+- объединении изменений в main через merge
+- улучшении блока проектов отдельным CSS-файлом
 
 ## Версии проекта
 
@@ -331,6 +392,7 @@ npm run format
 - [v1.3 — Настройка качества кода и автоматических проверок](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.3)
 - [v1.4 — Документация участия и безопасности](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.4)
 - [v1.5 — Шаблоны Issues и Pull Request](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.5)
+- [v1.6 — Улучшение блока проектов через Pull Request](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.6)
 
 ## Планы развития
 
@@ -356,7 +418,7 @@ npm run format
 
 Проект находится в активной разработке.
 
-Текущая версия: `v1.5`
+Текущая версия: `v1.6`
 
 ## Автор
 

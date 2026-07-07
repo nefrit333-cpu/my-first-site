@@ -327,6 +327,7 @@ const emailError = document.querySelector("#emailError");
 const messageError = document.querySelector("#messageError");
 const formMessage = document.querySelector("#formMessage");
 const submitButton = contactForm.querySelector("button[type='submit']");
+const formspreeEndpoint = "https://formspree.io/f/xbdvedyr";
 
 const formFields = [
   {
@@ -476,6 +477,24 @@ function focusFirstInvalidField() {
   }
 }
 
+async function sendFormData() {
+  const formData = new FormData(contactForm);
+
+  const response = await fetch(formspreeEndpoint, {
+    method: "POST",
+    body: formData,
+    headers: {
+      Accept: "application/json"
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error("Formspree request failed");
+  }
+
+  return response;
+}
+
 nameInput.addEventListener("input", function () {
   clearFieldError(nameInput, nameError);
   clearFormMessage();
@@ -491,7 +510,7 @@ messageInput.addEventListener("input", function () {
   clearFormMessage();
 });
 
-contactForm.addEventListener("submit", function (event) {
+contactForm.addEventListener("submit", async function (event) {
   event.preventDefault();
 
   clearFormMessage();
@@ -509,14 +528,20 @@ contactForm.addEventListener("submit", function (event) {
 
   startLoading();
 
-  setTimeout(function () {
+  try {
     const name = nameInput.value.trim();
+
+    await sendFormData();
 
     showFormSuccess(`${name}, спасибо! Заявка успешно отправлена. Я свяжусь с вами позже.`);
 
     contactForm.reset();
     clearAllFieldErrors();
-
+  } catch (error) {
+    showFormError(
+      "Не удалось отправить заявку. Проверьте интернет-соединение и попробуйте ещё раз."
+    );
+  } finally {
     stopLoading();
-  }, 1000);
+  }
 });

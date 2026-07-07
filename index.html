@@ -42,6 +42,7 @@
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="projects.css" />
   </head>
   <body>
     <header class="header" id="top">
@@ -347,44 +348,77 @@
         </div>
       </section>
 
-      <section class="section" id="projects">
+      <section class="section projects-section" id="projects">
         <div class="section-container">
           <p class="label">Проекты</p>
 
           <h2 class="section-title">Мои первые проекты</h2>
 
-          <p class="section-text">
-            Здесь собраны учебные проекты, которые постепенно превращаются в настоящее портфолио.
-            Каждый проект показывает конкретный навык: верстку, адаптив, интерактивность и
-            публикацию онлайн.
-          </p>
+          <div class="projects-intro">
+            <p class="section-text">
+              Здесь собраны учебные проекты, которые постепенно превращаются в настоящее портфолио.
+              Каждый проект показывает конкретный навык: верстку, адаптив, интерактивность и
+              публикацию онлайн.
+            </p>
+
+            <div class="projects-summary">
+              <div class="projects-summary-item">
+                <strong>01</strong>
+                <span>опубликованный проект</span>
+              </div>
+
+              <div class="projects-summary-item">
+                <strong>03</strong>
+                <span>карточки в портфолио</span>
+              </div>
+
+              <div class="projects-summary-item">
+                <strong>100%</strong>
+                <span>ручная HTML/CSS/JS-практика</span>
+              </div>
+            </div>
+          </div>
 
           <div class="projects-grid">
-            <article class="project-card">
-              <div class="project-image">
-                <span>01</span>
+            <article class="project-card project-card-featured">
+              <div class="project-image project-image-live">
+                <div class="project-image-content">
+                  <span class="project-image-label">01</span>
+                  <strong class="project-image-title">Portfolio</strong>
+                </div>
               </div>
 
               <div class="project-content">
                 <div class="project-header">
-                  <p class="project-status project-status-live">Опубликован</p>
+                  <p class="project-status project-status-live">
+                    <span></span>
+                    Опубликован
+                  </p>
+
                   <h3>Учебный сайт-портфолио</h3>
                 </div>
 
                 <p>
-                  Первый опубликованный сайт на HTML, CSS и JavaScript. В проекте уже есть адаптив,
-                  тёмная тема, FAQ, модальные окна, форма, GitHub Pages и кнопка возврата наверх.
+                  Первый опубликованный сайт на HTML, CSS и JavaScript. Проект показывает мой
+                  текущий путь во frontend: от базовой структуры страницы до публикации на GitHub
+                  Pages и оформления репозитория.
                 </p>
+
+                <div class="project-meta">
+                  <span>Frontend</span>
+                  <span>GitHub Pages</span>
+                  <span>Учебный релиз v1.5</span>
+                </div>
 
                 <div class="project-details">
                   <div class="project-detail">
                     <span>Задача</span>
-                    <strong>Собрать личное портфолио</strong>
+                    <strong>Собрать личное портфолио и показать рост в разработке</strong>
                   </div>
 
                   <div class="project-detail">
                     <span>Результат</span>
-                    <strong>Сайт опубликован онлайн</strong>
+                    <strong>Сайт опубликован онлайн, оформлен и развивается через Issues</strong>
                   </div>
                 </div>
 
@@ -392,11 +426,17 @@
                   <h4>Что сделано</h4>
 
                   <ul>
-                    <li>Собрана структура страницы</li>
-                    <li>Настроена адаптивная верстка</li>
-                    <li>Добавлена интерактивность на JavaScript</li>
+                    <li>Собрана семантическая HTML-структура</li>
+                    <li>Настроена адаптивная CSS-верстка</li>
+                    <li>Добавлены модальные окна, FAQ, форма и кнопка наверх</li>
                     <li>Проект опубликован через GitHub Pages</li>
+                    <li>Репозиторий оформлен README, релизами и GitHub-шаблонами</li>
                   </ul>
+                </div>
+
+                <div class="project-result">
+                  <span>Главный результат</span>
+                  <strong>Есть полноценная база первого frontend-портфолио</strong>
                 </div>
 
                 <div class="project-tags">
@@ -431,7 +471,7 @@
                     class="project-link"
                     type="button"
                     data-title="Учебный сайт-портфолио"
-                    data-description="Это мой первый опубликованный учебный проект. В нём есть HTML-структура, CSS-стили, адаптивная верстка, мобильное меню, тёмная тема, FAQ-аккордеон, модальное окно, проверка формы и кнопка возврата наверх. Проект опубликован через GitHub Pages."
+                    data-description="Это мой первый опубликованный учебный проект. В нём есть HTML-структура, CSS-стили, адаптивная верстка, мобильное меню, тёмная тема, FAQ-аккордеон, модальное окно, проверка формы и кнопка возврата наверх. Проект опубликован через GitHub Pages, а репозиторий оформлен README, CHANGELOG, релизами, GitHub Issues и Pull Request-шаблонами."
                   >
                     Подробнее
                   </button>
@@ -440,30 +480,44 @@
             </article>
 
             <article class="project-card">
-              <div class="project-image">
-                <span>02</span>
+              <div class="project-image project-image-progress">
+                <div class="project-image-content">
+                  <span class="project-image-label">02</span>
+                  <strong class="project-image-title">Landing</strong>
+                </div>
               </div>
 
               <div class="project-content">
                 <div class="project-header">
-                  <p class="project-status project-status-progress">Следующий проект</p>
+                  <p class="project-status project-status-progress">
+                    <span></span>
+                    Следующий проект
+                  </p>
+
                   <h3>Лендинг услуги</h3>
                 </div>
 
                 <p>
                   Будущий учебный проект: одностраничный сайт для услуги, эксперта или небольшой
-                  компании. Такой формат часто нужен клиентам.
+                  компании. Такой формат часто нужен клиентам и помогает тренировать коммерческую
+                  верстку.
                 </p>
+
+                <div class="project-meta">
+                  <span>Landing Page</span>
+                  <span>Форма заявки</span>
+                  <span>Mobile-first</span>
+                </div>
 
                 <div class="project-details">
                   <div class="project-detail">
                     <span>Задача</span>
-                    <strong>Сделать продающий лендинг</strong>
+                    <strong>Сделать продающий лендинг с понятной структурой</strong>
                   </div>
 
                   <div class="project-detail">
                     <span>Фокус</span>
-                    <strong>Блоки, форма и адаптив</strong>
+                    <strong>Оффер, преимущества, форма и адаптив</strong>
                   </div>
                 </div>
 
@@ -471,11 +525,16 @@
                   <h4>Что будет сделано</h4>
 
                   <ul>
-                    <li>Первый экран с оффером</li>
-                    <li>Блок преимуществ</li>
+                    <li>Первый экран с понятным оффером</li>
+                    <li>Блок преимуществ и доверия</li>
                     <li>Форма заявки</li>
                     <li>Адаптив под мобильные устройства</li>
                   </ul>
+                </div>
+
+                <div class="project-result">
+                  <span>Ожидаемый результат</span>
+                  <strong>Лендинг, который можно показать как учебный клиентский кейс</strong>
                 </div>
 
                 <div class="project-tags">
@@ -489,7 +548,7 @@
                     class="project-link"
                     type="button"
                     data-title="Лендинг услуги"
-                    data-description="Лендинг — это одностраничный сайт, который продаёт услугу или продукт. Обычно в нём есть первый экран, преимущества, описание услуги, отзывы, цены и форма заявки. Такой тип сайта часто заказывают клиенты."
+                    data-description="Лендинг — это одностраничный сайт, который продаёт услугу или продукт. Обычно в нём есть первый экран, преимущества, описание услуги, отзывы, цены и форма заявки. Такой тип сайта часто заказывают клиенты, поэтому он станет важным следующим проектом для портфолио."
                   >
                     Подробнее
                   </button>
@@ -498,13 +557,20 @@
             </article>
 
             <article class="project-card">
-              <div class="project-image">
-                <span>03</span>
+              <div class="project-image project-image-plan">
+                <div class="project-image-content">
+                  <span class="project-image-label">03</span>
+                  <strong class="project-image-title">Client</strong>
+                </div>
               </div>
 
               <div class="project-content">
                 <div class="project-header">
-                  <p class="project-status project-status-plan">В планах</p>
+                  <p class="project-status project-status-plan">
+                    <span></span>
+                    В планах
+                  </p>
+
                   <h3>Сайт для клиента</h3>
                 </div>
 
@@ -513,15 +579,21 @@
                   контактами и акцентом на удобство пользователя.
                 </p>
 
+                <div class="project-meta">
+                  <span>Клиентский сайт</span>
+                  <span>UX</span>
+                  <span>SEO-база</span>
+                </div>
+
                 <div class="project-details">
                   <div class="project-detail">
                     <span>Задача</span>
-                    <strong>Решить задачу бизнеса</strong>
+                    <strong>Решить реальную задачу бизнеса через сайт</strong>
                   </div>
 
                   <div class="project-detail">
                     <span>Фокус</span>
-                    <strong>UX, доверие и заявки</strong>
+                    <strong>UX, доверие, структура и заявки</strong>
                   </div>
                 </div>
 
@@ -534,6 +606,11 @@
                     <li>Описание преимуществ</li>
                     <li>Оптимизация под мобильную версию</li>
                   </ul>
+                </div>
+
+                <div class="project-result">
+                  <span>Ожидаемый результат</span>
+                  <strong>Основа для будущей работы с реальными заказчиками</strong>
                 </div>
 
                 <div class="project-tags">

@@ -801,6 +801,30 @@
                 Заполните имя, email и коротко опишите задачу. Все поля обязательны.
               </p>
 
+              <input type="hidden" name="_subject" value="Новая заявка с сайта Dmitriy Web" />
+              <input
+                type="hidden"
+                name="source"
+                value="Форма обратной связи на сайте Dmitriy Web"
+              />
+              <input
+                type="hidden"
+                name="page"
+                value="https://nefrit333-cpu.github.io/my-first-site/"
+              />
+
+              <div class="form-group form-spam-check" aria-hidden="true">
+                <label for="contactTrap">Проверочное поле</label>
+                <input
+                  type="text"
+                  id="contactTrap"
+                  name="contact_trap"
+                  tabindex="-1"
+                  autocomplete="new-password"
+                  data-lpignore="true"
+                />
+              </div>
+
               <div class="form-group">
                 <label for="name">Ваше имя</label>
                 <input

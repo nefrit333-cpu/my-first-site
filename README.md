@@ -9,7 +9,7 @@
 ![Prettier](https://img.shields.io/badge/Prettier-formatting-pink)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-checks-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-v2.1-blue)
+![Version](https://img.shields.io/badge/version-v2.2-blue)
 
 Это мой первый учебный сайт-портфолио, который я создаю в процессе изучения frontend-разработки.
 
@@ -28,10 +28,10 @@
 Актуальная версия проекта:
 
 ```text
-v2.1 — Реальная отправка контактной формы
+v2.2 — Защита контактной формы от спама
 ```
 
-[Открыть релиз v2.1](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v2.1)
+[Открыть релиз v2.2](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v2.2)
 
 ## Стек проекта
 
@@ -59,6 +59,10 @@ v2.1 — Реальная отправка контактной формы
 - улучшенное социальное превью сайта
 - улучшенная контактная форма
 - реальная отправка контактной формы через Formspree
+- базовая защита контактной формы от спама
+- скрытое honeypot-поле в форме
+- проверка слишком быстрой отправки формы
+- служебные поля Formspree для subject, source и page
 - отправка данных формы через `fetch`
 - сбор данных формы через `FormData`
 - обработка успешной отправки формы
@@ -115,6 +119,8 @@ v2.1 — Реальная отправка контактной формы
 - четвёртый рабочий цикл через Issue, ветку, Pull Request и merge
 - пятый рабочий цикл через Issue, ветку, Pull Request и merge
 - шестой рабочий цикл через Issue, ветку, Pull Request и merge
+- седьмой рабочий цикл через Issue, ветку, Pull Request и merge
+- седьмой рабочий цикл через Issue, ветку, Pull Request и merge
 - GitHub Release v1.0
 - GitHub Release v1.1
 - GitHub Release v1.2
@@ -127,6 +133,8 @@ v2.1 — Реальная отправка контактной формы
 - GitHub Release v1.9
 - GitHub Release v2.0
 - GitHub Release v2.1
+- GitHub Release v2.2
+- GitHub Release v2.2
 - визуальное превью проекта в README
 
 ## Структура проекта
@@ -242,6 +250,10 @@ my-first-site/
 
 Теперь после успешной проверки данные формы отправляются во внешний сервис, а пользователь получает понятное сообщение об успехе или ошибке.
 
+В версии `v2.2` форма получила базовую защиту от спама.
+
+Теперь в форме есть скрытое honeypot-поле, проверка слишком быстрой отправки, служебный subject для Formspree, а также поля source и page для понимания источника заявки.
+
 В версии `v1.7` форма стала удобнее для заполнения с телефона.
 
 В версии `v1.8` форма стала удобнее при ошибках: фокус переходит в поле, которое нужно исправить, а сообщения формы стали понятнее для вспомогательных технологий.
@@ -249,6 +261,10 @@ my-first-site/
 В версии `v2.0` форма получила отдельные ошибки под полями, улучшенную JavaScript-валидацию и визуальные состояния.
 
 В версии `v2.1` форма стала реальной: данные отправляются через `fetch`, собираются через `FormData`, а при ошибке отправки введённый текст не очищается.
+
+В версии `v2.2` форма стала устойчивее к простому спаму: добавлен honeypot, проверка времени заполнения и служебные поля для Formspree.
+
+В версии `v2.2` форма стала устойчивее к простому спаму: добавлен honeypot, проверка времени заполнения и служебные поля для Formspree.
 
 ### Релиз v1.0
 
@@ -858,7 +874,7 @@ main
 - [v1.8 — Улучшение доступности интерфейса](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.8)
 - [v1.9 — Улучшение SEO и социального превью сайта](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v1.9)
 - [v2.0 — Улучшение контактной формы](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v2.0)
-- [v2.1 — Реальная отправка контактной формы](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v2.1)
+- [v2.2 — Защита контактной формы от спама](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v2.1)
 
 ## Планы развития
 

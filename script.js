@@ -322,12 +322,15 @@ const contactForm = document.querySelector("#contactForm");
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
 const messageInput = document.querySelector("#message");
+const spamCheckInput = document.querySelector("#company");
 const nameError = document.querySelector("#nameError");
 const emailError = document.querySelector("#emailError");
 const messageError = document.querySelector("#messageError");
 const formMessage = document.querySelector("#formMessage");
 const submitButton = contactForm.querySelector("button[type='submit']");
 const formspreeEndpoint = "https://formspree.io/f/xbdvedyr";
+const formLoadTime = Date.now();
+const minFormFillTime = 3000;
 
 const formFields = [
   {
@@ -359,6 +362,14 @@ function isEmailValid(email) {
 
 function isOnlyNumbers(value) {
   return /^\d+$/.test(value);
+}
+
+function isSpamCheckFailed() {
+  return spamCheckInput.value.trim() !== "";
+}
+
+function isFormSubmittedTooFast() {
+  return Date.now() - formLoadTime < minFormFillTime;
 }
 
 function setFieldError(input, errorElement, message) {
@@ -480,6 +491,8 @@ function focusFirstInvalidField() {
 async function sendFormData() {
   const formData = new FormData(contactForm);
 
+  formData.delete("company");
+
   const response = await fetch(formspreeEndpoint, {
     method: "POST",
     body: formData,
@@ -523,6 +536,11 @@ contactForm.addEventListener("submit", async function (event) {
   if (!isNameValid || !isEmailValidValue || !isMessageValid) {
     showFormError("Проверьте поля формы и исправьте ошибки.");
     focusFirstInvalidField();
+    return;
+  }
+
+  if (isSpamCheckFailed() || isFormSubmittedTooFast()) {
+    showFormError("Не удалось отправить заявку. Попробуйте ещё раз через несколько секунд.");
     return;
   }
 

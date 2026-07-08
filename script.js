@@ -322,7 +322,7 @@ const contactForm = document.querySelector("#contactForm");
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
 const messageInput = document.querySelector("#message");
-const spamCheckInput = document.querySelector("#company");
+const spamCheckInput = document.querySelector("#contactTrap");
 const nameError = document.querySelector("#nameError");
 const emailError = document.querySelector("#emailError");
 const messageError = document.querySelector("#messageError");
@@ -331,6 +331,10 @@ const submitButton = contactForm.querySelector("button[type='submit']");
 const formspreeEndpoint = "https://formspree.io/f/xbdvedyr";
 const formLoadTime = Date.now();
 const minFormFillTime = 3000;
+
+if (spamCheckInput) {
+  spamCheckInput.value = "";
+}
 
 const formFields = [
   {
@@ -365,7 +369,7 @@ function isOnlyNumbers(value) {
 }
 
 function isSpamCheckFailed() {
-  return spamCheckInput.value.trim() !== "";
+  return spamCheckInput && spamCheckInput.value.trim() !== "";
 }
 
 function isFormSubmittedTooFast() {
@@ -491,7 +495,7 @@ function focusFirstInvalidField() {
 async function sendFormData() {
   const formData = new FormData(contactForm);
 
-  formData.delete("company");
+  formData.delete("contact_trap");
 
   const response = await fetch(formspreeEndpoint, {
     method: "POST",
@@ -539,8 +543,13 @@ contactForm.addEventListener("submit", async function (event) {
     return;
   }
 
-  if (isSpamCheckFailed() || isFormSubmittedTooFast()) {
-    showFormError("Не удалось отправить заявку. Попробуйте ещё раз через несколько секунд.");
+  if (isFormSubmittedTooFast()) {
+    showFormError("Форма отправлена слишком быстро. Попробуйте ещё раз через несколько секунд.");
+    return;
+  }
+
+  if (isSpamCheckFailed()) {
+    showFormError("Не удалось отправить заявку. Обновите страницу и попробуйте ещё раз.");
     return;
   }
 

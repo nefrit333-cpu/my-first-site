@@ -231,6 +231,17 @@
   line-height: 1.55;
 }
 
+.form-spam-check {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .form-hint {
   margin: 8px 0 0;
   color: var(--color-muted);

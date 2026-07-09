@@ -6,6 +6,73 @@
 
 ---
 
+## v2.8 — Улучшение SEO и sitemap для лендинга услуги
+
+Дата обновления: 2026-07-09
+
+### Добавлено
+
+- создана GitHub Issue для улучшения SEO и sitemap лендинга услуги
+- создана отдельная рабочая ветка `feature/improve-landing-seo-sitemap`
+- добавлены Open Graph meta-теги для `landing.html`
+- добавлены Twitter Card meta-теги для `landing.html`
+- добавлено social preview изображение для лендинга
+- добавлен alt-текст для preview-изображения
+- страница `landing.html` добавлена в `sitemap.xml`
+- добавлена отдельная запись sitemap для лендинга
+- README.md обновлён под релиз v2.8
+- CHANGELOG.md обновлён под релиз v2.8
+
+### Улучшено
+
+- улучшен `meta description` в `landing.html`
+- расширены `keywords` для страницы лендинга
+- проверен canonical URL лендинга
+- улучшена техническая SEO-база отдельной страницы
+- лендинг стал лучше подготовлен для поисковых систем
+- лендинг стал лучше подготовлен для отображения в мессенджерах и социальных сетях
+- обновлена дата `lastmod` для главной страницы в `sitemap.xml`
+- sitemap стал учитывать не только главную страницу, но и отдельный лендинг
+- четырнадцатый рабочий цикл через Issue, ветку, Pull Request и merge завершён
+
+### Техническая база
+
+Работа выполнена через отдельную ветку:
+
+```text
+feature/improve-landing-seo-sitemap
+```
+
+Основные изменённые файлы:
+
+```text
+landing.html
+sitemap.xml
+README.md
+CHANGELOG.md
+```
+
+### Проверено
+
+```text
+1. Лендинг открывается на GitHub Pages.
+2. Страница landing.html визуально не сломалась.
+3. Русский текст отображается корректно.
+4. В head есть Open Graph meta-теги.
+5. В head есть Twitter Card meta-теги.
+6. canonical ведёт на landing.html.
+7. sitemap.xml содержит главную страницу.
+8. sitemap.xml содержит landing.html.
+9. У landing.html в sitemap есть changefreq weekly.
+10. У landing.html в sitemap есть priority 0.8.
+11. Нет символов "вЂў", "вњ“" или "вн".
+12. Prettier проходит успешно.
+13. Pull Request влит в main.
+14. Живой сайт обновился.
+```
+
+---
+
 ## v2.7 — Создание и визуальное улучшение лендинга услуги
 
 Дата обновления: 2026-07-09

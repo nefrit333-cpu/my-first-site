@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Сайт для малого бизнеса — учебный лендинг Dmitriy Web</title>
+
+    <meta
+      name="description"
+      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает структуру коммерческого лендинга: оффер, преимущества, этапы работы, FAQ и форму заявки."
+    />
+
+    <meta
+      name="keywords"
+      content="лендинг, сайт для бизнеса, html, css, frontend, учебный проект, веб-разработка"
+    />
+
+    <meta name="author" content="Dmitriy Web" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0f172a" />
+
+    <link rel="canonical" href="https://nefrit333-cpu.github.io/my-first-site/landing.html" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="landing.css" />
+  </head>
+
+  <body>
+    <header class="landing-header">
+      <div class="landing-container landing-header__inner">
+        <a class="landing-logo" href="index.html">Dmitriy Web</a>
+
+        <nav class="landing-nav" aria-label="Навигация лендинга">
+          <a href="#service">Услуга</a>
+          <a href="#benefits">Преимущества</a>
+          <a href="#steps">Этапы</a>
+          <a href="#contacts">Заявка</a>
+        </nav>
+
+        <a class="landing-header__link" href="index.html">В портфолио</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="landing-hero">
+        <div class="landing-container landing-hero__grid">
+          <div class="landing-hero__content">
+            <p class="landing-label">Учебный commercial landing</p>
+
+            <h1>Сайт для малого бизнеса, который объясняет услугу и приводит к заявке</h1>
+
+            <p class="landing-hero__text">
+              Это учебный лендинг услуги. Он показывает, как можно собрать коммерческую страницу: с
+              понятным оффером, преимуществами, этапами работы, FAQ и формой заявки.
+            </p>
+
+            <div class="landing-hero__actions">
+              <a class="landing-button" href="#contacts">Оставить заявку</a>
+              <a class="landing-button landing-button--secondary" href="#service"
+                >Посмотреть услугу</a
+              >
+            </div>
+
+            <div class="landing-hero__stack">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>Адаптив</span>
+              <span>Форма</span>
+            </div>
+          </div>
+
+          <aside class="landing-hero__card">
+            <p class="landing-card__label">Что показывает проект</p>
+
+            <h2>Структура реального лендинга</h2>
+
+            <ul class="landing-checklist">
+              <li>
+                <span>✓</span>
+                Первый экран с оффером
+              </li>
+              <li>
+                <span>✓</span>
+                Блоки пользы и доверия
+              </li>
+              <li>
+                <span>✓</span>
+                Этапы работы
+              </li>
+              <li>
+                <span>✓</span>
+                Форма заявки
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="landing-section" id="service">
+        <div class="landing-container">
+          <p class="landing-label">Услуга</p>
+
+          <h2 class="landing-title">Для кого этот лендинг</h2>
+
+          <p class="landing-section__text">
+            Такой сайт подходит небольшому бизнесу, специалисту или локальной услуге, когда нужно
+            быстро объяснить предложение и получить обращение от клиента.
+          </p>
+
+          <div class="audience-grid">
+            <article class="audience-card">
+              <span>01</span>
+              <h3>Экспертам</h3>
+              <p>
+                Для консультантов, наставников, дизайнеров, маркетологов и частных специалистов.
+              </p>
+            </article>
+
+            <article class="audience-card">
+              <span>02</span>
+              <h3>Малым компаниям</h3>
+              <p>Для услуг, где важно понятно показать пользу, процесс работы и способ связи.</p>
+            </article>
+
+            <article class="audience-card">
+              <span>03</span>
+              <h3>Локальному бизнесу</h3>
+              <p>Для студий, мастеров, сервисов, школ, салонов и небольших команд.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section landing-section--dark" id="benefits">
+        <div class="landing-container">
+          <p class="landing-label">Преимущества</p>
+
+          <h2 class="landing-title">Что получает клиент</h2>
+
+          <div class="benefits-grid">
+            <article class="benefit-card">
+              <h3>Понятная структура</h3>
+              <p>
+                Страница ведёт пользователя от первого экрана к преимуществам, этапам работы и
+                заявке.
+              </p>
+            </article>
+
+            <article class="benefit-card">
+              <h3>Адаптивная верстка</h3>
+              <p>Лендинг удобно читать на компьютере, планшете и телефоне без потери смысла.</p>
+            </article>
+
+            <article class="benefit-card">
+              <h3>Фокус на заявке</h3>
+              <p>Важные блоки помогают объяснить услугу и подвести пользователя к форме связи.</p>
+            </article>
+
+            <article class="benefit-card">
+              <h3>База для развития</h3>
+              <p>
+                Проект можно расширять: добавить отзывы, тарифы, калькулятор, аналитику и
+                интеграции.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section">
+        <div class="landing-container landing-service-grid">
+          <div>
+            <p class="landing-label">Что входит</p>
+
+            <h2 class="landing-title">Страница собирается под задачу бизнеса</h2>
+
+            <p class="landing-section__text">
+              Главная цель лендинга — не просто красиво выглядеть, а быстро объяснить, что
+              предлагается, почему это полезно и как оставить заявку.
+            </p>
+          </div>
+
+          <div class="service-list">
+            <div class="service-item">
+              <strong>Первый экран</strong>
+              <span>Оффер, короткое описание и главная кнопка действия.</span>
+            </div>
+
+            <div class="service-item">
+              <strong>Блок преимуществ</strong>
+              <span>Причины выбрать услугу и понятные выгоды для клиента.</span>
+            </div>
+
+            <div class="service-item">
+              <strong>Этапы работы</strong>
+              <span>Простой процесс: заявка, обсуждение, разработка, запуск.</span>
+            </div>
+
+            <div class="service-item">
+              <strong>Форма заявки</strong>
+              <span>Поля для имени, email и описания задачи.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section" id="steps">
+        <div class="landing-container">
+          <p class="landing-label">Этапы</p>
+
+          <h2 class="landing-title">Как выглядит процесс работы</h2>
+
+          <div class="steps-grid">
+            <article class="step-card">
+              <span>01</span>
+              <h3>Разбор задачи</h3>
+              <p>Определяем услугу, аудиторию, цель страницы и основное действие пользователя.</p>
+            </article>
+
+            <article class="step-card">
+              <span>02</span>
+              <h3>Структура страницы</h3>
+              <p>Собираем блоки лендинга: первый экран, преимущества, услуга, этапы и заявка.</p>
+            </article>
+
+            <article class="step-card">
+              <span>03</span>
+              <h3>Верстка</h3>
+              <p>Делаем аккуратную HTML-структуру, CSS-стили и адаптив под разные экраны.</p>
+            </article>
+
+            <article class="step-card">
+              <span>04</span>
+              <h3>Публикация</h3>
+              <p>Проверяем страницу, оформляем проект и публикуем результат онлайн.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section landing-section--soft">
+        <div class="landing-container landing-proof">
+          <div>
+            <p class="landing-label">Доверие</p>
+
+            <h2 class="landing-title">Почему такой проект полезен для портфолио</h2>
+          </div>
+
+          <div class="proof-grid">
+            <div class="proof-item">
+              <strong>Коммерческая логика</strong>
+              <span>Страница строится вокруг пользы, структуры и заявки.</span>
+            </div>
+
+            <div class="proof-item">
+              <strong>Frontend-практика</strong>
+              <span>Проект тренирует HTML, CSS, адаптив и работу с формой.</span>
+            </div>
+
+            <div class="proof-item">
+              <strong>Будущий кейс</strong>
+              <span>Лендинг можно оформить как отдельный проект в портфолио.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section">
+        <div class="landing-container">
+          <p class="landing-label">FAQ</p>
+
+          <h2 class="landing-title">Частые вопросы</h2>
+
+          <div class="faq-grid">
+            <article class="faq-card">
+              <h3>Это реальный коммерческий сайт?</h3>
+              <p>
+                Это учебный проект, который имитирует реальную задачу. Его цель — показать структуру
+                лендинга и практику frontend-разработки.
+              </p>
+            </article>
+
+            <article class="faq-card">
+              <h3>Можно ли использовать такую страницу для клиента?</h3>
+              <p>
+                Да, после доработки под конкретную услугу, тексты, контакты, аналитику и реальные
+                данные бизнеса.
+              </p>
+            </article>
+
+            <article class="faq-card">
+              <h3>Что можно добавить дальше?</h3>
+              <p>
+                Отзывы, тарифы, галерею работ, интерактивный FAQ, отправку формы через JavaScript и
+                интеграции.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section landing-contact" id="contacts">
+        <div class="landing-container landing-contact__grid">
+          <div>
+            <p class="landing-label">Заявка</p>
+
+            <h2 class="landing-title">Обсудить сайт для бизнеса</h2>
+
+            <p class="landing-section__text">
+              Форма показывает, как на коммерческом лендинге может выглядеть заявка. Сейчас это
+              учебная форма, подключённая через Formspree.
+            </p>
+          </div>
+
+          <form class="landing-form" action="https://formspree.io/f/xbdvedyr" method="POST">
+            <input type="hidden" name="_subject" value="Заявка с учебного лендинга услуги" />
+            <input type="hidden" name="source" value="landing.html" />
+
+            <div class="landing-form__group">
+              <label for="landingName">Ваше имя</label>
+              <input
+                type="text"
+                id="landingName"
+                name="name"
+                autocomplete="name"
+                required
+                minlength="2"
+                placeholder="Например, Иван"
+              />
+            </div>
+
+            <div class="landing-form__group">
+              <label for="landingEmail">Ваш email</label>
+              <input
+                type="email"
+                id="landingEmail"
+                name="email"
+                autocomplete="email"
+                required
+                placeholder="example@mail.com"
+              />
+            </div>
+
+            <div class="landing-form__group">
+              <label for="landingMessage">Какая задача?</label>
+              <textarea
+                id="landingMessage"
+                name="message"
+                rows="5"
+                required
+                minlength="10"
+                placeholder="Напишите, какой сайт нужен"
+              ></textarea>
+            </div>
+
+            <button class="landing-button" type="submit">Отправить заявку</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="landing-footer">
+      <div class="landing-container landing-footer__inner">
+        <p>© 2026 Dmitriy Web. Учебный лендинг услуги.</p>
+        <a href="index.html">Вернуться в портфолио</a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -58,19 +58,85 @@
     <script src="landing.js" defer></script>
   </head>
 
-  <body>
-    <header class="landing-header">
+  <body id="top">
+    <header class="landing-header" data-landing-header>
       <div class="landing-container landing-header__inner">
-        <a class="landing-logo" href="index.html">Dmitriy Web</a>
+        <a
+          class="landing-logo"
+          href="#top"
+          aria-label="Перейти в начало страницы"
+          title="Dmitriy Web — в начало страницы"
+        >
+          Dmitriy Web
+        </a>
 
-        <nav class="landing-nav" aria-label="Навигация лендинга">
+        <nav
+          class="landing-nav"
+          id="landingNavigation"
+          aria-label="Навигация лендинга"
+          data-landing-nav
+        >
           <a href="#service">Услуга</a>
           <a href="#benefits">Преимущества</a>
           <a href="#steps">Этапы</a>
           <a href="#contacts">Заявка</a>
+          <a class="landing-nav__portfolio" href="index.html">Портфолио</a>
         </nav>
 
-        <a class="landing-header__link" href="index.html">В портфолио</a>
+        <div class="landing-header__actions">
+          <a
+            class="landing-portfolio-button"
+            href="index.html"
+            aria-label="Открыть портфолио"
+            title="Открыть портфолио"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 7V5.8C9 4.806 9.806 4 10.8 4H13.2C14.194 4 15 4.806 15 5.8V7"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+              <path
+                d="M5.5 7H18.5C19.328 7 20 7.672 20 8.5V17.5C20 18.328 19.328 19 18.5 19H5.5C4.672 19 4 18.328 4 17.5V8.5C4 7.672 4.672 7 5.5 7Z"
+                stroke="currentColor"
+                stroke-width="1.8"
+              />
+              <path
+                d="M4.5 11.5C6.7 12.7 9.2 13.3 12 13.3C14.8 13.3 17.3 12.7 19.5 11.5"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+              <path
+                d="M10.5 13H13.5"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <span class="visually-hidden">Открыть портфолио</span>
+          </a>
+
+          <button
+            class="landing-menu-toggle"
+            type="button"
+            aria-label="Открыть меню"
+            aria-controls="landingNavigation"
+            aria-expanded="false"
+            data-menu-toggle
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -89,9 +155,10 @@
 
             <div class="landing-hero__actions">
               <a class="landing-button" href="#contacts">Оставить заявку</a>
-              <a class="landing-button landing-button--secondary" href="#service"
-                >Посмотреть услугу</a
-              >
+
+              <a class="landing-button landing-button--secondary" href="#service">
+                Посмотреть услугу
+              </a>
             </div>
 
             <div class="landing-hero__stack">
@@ -112,14 +179,17 @@
                 <span>✓</span>
                 Первый экран с оффером
               </li>
+
               <li>
                 <span>✓</span>
                 Блоки пользы и доверия
               </li>
+
               <li>
                 <span>✓</span>
                 Этапы работы
               </li>
+
               <li>
                 <span>✓</span>
                 Форма заявки
@@ -129,7 +199,7 @@
         </div>
       </section>
 
-      <section class="landing-section" id="service">
+      <section class="landing-section landing-section--audience" id="service">
         <div class="landing-container">
           <p class="landing-label">Услуга</p>
 
@@ -143,7 +213,9 @@
           <div class="audience-grid">
             <article class="audience-card">
               <span>01</span>
+
               <h3>Экспертам</h3>
+
               <p>
                 Для консультантов, наставников, дизайнеров, маркетологов и частных специалистов.
               </p>
@@ -151,13 +223,17 @@
 
             <article class="audience-card">
               <span>02</span>
+
               <h3>Малым компаниям</h3>
+
               <p>Для услуг, где важно понятно показать пользу, процесс работы и способ связи.</p>
             </article>
 
             <article class="audience-card">
               <span>03</span>
+
               <h3>Локальному бизнесу</h3>
+
               <p>Для студий, мастеров, сервисов, школ, салонов и небольших команд.</p>
             </article>
           </div>
@@ -173,6 +249,7 @@
           <div class="benefits-grid">
             <article class="benefit-card">
               <h3>Понятная структура</h3>
+
               <p>
                 Страница ведёт пользователя от первого экрана к преимуществам, этапам работы и
                 заявке.
@@ -181,16 +258,19 @@
 
             <article class="benefit-card">
               <h3>Адаптивная верстка</h3>
+
               <p>Лендинг удобно читать на компьютере, планшете и телефоне без потери смысла.</p>
             </article>
 
             <article class="benefit-card">
               <h3>Фокус на заявке</h3>
+
               <p>Важные блоки помогают объяснить услугу и подвести пользователя к форме связи.</p>
             </article>
 
             <article class="benefit-card">
               <h3>База для развития</h3>
+
               <p>
                 Проект можно расширять: добавить отзывы, тарифы, калькулятор, аналитику и
                 интеграции.
@@ -200,7 +280,7 @@
         </div>
       </section>
 
-      <section class="landing-section">
+      <section class="landing-section landing-section--included">
         <div class="landing-container landing-service-grid">
           <div>
             <p class="landing-label">Что входит</p>
@@ -237,7 +317,7 @@
         </div>
       </section>
 
-      <section class="landing-section" id="steps">
+      <section class="landing-section landing-section--steps" id="steps">
         <div class="landing-container">
           <p class="landing-label">Этапы</p>
 
@@ -246,32 +326,40 @@
           <div class="steps-grid">
             <article class="step-card">
               <span>01</span>
+
               <h3>Разбор задачи</h3>
+
               <p>Определяем услугу, аудиторию, цель страницы и основное действие пользователя.</p>
             </article>
 
             <article class="step-card">
               <span>02</span>
+
               <h3>Структура страницы</h3>
+
               <p>Собираем блоки лендинга: первый экран, преимущества, услуга, этапы и заявка.</p>
             </article>
 
             <article class="step-card">
               <span>03</span>
+
               <h3>Верстка</h3>
+
               <p>Делаем аккуратную HTML-структуру, CSS-стили и адаптив под разные экраны.</p>
             </article>
 
             <article class="step-card">
               <span>04</span>
+
               <h3>Публикация</h3>
+
               <p>Проверяем страницу, оформляем проект и публикуем результат онлайн.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="landing-section landing-section--soft">
+      <section class="landing-section landing-section--trust">
         <div class="landing-container landing-proof">
           <div>
             <p class="landing-label">Доверие</p>
@@ -298,7 +386,7 @@
         </div>
       </section>
 
-      <section class="landing-section">
+      <section class="landing-section landing-section--faq">
         <div class="landing-container">
           <p class="landing-label">FAQ</p>
 
@@ -307,6 +395,7 @@
           <div class="faq-grid">
             <article class="faq-card">
               <h3>Это реальный коммерческий сайт?</h3>
+
               <p>
                 Это учебный проект, который имитирует реальную задачу. Его цель — показать структуру
                 лендинга и практику frontend-разработки.
@@ -315,6 +404,7 @@
 
             <article class="faq-card">
               <h3>Можно ли использовать такую страницу для клиента?</h3>
+
               <p>
                 Да, после доработки под конкретную услугу, тексты, контакты, аналитику и реальные
                 данные бизнеса.
@@ -323,6 +413,7 @@
 
             <article class="faq-card">
               <h3>Что можно добавить дальше?</h3>
+
               <p>
                 Отзывы, тарифы, галерею работ, интерактивный FAQ, отправку формы через JavaScript и
                 интеграции.
@@ -355,6 +446,7 @@
           >
             <input type="hidden" name="_subject" value="Заявка с учебного лендинга услуги" />
             <input type="hidden" name="source" value="landing.html" />
+
             <input
               type="hidden"
               name="page"
@@ -363,6 +455,7 @@
 
             <div class="landing-form__trap" aria-hidden="true">
               <label for="landingTrap">Не заполняйте это поле</label>
+
               <input
                 type="text"
                 id="landingTrap"
@@ -381,6 +474,7 @@
 
             <div class="landing-form__group">
               <label for="landingName">Ваше имя</label>
+
               <input
                 type="text"
                 id="landingName"
@@ -393,11 +487,13 @@
                 aria-invalid="false"
                 data-form-field="name"
               />
+
               <p class="landing-form__error" id="landingNameError" data-form-error="name"></p>
             </div>
 
             <div class="landing-form__group">
               <label for="landingEmail">Ваш email</label>
+
               <input
                 type="email"
                 id="landingEmail"
@@ -409,11 +505,13 @@
                 aria-invalid="false"
                 data-form-field="email"
               />
+
               <p class="landing-form__error" id="landingEmailError" data-form-error="email"></p>
             </div>
 
             <div class="landing-form__group">
               <label for="landingMessage">Какая задача?</label>
+
               <textarea
                 id="landingMessage"
                 name="message"
@@ -425,6 +523,7 @@
                 aria-invalid="false"
                 data-form-field="message"
               ></textarea>
+
               <p class="landing-form__error" id="landingMessageError" data-form-error="message"></p>
             </div>
 
@@ -436,9 +535,61 @@
 
     <footer class="landing-footer">
       <div class="landing-container landing-footer__inner">
-        <p>© 2026 Dmitriy Web. Учебный лендинг услуги.</p>
-        <a href="index.html">Вернуться в портфолио</a>
+        <div class="landing-footer__top">
+          <div class="landing-footer__brand">
+            <a
+              class="landing-footer__logo"
+              href="#top"
+              aria-label="Перейти в начало страницы"
+              title="Dmitriy Web — в начало страницы"
+            >
+              Dmitriy Web
+            </a>
+
+            <p>
+              Учебный коммерческий лендинг для малого бизнеса, созданный как отдельный
+              frontend-кейс.
+            </p>
+          </div>
+
+          <nav class="landing-footer__navigation" aria-label="Навигация в подвале">
+            <a href="#service">Услуга</a>
+            <a href="#benefits">Преимущества</a>
+            <a href="#steps">Этапы</a>
+            <a href="#contacts">Заявка</a>
+            <a href="index.html">Портфолио</a>
+          </nav>
+        </div>
+
+        <div class="landing-footer__bottom">
+          <div class="landing-footer__stack">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>Formspree</span>
+          </div>
+
+          <p>© 2026 Dmitriy Web. Учебный проект.</p>
+        </div>
       </div>
     </footer>
+
+    <button
+      class="landing-back-to-top"
+      type="button"
+      aria-label="Прокрутить страницу наверх"
+      title="Наверх"
+      data-back-to-top
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M6.5 14.5L12 9L17.5 14.5"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
   </body>
 </html>

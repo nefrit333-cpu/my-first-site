@@ -55,6 +55,7 @@
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="landing.css" />
+    <script src="landing.js" defer></script>
   </head>
 
   <body>
@@ -339,14 +340,44 @@
             <h2 class="landing-title">Обсудить сайт для бизнеса</h2>
 
             <p class="landing-section__text">
-              Форма показывает, как на коммерческом лендинге может выглядеть заявка. Сейчас это
-              учебная форма, подключённая через Formspree.
+              Форма показывает, как на коммерческом лендинге может выглядеть заявка. Теперь она
+              проверяет поля, показывает ошибки и отправляет данные через Formspree без перезагрузки
+              страницы.
             </p>
           </div>
 
-          <form class="landing-form" action="https://formspree.io/f/xbdvedyr" method="POST">
+          <form
+            class="landing-form"
+            action="https://formspree.io/f/xbdvedyr"
+            method="POST"
+            novalidate
+            data-landing-form
+          >
             <input type="hidden" name="_subject" value="Заявка с учебного лендинга услуги" />
             <input type="hidden" name="source" value="landing.html" />
+            <input
+              type="hidden"
+              name="page"
+              value="https://nefrit333-cpu.github.io/my-first-site/landing.html"
+            />
+
+            <div class="landing-form__trap" aria-hidden="true">
+              <label for="landingTrap">Не заполняйте это поле</label>
+              <input
+                type="text"
+                id="landingTrap"
+                name="contact_trap"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
+            <p
+              class="landing-form__status"
+              id="landingFormStatus"
+              aria-live="polite"
+              data-form-status
+            ></p>
 
             <div class="landing-form__group">
               <label for="landingName">Ваше имя</label>
@@ -358,7 +389,11 @@
                 required
                 minlength="2"
                 placeholder="Например, Иван"
+                aria-describedby="landingNameError"
+                aria-invalid="false"
+                data-form-field="name"
               />
+              <p class="landing-form__error" id="landingNameError" data-form-error="name"></p>
             </div>
 
             <div class="landing-form__group">
@@ -370,7 +405,11 @@
                 autocomplete="email"
                 required
                 placeholder="example@mail.com"
+                aria-describedby="landingEmailError"
+                aria-invalid="false"
+                data-form-field="email"
               />
+              <p class="landing-form__error" id="landingEmailError" data-form-error="email"></p>
             </div>
 
             <div class="landing-form__group">
@@ -382,10 +421,14 @@
                 required
                 minlength="10"
                 placeholder="Напишите, какой сайт нужен"
+                aria-describedby="landingMessageError"
+                aria-invalid="false"
+                data-form-field="message"
               ></textarea>
+              <p class="landing-form__error" id="landingMessageError" data-form-error="message"></p>
             </div>
 
-            <button class="landing-button" type="submit">Отправить заявку</button>
+            <button class="landing-button" type="submit" data-form-submit>Отправить заявку</button>
           </form>
         </div>
       </section>

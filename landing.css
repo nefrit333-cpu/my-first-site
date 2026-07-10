@@ -12,6 +12,8 @@
   --landing-primary-dark: #1d4ed8;
   --landing-accent: #14b8a6;
   --landing-accent-soft: #ccfbf1;
+  --landing-error: #fca5a5;
+  --landing-success: #86efac;
   --landing-border: #dbe7f5;
   --landing-border-strong: #bfdbfe;
   --landing-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
@@ -266,7 +268,8 @@ textarea {
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
-    filter 0.22s ease;
+    filter 0.22s ease,
+    opacity 0.22s ease;
 }
 
 .landing-button::before {
@@ -292,6 +295,12 @@ textarea {
 .landing-button:hover::before,
 .landing-button:focus-visible::before {
   left: 130%;
+}
+
+.landing-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
 }
 
 .landing-button--secondary {
@@ -765,6 +774,56 @@ textarea {
   border-color: rgba(147, 197, 253, 0.72);
   outline: none;
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.24);
+}
+
+.landing-form input[aria-invalid="true"],
+.landing-form textarea[aria-invalid="true"] {
+  border-color: rgba(252, 165, 165, 0.9);
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.16);
+}
+
+.landing-form__error {
+  min-height: 18px;
+  margin: 0;
+  color: var(--landing-error);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.landing-form__status {
+  display: none;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 18px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.landing-form__status.is-visible {
+  display: block;
+}
+
+.landing-form__status.is-success {
+  color: #052e16;
+  border: 1px solid rgba(134, 239, 172, 0.72);
+  background: rgba(134, 239, 172, 0.9);
+}
+
+.landing-form__status.is-error {
+  color: #7f1d1d;
+  border: 1px solid rgba(252, 165, 165, 0.72);
+  background: rgba(254, 226, 226, 0.94);
+}
+
+.landing-form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .landing-footer {

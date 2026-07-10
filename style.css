@@ -90,14 +90,55 @@ body.modal-is-open {
 }
 
 .logo {
-  color: var(--color-text);
-  font-size: 24px;
-  font-weight: 700;
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  border: 1px solid rgba(96, 165, 250, 0.18);
+  border-radius: 16px;
+  color: #ffffff;
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.045em;
   text-decoration: none;
+  white-space: nowrap;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(37, 99, 235, 0.2), transparent 58%),
+    linear-gradient(145deg, #020617, #07111f 58%, #0b1729);
+  box-shadow:
+    0 16px 34px rgba(2, 8, 23, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
-.logo:hover {
-  color: var(--color-accent);
+.logo::after {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+  background: #14b8a6;
+  box-shadow:
+    0 0 0 5px rgba(20, 184, 166, 0.13),
+    0 0 18px rgba(20, 184, 166, 0.55);
+  content: "";
+}
+
+.logo:hover,
+.logo:focus-visible {
+  color: #ffffff;
+  border-color: rgba(20, 184, 166, 0.42);
+  box-shadow:
+    0 20px 42px rgba(2, 8, 23, 0.38),
+    0 0 0 4px rgba(20, 184, 166, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  outline: none;
+  transform: translateY(-2px);
 }
 
 .nav {
@@ -1212,8 +1253,20 @@ h2,
   }
 
   .logo {
-    font-size: 23px;
-    line-height: normal;
+    min-height: 44px;
+    padding: 8px 12px;
+    border-radius: 15px;
+    font-size: 19px;
+    line-height: 1;
+  }
+
+  .logo::after {
+    width: 8px;
+    height: 8px;
+    flex-basis: 8px;
+    box-shadow:
+      0 0 0 4px rgba(20, 184, 166, 0.13),
+      0 0 15px rgba(20, 184, 166, 0.5);
   }
 
   .header-actions {
@@ -1483,10 +1536,13 @@ h2,
   }
 
   .logo {
+    min-height: 50px;
+    padding: 10px 15px;
+    border-radius: 17px;
     font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
     font-size: 21px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-weight: 900;
+    letter-spacing: -0.045em;
   }
 
   .nav {

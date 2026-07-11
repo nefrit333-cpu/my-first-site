@@ -3026,3 +3026,124 @@ body.menu-open {
   }
 }
 /* ===== PREMIUM SECTION LABELS END ===== */
+
+/* ===== ACCESSIBILITY AND PERFORMANCE START ===== */
+.landing-skip-link {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top));
+  left: 16px;
+  z-index: 1000;
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border: 1px solid rgba(147, 197, 253, 0.7);
+  border-radius: 14px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.98), rgba(13, 148, 136, 0.96)), #1d4ed8;
+  box-shadow:
+    0 18px 44px rgba(15, 23, 42, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  opacity: 0;
+  transform: translateY(-160%);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.landing-skip-link:focus,
+.landing-skip-link:focus-visible {
+  color: #ffffff;
+  outline: 3px solid #67e8f9 !important;
+  outline-offset: 4px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#main-content:focus {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #22d3ee !important;
+  outline-offset: 4px;
+}
+
+.landing-nav a:focus-visible,
+.landing-button:focus-visible,
+.faq-question:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.96),
+    0 0 0 7px rgba(34, 211, 238, 0.82),
+    0 16px 36px rgba(15, 23, 42, 0.16);
+}
+
+.landing-form input:focus-visible,
+.landing-form textarea:focus-visible {
+  border-color: #0891b2;
+  box-shadow:
+    0 0 0 4px rgba(34, 211, 238, 0.18),
+    0 14px 34px rgba(15, 23, 42, 0.08);
+}
+
+.landing-nav[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .landing-skip-link {
+    right: 14px;
+    left: 14px;
+    min-height: 44px;
+    padding-inline: 14px;
+    text-align: center;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .landing-logo:hover,
+  .landing-nav a:hover,
+  .landing-button:hover,
+  .landing-portfolio-button:hover,
+  .landing-menu-toggle:hover,
+  .landing-back-to-top:hover,
+  .landing-label:hover,
+  .faq-item:hover {
+    transform: none !important;
+  }
+
+  .landing-label:hover::after,
+  .landing-button:hover::before {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .landing-skip-link,
+  .landing-header,
+  .landing-nav,
+  .landing-nav a,
+  .landing-menu-toggle span,
+  .landing-back-to-top,
+  .faq-answer,
+  .faq-question__icon,
+  .landing-label,
+  .landing-label::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* ===== ACCESSIBILITY AND PERFORMANCE END ===== */

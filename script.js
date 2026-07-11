@@ -308,6 +308,18 @@ faqItems.forEach(function (item) {
   });
 });
 
+document.addEventListener("click", function (event) {
+  const clickedFaqItem = event.target.closest(".faq-item");
+
+  if (clickedFaqItem) {
+    return;
+  }
+
+  faqItems.forEach(function (item) {
+    closeFaqItem(item);
+  });
+});
+
 window.addEventListener("resize", function () {
   faqItems.forEach(function (item) {
     const answer = item.querySelector(".faq-answer");
@@ -561,7 +573,6 @@ contactForm.addEventListener("submit", async function (event) {
     await sendFormData();
 
     showFormSuccess(`${name}, спасибо! Заявка успешно отправлена. Я свяжусь с вами позже.`);
-
     contactForm.reset();
     clearAllFieldErrors();
   } catch (error) {

@@ -386,38 +386,149 @@
         </div>
       </section>
 
-      <section class="landing-section landing-section--faq">
+      <section class="landing-section landing-section--faq" id="faq">
         <div class="landing-container">
           <p class="landing-label">FAQ</p>
 
           <h2 class="landing-title">Частые вопросы</h2>
 
-          <div class="faq-grid">
-            <article class="faq-card">
-              <h3>Это реальный коммерческий сайт?</h3>
+          <p class="landing-section__text">
+            Откройте нужный вопрос, чтобы увидеть короткий и понятный ответ.
+          </p>
 
-              <p>
-                Это учебный проект, который имитирует реальную задачу. Его цель — показать структуру
-                лендинга и практику frontend-разработки.
-              </p>
+          <div class="faq-accordion" data-faq-list>
+            <article class="faq-item" data-faq-item>
+              <button
+                class="faq-question"
+                type="button"
+                id="faqQuestionOne"
+                aria-expanded="true"
+                aria-controls="faqAnswerOne"
+                data-faq-trigger
+              >
+                <span class="faq-question__text">Это реальный коммерческий сайт?</span>
+
+                <span class="faq-question__icon" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                </span>
+              </button>
+
+              <div
+                class="faq-answer"
+                id="faqAnswerOne"
+                role="region"
+                aria-labelledby="faqQuestionOne"
+                data-faq-answer
+              >
+                <div class="faq-answer__inner">
+                  <p>
+                    Это учебный проект, который имитирует реальную задачу. Его цель — показать
+                    структуру лендинга и практику frontend-разработки.
+                  </p>
+                </div>
+              </div>
             </article>
 
-            <article class="faq-card">
-              <h3>Можно ли использовать такую страницу для клиента?</h3>
+            <article class="faq-item" data-faq-item>
+              <button
+                class="faq-question"
+                type="button"
+                id="faqQuestionTwo"
+                aria-expanded="true"
+                aria-controls="faqAnswerTwo"
+                data-faq-trigger
+              >
+                <span class="faq-question__text">
+                  Можно ли использовать такую страницу для клиента?
+                </span>
 
-              <p>
-                Да, после доработки под конкретную услугу, тексты, контакты, аналитику и реальные
-                данные бизнеса.
-              </p>
+                <span class="faq-question__icon" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                </span>
+              </button>
+
+              <div
+                class="faq-answer"
+                id="faqAnswerTwo"
+                role="region"
+                aria-labelledby="faqQuestionTwo"
+                data-faq-answer
+              >
+                <div class="faq-answer__inner">
+                  <p>
+                    Да, после доработки под конкретную услугу, тексты, контакты, аналитику и
+                    реальные данные бизнеса.
+                  </p>
+                </div>
+              </div>
             </article>
 
-            <article class="faq-card">
-              <h3>Что можно добавить дальше?</h3>
+            <article class="faq-item" data-faq-item>
+              <button
+                class="faq-question"
+                type="button"
+                id="faqQuestionThree"
+                aria-expanded="true"
+                aria-controls="faqAnswerThree"
+                data-faq-trigger
+              >
+                <span class="faq-question__text">Что уже работает на лендинге?</span>
 
-              <p>
-                Отзывы, тарифы, галерею работ, интерактивный FAQ, отправку формы через JavaScript и
-                интеграции.
-              </p>
+                <span class="faq-question__icon" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                </span>
+              </button>
+
+              <div
+                class="faq-answer"
+                id="faqAnswerThree"
+                role="region"
+                aria-labelledby="faqQuestionThree"
+                data-faq-answer
+              >
+                <div class="faq-answer__inner">
+                  <p>
+                    Работают адаптивная верстка, мобильное меню, кнопка возврата наверх, клиентская
+                    валидация и отправка формы через Formspree.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq-item" data-faq-item>
+              <button
+                class="faq-question"
+                type="button"
+                id="faqQuestionFour"
+                aria-expanded="true"
+                aria-controls="faqAnswerFour"
+                data-faq-trigger
+              >
+                <span class="faq-question__text">Что можно добавить дальше?</span>
+
+                <span class="faq-question__icon" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                </span>
+              </button>
+
+              <div
+                class="faq-answer"
+                id="faqAnswerFour"
+                role="region"
+                aria-labelledby="faqQuestionFour"
+                data-faq-answer
+              >
+                <div class="faq-answer__inner">
+                  <p>
+                    Отзывы, тарифы, галерею работ, калькулятор стоимости, аналитику, уведомления и
+                    дополнительные интеграции.
+                  </p>
+                </div>
+              </div>
             </article>
           </div>
         </div>

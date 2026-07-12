@@ -4,7 +4,8 @@
   "description": "Учебный сайт-портфолио frontend-разработчика на HTML, CSS и JavaScript",
   "private": true,
   "scripts": {
-    "format": "prettier --write .",
+    "format": "node scripts/format-changed.mjs",
+    "format:all": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "keywords": [

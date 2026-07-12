@@ -1,0 +1,22 @@
+# Keep text files consistent on Windows, macOS, and Linux.
+* text=auto eol=lf
+
+# Binary images.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+
+# Binary documents and archives.
+*.pdf binary
+*.zip binary
+*.rar binary
+*.7z binary
+
+# Binary font files.
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary

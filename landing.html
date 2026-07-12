@@ -9,7 +9,7 @@
 
     <meta
       name="description"
-      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает структуру коммерческого лендинга: оффер, преимущества, этапы работы, FAQ, форму заявки и адаптивную верстку."
+      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает оффер, преимущества, тарифы, этапы работы, FAQ, форму заявки и адаптивную верстку."
     />
 
     <meta
@@ -29,7 +29,7 @@
     <meta property="og:title" content="Сайт для малого бизнеса — учебный лендинг" />
     <meta
       property="og:description"
-      content="Учебный frontend-лендинг услуги для малого бизнеса: оффер, преимущества, этапы работы, FAQ, форма заявки и адаптивная верстка."
+      content="Учебный frontend-лендинг услуги для малого бизнеса: оффер, преимущества, тарифы, этапы работы, FAQ, форма заявки и адаптивная верстка."
     />
     <meta property="og:url" content="https://nefrit333-cpu.github.io/my-first-site/landing.html" />
     <meta
@@ -45,7 +45,7 @@
     <meta name="twitter:title" content="Сайт для малого бизнеса — учебный лендинг" />
     <meta
       name="twitter:description"
-      content="Учебный frontend-лендинг услуги с коммерческой структурой, адаптивной версткой и формой заявки."
+      content="Учебный frontend-лендинг услуги с тарифами, коммерческой структурой, адаптивной версткой и формой заявки."
     />
     <meta
       name="twitter:image"
@@ -55,6 +55,7 @@
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="landing.css" />
+    <link rel="stylesheet" href="pricing.css" />
     <script src="landing.js" defer></script>
   </head>
 
@@ -82,6 +83,7 @@
         >
           <a href="#service">Услуга</a>
           <a href="#benefits">Преимущества</a>
+          <a href="#pricing">Тарифы</a>
           <a href="#steps">Этапы</a>
           <a href="#contacts">Заявка</a>
           <a class="landing-nav__portfolio" href="index.html">Портфолио</a>
@@ -154,7 +156,7 @@
 
             <p class="landing-hero__text">
               Это учебный лендинг услуги. Он показывает, как можно собрать коммерческую страницу: с
-              понятным оффером, преимуществами, этапами работы, FAQ и формой заявки.
+              понятным оффером, преимуществами, тарифами, этапами работы, FAQ и формой заявки.
             </p>
 
             <div class="landing-hero__actions">
@@ -169,6 +171,7 @@
               <span>HTML</span>
               <span>CSS</span>
               <span>Адаптив</span>
+              <span>Тарифы</span>
               <span>Форма</span>
             </div>
           </div>
@@ -196,7 +199,7 @@
 
               <li>
                 <span>✓</span>
-                Форма заявки
+                Тарифы и форма заявки
               </li>
             </ul>
           </aside>
@@ -318,6 +321,136 @@
               <span>Поля для имени, email и описания задачи.</span>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section
+        class="landing-section landing-section--pricing"
+        id="pricing"
+        aria-labelledby="pricingTitle"
+      >
+        <div class="landing-container">
+          <div class="pricing-heading">
+            <div>
+              <p class="landing-label">Тарифы</p>
+
+              <h2 class="landing-title" id="pricingTitle">Три варианта под разные задачи</h2>
+            </div>
+
+            <p class="landing-section__text pricing-heading__text">
+              Выберите подходящий уровень проекта. Стоимость указана для учебного примера и помогает
+              сравнить объём работ в каждом пакете.
+            </p>
+          </div>
+
+          <div class="pricing-grid">
+            <article class="pricing-card" data-pricing-card data-plan="Старт">
+              <div class="pricing-card__header">
+                <p class="pricing-card__kicker">Быстрый запуск</p>
+                <h3>Старт</h3>
+                <p>Компактный одностраничный сайт для одной услуги или специалиста.</p>
+              </div>
+
+              <p class="pricing-card__price">
+                <span>от</span>
+                25 000 ₽
+              </p>
+
+              <ul class="pricing-card__features">
+                <li><span aria-hidden="true">✓</span> До 5 смысловых блоков</li>
+                <li><span aria-hidden="true">✓</span> Адаптивная верстка</li>
+                <li><span aria-hidden="true">✓</span> Форма заявки</li>
+                <li><span aria-hidden="true">✓</span> Базовая SEO-настройка</li>
+              </ul>
+
+              <a
+                class="landing-button pricing-card__button"
+                href="#contacts"
+                aria-label="Выбрать тариф Старт и перейти к заявке"
+                data-pricing-select
+                data-plan="Старт"
+              >
+                Выбрать «Старт»
+              </a>
+            </article>
+
+            <article
+              class="pricing-card pricing-card--featured"
+              data-pricing-card
+              data-plan="Бизнес"
+            >
+              <span class="pricing-card__badge">Популярный</span>
+
+              <div class="pricing-card__header">
+                <p class="pricing-card__kicker">Оптимальный выбор</p>
+                <h3>Бизнес</h3>
+                <p>Полноценный коммерческий лендинг с усиленной структурой и доверием.</p>
+              </div>
+
+              <p class="pricing-card__price">
+                <span>от</span>
+                45 000 ₽
+              </p>
+
+              <ul class="pricing-card__features">
+                <li><span aria-hidden="true">✓</span> До 9 смысловых блоков</li>
+                <li><span aria-hidden="true">✓</span> Индивидуальный визуальный стиль</li>
+                <li><span aria-hidden="true">✓</span> Интерактивный FAQ</li>
+                <li><span aria-hidden="true">✓</span> Форма и базовые интеграции</li>
+                <li><span aria-hidden="true">✓</span> Расширенная SEO-база</li>
+              </ul>
+
+              <a
+                class="landing-button pricing-card__button"
+                href="#contacts"
+                aria-label="Выбрать тариф Бизнес и перейти к заявке"
+                data-pricing-select
+                data-plan="Бизнес"
+              >
+                Выбрать «Бизнес»
+              </a>
+            </article>
+
+            <article
+              class="pricing-card pricing-card--premium"
+              data-pricing-card
+              data-plan="Премиум"
+            >
+              <div class="pricing-card__header">
+                <p class="pricing-card__kicker">Максимум возможностей</p>
+                <h3>Премиум</h3>
+                <p>Расширенный проект для бизнеса, которому нужен сильный цифровой продукт.</p>
+              </div>
+
+              <p class="pricing-card__price">
+                <span>от</span>
+                75 000 ₽
+              </p>
+
+              <ul class="pricing-card__features">
+                <li><span aria-hidden="true">✓</span> Расширенная структура страницы</li>
+                <li><span aria-hidden="true">✓</span> Сложные интерактивные блоки</li>
+                <li><span aria-hidden="true">✓</span> Калькулятор стоимости</li>
+                <li><span aria-hidden="true">✓</span> Дополнительные интеграции</li>
+                <li><span aria-hidden="true">✓</span> Приоритетная доработка</li>
+              </ul>
+
+              <a
+                class="landing-button pricing-card__button"
+                href="#contacts"
+                aria-label="Выбрать тариф Премиум и перейти к заявке"
+                data-pricing-select
+                data-plan="Премиум"
+              >
+                Выбрать «Премиум»
+              </a>
+            </article>
+          </div>
+
+          <p class="pricing-note">
+            Цены приведены для учебного проекта и не являются публичной офертой. Итоговая стоимость
+            зависит от структуры, контента и дополнительных функций.
+          </p>
         </div>
       </section>
 
@@ -670,6 +803,7 @@
           <nav class="landing-footer__navigation" aria-label="Навигация в подвале">
             <a href="#service">Услуга</a>
             <a href="#benefits">Преимущества</a>
+            <a href="#pricing">Тарифы</a>
             <a href="#steps">Этапы</a>
             <a href="#contacts">Заявка</a>
             <a href="index.html">Портфолио</a>

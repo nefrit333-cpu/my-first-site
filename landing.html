@@ -733,7 +733,9 @@
               ></p>
 
               <div class="calculator-result__actions">
-                <a class="landing-button" href="#contacts"> Оставить заявку </a>
+                <a class="landing-button" href="#contacts" data-calculator-apply>
+                  Перенести расчёт в заявку
+                </a>
 
                 <button class="calculator-reset" type="reset" data-calculator-reset>
                   Сбросить расчёт
@@ -924,7 +926,7 @@
                 <div class="faq-answer__inner">
                   <p>
                     Работают адаптивная верстка, мобильное меню, тарифы, калькулятор стоимости,
-                    клиентская валидация и отправка формы через Formspree.
+                    перенос расчёта в заявку, клиентская валидация и отправка через Formspree.
                   </p>
                 </div>
               </div>
@@ -974,9 +976,8 @@
             <h2 class="landing-title">Обсудить сайт для бизнеса</h2>
 
             <p class="landing-section__text">
-              Форма показывает, как на коммерческом лендинге может выглядеть заявка. Теперь она
-              проверяет поля, показывает ошибки и отправляет данные через Formspree без перезагрузки
-              страницы.
+              Выбранный тариф и предварительный расчёт можно перенести в заявку. Форма проверяет
+              поля, показывает ошибки и отправляет данные через Formspree без перезагрузки страницы.
             </p>
           </div>
 
@@ -996,6 +997,12 @@
               value="https://nefrit333-cpu.github.io/my-first-site/landing.html"
             />
 
+            <input type="hidden" name="selected_plan" value="" data-selected-plan-field />
+
+            <input type="hidden" name="selected_extras" value="" data-selected-extras-field />
+
+            <input type="hidden" name="estimated_price" value="" data-estimated-price-field />
+
             <div class="landing-form__trap" aria-hidden="true">
               <label for="landingTrap">Не заполняйте это поле</label>
 
@@ -1013,6 +1020,49 @@
               id="landingFormStatus"
               aria-live="polite"
               data-form-status
+            ></p>
+
+            <section
+              class="landing-selection"
+              aria-labelledby="selectedConfigurationTitle"
+              data-selected-configuration
+              hidden
+            >
+              <div class="landing-selection__header">
+                <div>
+                  <p class="landing-selection__kicker">Выбранная конфигурация</p>
+
+                  <h3 id="selectedConfigurationTitle">Расчёт добавлен в заявку</h3>
+                </div>
+
+                <button class="landing-selection__clear" type="button" data-clear-configuration>
+                  Очистить
+                </button>
+              </div>
+
+              <dl class="landing-selection__details">
+                <div class="landing-selection__item">
+                  <dt>Тариф</dt>
+                  <dd data-configuration-plan></dd>
+                </div>
+
+                <div class="landing-selection__item landing-selection__item--extras">
+                  <dt>Дополнительные услуги</dt>
+                  <dd data-configuration-extras></dd>
+                </div>
+
+                <div class="landing-selection__item landing-selection__item--price">
+                  <dt>Предварительная стоимость</dt>
+                  <dd data-configuration-price></dd>
+                </div>
+              </dl>
+            </section>
+
+            <p
+              class="visually-hidden"
+              aria-live="polite"
+              aria-atomic="true"
+              data-configuration-status
             ></p>
 
             <div class="landing-form__group">

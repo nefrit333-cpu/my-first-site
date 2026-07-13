@@ -9,7 +9,7 @@
 
     <meta
       name="description"
-      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает оффер, преимущества, тарифы, этапы работы, FAQ, форму заявки и адаптивную верстку."
+      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает оффер, преимущества, тарифы, калькулятор стоимости, этапы работы, FAQ, форму заявки и адаптивную верстку."
     />
 
     <meta
@@ -29,7 +29,7 @@
     <meta property="og:title" content="Сайт для малого бизнеса — учебный лендинг" />
     <meta
       property="og:description"
-      content="Учебный frontend-лендинг услуги для малого бизнеса: оффер, преимущества, тарифы, этапы работы, FAQ, форма заявки и адаптивная верстка."
+      content="Учебный frontend-лендинг услуги для малого бизнеса: оффер, преимущества, тарифы, калькулятор стоимости, FAQ, форма заявки и адаптивная верстка."
     />
     <meta property="og:url" content="https://nefrit333-cpu.github.io/my-first-site/landing.html" />
     <meta
@@ -45,7 +45,7 @@
     <meta name="twitter:title" content="Сайт для малого бизнеса — учебный лендинг" />
     <meta
       name="twitter:description"
-      content="Учебный frontend-лендинг услуги с тарифами, коммерческой структурой, адаптивной версткой и формой заявки."
+      content="Учебный frontend-лендинг услуги с тарифами, калькулятором стоимости, адаптивной версткой и формой заявки."
     />
     <meta
       name="twitter:image"
@@ -56,6 +56,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="landing.css" />
     <link rel="stylesheet" href="pricing.css" />
+    <link rel="stylesheet" href="calculator.css" />
     <script src="landing.js" defer></script>
   </head>
 
@@ -84,6 +85,7 @@
           <a href="#service">Услуга</a>
           <a href="#benefits">Преимущества</a>
           <a href="#pricing">Тарифы</a>
+          <a href="#calculator">Калькулятор</a>
           <a href="#steps">Этапы</a>
           <a href="#contacts">Заявка</a>
           <a class="landing-nav__portfolio" href="index.html">Портфолио</a>
@@ -156,7 +158,7 @@
 
             <p class="landing-hero__text">
               Это учебный лендинг услуги. Он показывает, как можно собрать коммерческую страницу: с
-              понятным оффером, преимуществами, тарифами, этапами работы, FAQ и формой заявки.
+              понятным оффером, преимуществами, тарифами, калькулятором, FAQ и формой заявки.
             </p>
 
             <div class="landing-hero__actions">
@@ -172,6 +174,7 @@
               <span>CSS</span>
               <span>Адаптив</span>
               <span>Тарифы</span>
+              <span>Калькулятор</span>
               <span>Форма</span>
             </div>
           </div>
@@ -199,7 +202,7 @@
 
               <li>
                 <span>✓</span>
-                Тарифы и форма заявки
+                Тарифы, калькулятор и форма
               </li>
             </ul>
           </aside>
@@ -454,6 +457,298 @@
         </div>
       </section>
 
+      <section
+        class="landing-section landing-section--calculator"
+        id="calculator"
+        aria-labelledby="calculatorTitle"
+      >
+        <div class="landing-container">
+          <div class="calculator-heading">
+            <div>
+              <p class="landing-label">Калькулятор</p>
+
+              <h2 class="landing-title" id="calculatorTitle">
+                Рассчитайте примерную стоимость проекта
+              </h2>
+            </div>
+
+            <p class="landing-section__text calculator-heading__text">
+              Выберите базовый тариф и дополнительные функции. Итог обновится сразу без перезагрузки
+              страницы.
+            </p>
+          </div>
+
+          <form class="calculator" data-calculator>
+            <div class="calculator__controls">
+              <fieldset class="calculator-group">
+                <legend>
+                  <span>01</span>
+                  Выберите базовый тариф
+                </legend>
+
+                <div class="calculator-options calculator-options--plans">
+                  <label class="calculator-option calculator-option--plan">
+                    <input
+                      class="calculator-option__input"
+                      type="radio"
+                      name="calculator_plan"
+                      value="25000"
+                      data-calculator-plan
+                      data-plan-name="Старт"
+                    />
+
+                    <span class="calculator-option__body">
+                      <span class="calculator-option__top">
+                        <strong>Старт</strong>
+                        <span>25 000 ₽</span>
+                      </span>
+
+                      <span class="calculator-option__description">
+                        Компактный лендинг для одной услуги или специалиста.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="calculator-option calculator-option--plan">
+                    <input
+                      class="calculator-option__input"
+                      type="radio"
+                      name="calculator_plan"
+                      value="45000"
+                      data-calculator-plan
+                      data-plan-name="Бизнес"
+                      checked
+                    />
+
+                    <span class="calculator-option__body">
+                      <span class="calculator-option__top">
+                        <strong>Бизнес</strong>
+                        <span>45 000 ₽</span>
+                      </span>
+
+                      <span class="calculator-option__description">
+                        Полноценная коммерческая страница с усиленной структурой.
+                      </span>
+
+                      <span class="calculator-option__recommendation">Рекомендуемый</span>
+                    </span>
+                  </label>
+
+                  <label class="calculator-option calculator-option--plan">
+                    <input
+                      class="calculator-option__input"
+                      type="radio"
+                      name="calculator_plan"
+                      value="75000"
+                      data-calculator-plan
+                      data-plan-name="Премиум"
+                    />
+
+                    <span class="calculator-option__body">
+                      <span class="calculator-option__top">
+                        <strong>Премиум</strong>
+                        <span>75 000 ₽</span>
+                      </span>
+
+                      <span class="calculator-option__description">
+                        Расширенный проект со сложными блоками и интеграциями.
+                      </span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset class="calculator-group">
+                <legend>
+                  <span>02</span>
+                  Добавьте нужные функции
+                </legend>
+
+                <div class="calculator-options calculator-options--extras">
+                  <label class="calculator-option calculator-option--extra">
+                    <input
+                      class="calculator-option__input"
+                      type="checkbox"
+                      name="calculator_extra"
+                      value="6000"
+                      data-calculator-extra
+                      data-extra-name="Дополнительная страница"
+                    />
+
+                    <span class="calculator-option__body">
+                      <span class="calculator-option__top">
+                        <strong>Дополнительная страница</strong>
+                        <span>+6 000 ₽</span>
+                      </span>
+
+                      <span class="calculator-option__description">
+                        Отдельная страница услуги, команды или контактов.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="calculator-option calculator-option--extra">
+                    <input
+                      class="calculator-option__input"
+                      type="checkbox"
+                      name="calculator_extra"
+                      value="8000"
+                      data-calculator-extra
+                      data-extra-name="Подготовка текстов"
+                    />
+
+                    <span class="calculator-option__body">
+                      <span class="calculator-option__top">
+                        <strong>Подготовка текстов</strong>
+                        <span>+8 000 ₽</span>
+                      </span>
+
+                      <span class="calculator-option__description">
+                        Помощь со структурой, заголовками и текстами блоков.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="calculator-option calculator-option--extra">
+                    <input
+                      class="calculator-option__input"
+                      type="checkbox"
+                      name="calculator_extra"
+                      value="7000"
+                      data-calculator-extra
+                      data-extra-name="Расширенная анимация"
+                    />
+
+                    <span class="calculator-option__body">
+                      <span class="calculator-option__top">
+                        <strong>Расширенная анимация</strong>
+                        <span>+7 000 ₽</span>
+                      </span>
+
+                      <span class="calculator-option__description">
+                        Дополнительные появления, переходы и интерактивные эффекты.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="calculator-option calculator-option--extra">
+                    <input
+                      class="calculator-option__input"
+                      type="checkbox"
+                      name="calculator_extra"
+                      value="5000"
+                      data-calculator-extra
+                      data-extra-name="Подключение аналитики"
+                    />
+
+                    <span class="calculator-option__body">
+                      <span class="calculator-option__top">
+                        <strong>Подключение аналитики</strong>
+                        <span>+5 000 ₽</span>
+                      </span>
+
+                      <span class="calculator-option__description">
+                        Подготовка событий и базового отслеживания действий.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="calculator-option calculator-option--extra">
+                    <input
+                      class="calculator-option__input"
+                      type="checkbox"
+                      name="calculator_extra"
+                      value="9000"
+                      data-calculator-extra
+                      data-extra-name="Дополнительная интеграция"
+                    />
+
+                    <span class="calculator-option__body">
+                      <span class="calculator-option__top">
+                        <strong>Дополнительная интеграция</strong>
+                        <span>+9 000 ₽</span>
+                      </span>
+
+                      <span class="calculator-option__description">
+                        Подключение внешнего сервиса, виджета или уведомлений.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="calculator-option calculator-option--extra">
+                    <input
+                      class="calculator-option__input"
+                      type="checkbox"
+                      name="calculator_extra"
+                      value="15000"
+                      data-calculator-extra
+                      data-extra-name="Срочный запуск"
+                    />
+
+                    <span class="calculator-option__body">
+                      <span class="calculator-option__top">
+                        <strong>Срочный запуск</strong>
+                        <span>+15 000 ₽</span>
+                      </span>
+
+                      <span class="calculator-option__description">
+                        Приоритетная работа и сокращённый срок подготовки проекта.
+                      </span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+
+            <aside class="calculator-result" aria-labelledby="calculatorResultTitle">
+              <p class="calculator-result__kicker">Предварительный расчёт</p>
+
+              <h3 id="calculatorResultTitle">Стоимость проекта</h3>
+
+              <output
+                class="calculator-result__total"
+                data-calculator-total
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                45 000 ₽
+              </output>
+
+              <div class="calculator-result__summary">
+                <p>В расчёт входит:</p>
+
+                <ul data-calculator-summary>
+                  <li>
+                    <span>Тариф «Бизнес»</span>
+                    <strong>45 000 ₽</strong>
+                  </li>
+                </ul>
+              </div>
+
+              <p
+                class="visually-hidden"
+                data-calculator-status
+                aria-live="polite"
+                aria-atomic="true"
+              ></p>
+
+              <div class="calculator-result__actions">
+                <a class="landing-button" href="#contacts"> Оставить заявку </a>
+
+                <button class="calculator-reset" type="reset" data-calculator-reset>
+                  Сбросить расчёт
+                </button>
+              </div>
+
+              <p class="calculator-result__note">
+                Расчёт носит предварительный характер и не является публичной офертой. Точная
+                стоимость зависит от задачи, контента и сроков.
+              </p>
+            </aside>
+          </form>
+        </div>
+      </section>
+
       <section class="landing-section landing-section--steps" id="steps">
         <div class="landing-container">
           <p class="landing-label">Этапы</p>
@@ -628,8 +923,8 @@
               >
                 <div class="faq-answer__inner">
                   <p>
-                    Работают адаптивная верстка, мобильное меню, кнопка возврата наверх, клиентская
-                    валидация и отправка формы через Formspree.
+                    Работают адаптивная верстка, мобильное меню, тарифы, калькулятор стоимости,
+                    клиентская валидация и отправка формы через Formspree.
                   </p>
                 </div>
               </div>
@@ -661,8 +956,8 @@
               >
                 <div class="faq-answer__inner">
                   <p>
-                    Отзывы, тарифы, галерею работ, калькулятор стоимости, аналитику, уведомления и
-                    дополнительные интеграции.
+                    Отзывы клиентов, галерею работ, личный кабинет, расширенную аналитику,
+                    уведомления и дополнительные интеграции.
                   </p>
                 </div>
               </div>
@@ -804,6 +1099,7 @@
             <a href="#service">Услуга</a>
             <a href="#benefits">Преимущества</a>
             <a href="#pricing">Тарифы</a>
+            <a href="#calculator">Калькулятор</a>
             <a href="#steps">Этапы</a>
             <a href="#contacts">Заявка</a>
             <a href="index.html">Портфолио</a>

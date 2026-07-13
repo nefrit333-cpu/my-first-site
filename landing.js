@@ -408,6 +408,104 @@ faqLists.forEach((faqList) => {
 });
 
 const calculator = document.querySelector("[data-calculator]");
+const landingForm = document.querySelector("[data-landing-form]");
+const pricingSelectButtons = Array.from(document.querySelectorAll("[data-pricing-select]"));
+const calculatorApplyButton = document.querySelector("[data-calculator-apply]");
+
+const currencyFormatter = new Intl.NumberFormat("ru-RU");
+const formatCurrency = (value) => `${currencyFormatter.format(Number(value) || 0)} ₽`;
+
+const selectedConfiguration = landingForm?.querySelector("[data-selected-configuration]");
+const configurationPlan = landingForm?.querySelector("[data-configuration-plan]");
+const configurationExtras = landingForm?.querySelector("[data-configuration-extras]");
+const configurationPrice = landingForm?.querySelector("[data-configuration-price]");
+const configurationStatus = landingForm?.querySelector("[data-configuration-status]");
+const clearConfigurationButton = landingForm?.querySelector("[data-clear-configuration]");
+const selectedPlanField = landingForm?.querySelector("[data-selected-plan-field]");
+const selectedExtrasField = landingForm?.querySelector("[data-selected-extras-field]");
+const estimatedPriceField = landingForm?.querySelector("[data-estimated-price-field]");
+
+let activeFormConfiguration = null;
+
+const getExtrasText = (extras) =>
+  extras.length > 0 ? extras.map((extra) => extra.name).join(", ") : "Без дополнительных услуг";
+
+const applyConfigurationToForm = (configuration, { announce = true } = {}) => {
+  if (
+    !configuration ||
+    !selectedConfiguration ||
+    !configurationPlan ||
+    !configurationExtras ||
+    !configurationPrice ||
+    !selectedPlanField ||
+    !selectedExtrasField ||
+    !estimatedPriceField
+  ) {
+    return;
+  }
+
+  const extrasText = getExtrasText(configuration.extras);
+  const formattedPrice = formatCurrency(configuration.totalPrice);
+
+  activeFormConfiguration = configuration;
+
+  selectedPlanField.value = configuration.planName;
+  selectedExtrasField.value = extrasText;
+  estimatedPriceField.value = formattedPrice;
+
+  configurationPlan.textContent = configuration.planName;
+  configurationExtras.textContent = extrasText;
+  configurationPrice.textContent = formattedPrice;
+
+  selectedConfiguration.hidden = false;
+
+  if (announce && configurationStatus) {
+    configurationStatus.textContent =
+      `В заявку добавлен тариф «${configuration.planName}». ` +
+      `Дополнительные услуги: ${extrasText}. ` +
+      `Предварительная стоимость ${formattedPrice}.`;
+  }
+};
+
+const clearFormConfiguration = ({ announce = true } = {}) => {
+  activeFormConfiguration = null;
+
+  if (selectedPlanField) {
+    selectedPlanField.value = "";
+  }
+
+  if (selectedExtrasField) {
+    selectedExtrasField.value = "";
+  }
+
+  if (estimatedPriceField) {
+    estimatedPriceField.value = "";
+  }
+
+  if (configurationPlan) {
+    configurationPlan.textContent = "";
+  }
+
+  if (configurationExtras) {
+    configurationExtras.textContent = "";
+  }
+
+  if (configurationPrice) {
+    configurationPrice.textContent = "";
+  }
+
+  if (selectedConfiguration) {
+    selectedConfiguration.hidden = true;
+  }
+
+  if (announce && configurationStatus) {
+    configurationStatus.textContent = "Выбранная конфигурация удалена из заявки.";
+  }
+};
+
+let getCalculatorConfiguration = () => null;
+let updateCalculator = () => null;
+let selectCalculatorPlan = () => null;
 
 if (calculator) {
   const planInputs = Array.from(calculator.querySelectorAll("[data-calculator-plan]"));
@@ -415,10 +513,6 @@ if (calculator) {
   const totalOutput = calculator.querySelector("[data-calculator-total]");
   const summaryList = calculator.querySelector("[data-calculator-summary]");
   const calculatorStatus = calculator.querySelector("[data-calculator-status]");
-
-  const currencyFormatter = new Intl.NumberFormat("ru-RU");
-
-  const formatCurrency = (value) => `${currencyFormatter.format(Number(value) || 0)} ₽`;
 
   const createSummaryItem = (name, price) => {
     const item = document.createElement("li");
@@ -437,48 +531,91 @@ if (calculator) {
 
   const getSelectedExtras = () => extraInputs.filter((input) => input.checked);
 
-  const updateCalculator = ({ announce = true, reset = false } = {}) => {
+  getCalculatorConfiguration = () => {
     const selectedPlan = getSelectedPlan();
 
-    if (!selectedPlan || !totalOutput || !summaryList) {
-      return;
+    if (!selectedPlan) {
+      return null;
     }
 
-    const selectedExtras = getSelectedExtras();
+    const extras = getSelectedExtras().map((input) => ({
+      name: input.dataset.extraName || "Дополнительная функция",
+      price: Number(input.value)
+    }));
     const basePrice = Number(selectedPlan.value);
-    const extrasPrice = selectedExtras.reduce((total, input) => total + Number(input.value), 0);
-    const totalPrice = basePrice + extrasPrice;
-    const planName = selectedPlan.dataset.planName || "Выбранный тариф";
+    const extrasPrice = extras.reduce((total, extra) => total + extra.price, 0);
 
-    totalOutput.value = String(totalPrice);
-    totalOutput.textContent = formatCurrency(totalPrice);
+    return {
+      planName: selectedPlan.dataset.planName || "Выбранный тариф",
+      basePrice,
+      extras,
+      totalPrice: basePrice + extrasPrice
+    };
+  };
+
+  updateCalculator = ({ announce = true, reset = false, syncForm = true } = {}) => {
+    const configuration = getCalculatorConfiguration();
+
+    if (!configuration || !totalOutput || !summaryList) {
+      return configuration;
+    }
+
+    totalOutput.value = String(configuration.totalPrice);
+    totalOutput.textContent = formatCurrency(configuration.totalPrice);
 
     const summaryItems = [
-      createSummaryItem(`Тариф «${planName}»`, basePrice),
-      ...selectedExtras.map((input) =>
-        createSummaryItem(input.dataset.extraName || "Дополнительная функция", Number(input.value))
-      )
+      createSummaryItem(`Тариф «${configuration.planName}»`, configuration.basePrice),
+      ...configuration.extras.map((extra) => createSummaryItem(extra.name, extra.price))
     ];
 
     summaryList.replaceChildren(...summaryItems);
 
-    if (!announce || !calculatorStatus) {
-      return;
+    if (syncForm && activeFormConfiguration) {
+      applyConfigurationToForm(configuration, {
+        announce: false
+      });
     }
 
-    const extrasCount = selectedExtras.length;
+    if (!announce || !calculatorStatus) {
+      return configuration;
+    }
+
+    const extrasCount = configuration.extras.length;
     const extrasText =
       extrasCount === 0
         ? "Дополнительные функции не выбраны."
         : `Выбрано дополнительных функций: ${extrasCount}.`;
 
     calculatorStatus.textContent = reset
-      ? `Расчёт сброшен. Выбран тариф «${planName}». Итоговая стоимость ${formatCurrency(
-          totalPrice
+      ? `Расчёт сброшен. Выбран тариф «${configuration.planName}». Итоговая стоимость ${formatCurrency(
+          configuration.totalPrice
         )}.`
-      : `Выбран тариф «${planName}». ${extrasText} Итоговая стоимость ${formatCurrency(
-          totalPrice
+      : `Выбран тариф «${configuration.planName}». ${extrasText} Итоговая стоимость ${formatCurrency(
+          configuration.totalPrice
         )}.`;
+
+    return configuration;
+  };
+
+  selectCalculatorPlan = (planName, { clearExtras = false, announce = true } = {}) => {
+    const matchingPlan = planInputs.find((input) => input.dataset.planName === planName);
+
+    if (!matchingPlan) {
+      return null;
+    }
+
+    matchingPlan.checked = true;
+
+    if (clearExtras) {
+      extraInputs.forEach((input) => {
+        input.checked = false;
+      });
+    }
+
+    return updateCalculator({
+      announce,
+      syncForm: false
+    });
   };
 
   calculator.addEventListener("change", (event) => {
@@ -497,11 +634,47 @@ if (calculator) {
   });
 
   updateCalculator({
-    announce: false
+    announce: false,
+    syncForm: false
   });
 }
 
-const landingForm = document.querySelector("[data-landing-form]");
+pricingSelectButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const planName = button.dataset.plan;
+    const configuration = selectCalculatorPlan(planName, {
+      clearExtras: true,
+      announce: true
+    });
+
+    if (configuration) {
+      applyConfigurationToForm(configuration);
+    }
+  });
+});
+
+if (calculatorApplyButton) {
+  calculatorApplyButton.addEventListener("click", () => {
+    const configuration = updateCalculator({
+      announce: false,
+      syncForm: false
+    });
+
+    if (configuration) {
+      applyConfigurationToForm(configuration);
+    }
+  });
+}
+
+if (clearConfigurationButton) {
+  clearConfigurationButton.addEventListener("click", () => {
+    clearFormConfiguration();
+
+    window.requestAnimationFrame(() => {
+      clearConfigurationButton.blur();
+    });
+  });
+}
 
 if (landingForm) {
   const formStatus = landingForm.querySelector("[data-form-status]");
@@ -635,6 +808,9 @@ if (landingForm) {
       }
 
       landingForm.reset();
+      clearFormConfiguration({
+        announce: false
+      });
       clearAllErrors();
 
       setStatus(

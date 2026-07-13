@@ -231,7 +231,9 @@ if (backToTopButton) {
 syncNavigationAccessibility();
 updateLandingInterface();
 
-const observedSections = document.querySelectorAll("#service, #benefits, #steps, #contacts");
+const observedSections = document.querySelectorAll(
+  "#service, #benefits, #pricing, #calculator, #steps, #contacts"
+);
 
 const navigationSectionLinks = landingNavigation
   ? Array.from(landingNavigation.querySelectorAll('a[href^="#"]'))
@@ -404,6 +406,100 @@ faqLists.forEach((faqList) => {
     passive: true
   });
 });
+
+const calculator = document.querySelector("[data-calculator]");
+
+if (calculator) {
+  const planInputs = Array.from(calculator.querySelectorAll("[data-calculator-plan]"));
+  const extraInputs = Array.from(calculator.querySelectorAll("[data-calculator-extra]"));
+  const totalOutput = calculator.querySelector("[data-calculator-total]");
+  const summaryList = calculator.querySelector("[data-calculator-summary]");
+  const calculatorStatus = calculator.querySelector("[data-calculator-status]");
+
+  const currencyFormatter = new Intl.NumberFormat("ru-RU");
+
+  const formatCurrency = (value) => `${currencyFormatter.format(Number(value) || 0)} ₽`;
+
+  const createSummaryItem = (name, price) => {
+    const item = document.createElement("li");
+    const nameElement = document.createElement("span");
+    const priceElement = document.createElement("strong");
+
+    nameElement.textContent = name;
+    priceElement.textContent = formatCurrency(price);
+
+    item.append(nameElement, priceElement);
+
+    return item;
+  };
+
+  const getSelectedPlan = () => planInputs.find((input) => input.checked) || planInputs[0];
+
+  const getSelectedExtras = () => extraInputs.filter((input) => input.checked);
+
+  const updateCalculator = ({ announce = true, reset = false } = {}) => {
+    const selectedPlan = getSelectedPlan();
+
+    if (!selectedPlan || !totalOutput || !summaryList) {
+      return;
+    }
+
+    const selectedExtras = getSelectedExtras();
+    const basePrice = Number(selectedPlan.value);
+    const extrasPrice = selectedExtras.reduce((total, input) => total + Number(input.value), 0);
+    const totalPrice = basePrice + extrasPrice;
+    const planName = selectedPlan.dataset.planName || "Выбранный тариф";
+
+    totalOutput.value = String(totalPrice);
+    totalOutput.textContent = formatCurrency(totalPrice);
+
+    const summaryItems = [
+      createSummaryItem(`Тариф «${planName}»`, basePrice),
+      ...selectedExtras.map((input) =>
+        createSummaryItem(input.dataset.extraName || "Дополнительная функция", Number(input.value))
+      )
+    ];
+
+    summaryList.replaceChildren(...summaryItems);
+
+    if (!announce || !calculatorStatus) {
+      return;
+    }
+
+    const extrasCount = selectedExtras.length;
+    const extrasText =
+      extrasCount === 0
+        ? "Дополнительные функции не выбраны."
+        : `Выбрано дополнительных функций: ${extrasCount}.`;
+
+    calculatorStatus.textContent = reset
+      ? `Расчёт сброшен. Выбран тариф «${planName}». Итоговая стоимость ${formatCurrency(
+          totalPrice
+        )}.`
+      : `Выбран тариф «${planName}». ${extrasText} Итоговая стоимость ${formatCurrency(
+          totalPrice
+        )}.`;
+  };
+
+  calculator.addEventListener("change", (event) => {
+    if (event.target.matches("[data-calculator-plan], [data-calculator-extra]")) {
+      updateCalculator();
+    }
+  });
+
+  calculator.addEventListener("reset", () => {
+    window.requestAnimationFrame(() => {
+      updateCalculator({
+        announce: true,
+        reset: true
+      });
+    });
+  });
+
+  updateCalculator({
+    announce: false
+  });
+}
 
 const landingForm = document.querySelector("[data-landing-form]");
 

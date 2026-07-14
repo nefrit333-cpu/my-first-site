@@ -232,7 +232,7 @@ syncNavigationAccessibility();
 updateLandingInterface();
 
 const observedSections = document.querySelectorAll(
-  "#service, #benefits, #pricing, #calculator, #steps, #contacts"
+  "#service, #benefits, #pricing, #calculator, #cases, #steps, #contacts"
 );
 
 const navigationSectionLinks = landingNavigation

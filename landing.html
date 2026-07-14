@@ -9,7 +9,7 @@
 
     <meta
       name="description"
-      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает оффер, преимущества, тарифы, калькулятор стоимости, этапы работы, FAQ, форму заявки и адаптивную верстку."
+      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает оффер, преимущества, тарифы, калькулятор стоимости, кейсы, этапы работы, FAQ, форму заявки и адаптивную верстку."
     />
 
     <meta
@@ -29,7 +29,7 @@
     <meta property="og:title" content="Сайт для малого бизнеса — учебный лендинг" />
     <meta
       property="og:description"
-      content="Учебный frontend-лендинг услуги для малого бизнеса: оффер, преимущества, тарифы, калькулятор стоимости, FAQ, форма заявки и адаптивная верстка."
+      content="Учебный frontend-лендинг услуги для малого бизнеса: оффер, преимущества, тарифы, калькулятор стоимости, кейсы, FAQ, форма заявки и адаптивная верстка."
     />
     <meta property="og:url" content="https://nefrit333-cpu.github.io/my-first-site/landing.html" />
     <meta
@@ -45,7 +45,7 @@
     <meta name="twitter:title" content="Сайт для малого бизнеса — учебный лендинг" />
     <meta
       name="twitter:description"
-      content="Учебный frontend-лендинг услуги с тарифами, калькулятором стоимости, адаптивной версткой и формой заявки."
+      content="Учебный frontend-лендинг услуги с тарифами, калькулятором стоимости, кейсами, адаптивной версткой и формой заявки."
     />
     <meta
       name="twitter:image"
@@ -57,6 +57,7 @@
     <link rel="stylesheet" href="landing.css" />
     <link rel="stylesheet" href="pricing.css" />
     <link rel="stylesheet" href="calculator.css" />
+    <link rel="stylesheet" href="cases.css" />
     <script src="landing.js" defer></script>
   </head>
 
@@ -86,6 +87,7 @@
           <a href="#benefits">Преимущества</a>
           <a href="#pricing">Тарифы</a>
           <a href="#calculator">Калькулятор</a>
+          <a href="#cases">Кейсы</a>
           <a href="#steps">Этапы</a>
           <a href="#contacts">Заявка</a>
           <a class="landing-nav__portfolio" href="index.html">Портфолио</a>
@@ -158,7 +160,8 @@
 
             <p class="landing-hero__text">
               Это учебный лендинг услуги. Он показывает, как можно собрать коммерческую страницу: с
-              понятным оффером, преимуществами, тарифами, калькулятором, FAQ и формой заявки.
+              понятным оффером, преимуществами, тарифами, калькулятором, кейсами, FAQ и формой
+              заявки.
             </p>
 
             <div class="landing-hero__actions">
@@ -175,6 +178,7 @@
               <span>Адаптив</span>
               <span>Тарифы</span>
               <span>Калькулятор</span>
+              <span>Кейсы</span>
               <span>Форма</span>
             </div>
           </div>
@@ -202,7 +206,7 @@
 
               <li>
                 <span>✓</span>
-                Тарифы, калькулятор и форма
+                Кейсы, калькулятор и форма
               </li>
             </ul>
           </aside>
@@ -751,6 +755,297 @@
         </div>
       </section>
 
+      <section
+        class="landing-section landing-section--cases"
+        id="cases"
+        aria-labelledby="casesTitle"
+      >
+        <div class="landing-container">
+          <div class="cases-heading">
+            <div>
+              <p class="landing-label">Кейсы</p>
+
+              <h2 class="landing-title" id="casesTitle">
+                Как задача бизнеса превращается в понятный цифровой продукт
+              </h2>
+            </div>
+
+            <p class="landing-section__text cases-heading__text">
+              Три учебных сценария показывают путь от исходной задачи до готовой структуры,
+              адаптивной верстки и измеримого результата.
+            </p>
+          </div>
+
+          <div class="cases-grid">
+            <article
+              class="case-card case-card--studio"
+              aria-labelledby="caseStudioTitle"
+              data-case-card
+              data-case-title="Лендинг для локальной студии"
+            >
+              <div class="case-card__top">
+                <span class="case-card__number" aria-hidden="true">01</span>
+                <span class="case-card__category">Локальный бизнес</span>
+              </div>
+
+              <h3 id="caseStudioTitle">Лендинг для локальной студии</h3>
+
+              <p class="case-card__lead">
+                Страница для небольшой интерьерной студии, которой важно показать подход, услуги и
+                быстро привести посетителя к консультации.
+              </p>
+
+              <div class="case-card__story">
+                <section class="case-card__block">
+                  <h4>Задача</h4>
+                  <p>
+                    Объединить разрозненную информацию об услугах и объяснить ценность работы студии
+                    за несколько минут просмотра.
+                  </p>
+                </section>
+
+                <section class="case-card__block">
+                  <h4>Решение</h4>
+                  <p>
+                    Собрать спокойный визуальный сценарий с портфолио-направлениями, этапами,
+                    тарифами и короткой формой консультации.
+                  </p>
+                </section>
+              </div>
+
+              <div class="case-card__work">
+                <h4>Основные работы</h4>
+
+                <ul>
+                  <li>структура из восьми смысловых экранов</li>
+                  <li>адаптивная сетка услуг и преимуществ</li>
+                  <li>CTA после ключевых блоков</li>
+                </ul>
+              </div>
+
+              <div class="case-card__result">
+                <h4>Результат</h4>
+                <p>
+                  Пользователь понимает специализацию студии, видит процесс работы и может перейти к
+                  заявке без поиска контактов.
+                </p>
+              </div>
+
+              <dl class="case-card__metrics">
+                <div>
+                  <dt>Срок запуска</dt>
+                  <dd>12 дней</dd>
+                </div>
+
+                <div>
+                  <dt>Экранов</dt>
+                  <dd>8</dd>
+                </div>
+
+                <div>
+                  <dt>Рост заявок*</dt>
+                  <dd>+27%</dd>
+                </div>
+              </dl>
+
+              <div class="case-card__footer">
+                <span>Учебный пример</span>
+
+                <a
+                  class="case-card__link"
+                  href="#contacts"
+                  aria-label="Обсудить проект, похожий на лендинг для локальной студии"
+                >
+                  Обсудить похожий проект
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+
+            <article
+              class="case-card case-card--expert"
+              aria-labelledby="caseExpertTitle"
+              data-case-card
+              data-case-title="Сайт для частного эксперта"
+            >
+              <div class="case-card__top">
+                <span class="case-card__number" aria-hidden="true">02</span>
+                <span class="case-card__category">Экспертная услуга</span>
+              </div>
+
+              <h3 id="caseExpertTitle">Сайт для частного эксперта</h3>
+
+              <p class="case-card__lead">
+                Персональный сайт для консультанта, которому нужно представить метод работы,
+                продукты и собрать заявки на первую встречу.
+              </p>
+
+              <div class="case-card__story">
+                <section class="case-card__block">
+                  <h4>Задача</h4>
+                  <p>
+                    Убрать перегруженную подачу, выстроить доверие к специалисту и разделить
+                    несколько форматов консультаций.
+                  </p>
+                </section>
+
+                <section class="case-card__block">
+                  <h4>Решение</h4>
+                  <p>
+                    Создать персональную страницу с сильным оффером, авторским подходом,
+                    программами, ответами на вопросы и формой записи.
+                  </p>
+                </section>
+              </div>
+
+              <div class="case-card__work">
+                <h4>Основные работы</h4>
+
+                <ul>
+                  <li>сценарий от знакомства до записи</li>
+                  <li>карточки программ и форматов работы</li>
+                  <li>доступный FAQ с клавиатурным управлением</li>
+                </ul>
+              </div>
+
+              <div class="case-card__result">
+                <h4>Результат</h4>
+                <p>
+                  Посетитель быстрее выбирает подходящий формат, получает ответы на возражения и
+                  записывается на вводную консультацию.
+                </p>
+              </div>
+
+              <dl class="case-card__metrics">
+                <div>
+                  <dt>Срок запуска</dt>
+                  <dd>10 дней</dd>
+                </div>
+
+                <div>
+                  <dt>Экранов</dt>
+                  <dd>7</dd>
+                </div>
+
+                <div>
+                  <dt>Скорость*</dt>
+                  <dd>94 / 100</dd>
+                </div>
+              </dl>
+
+              <div class="case-card__footer">
+                <span>Учебный пример</span>
+
+                <a
+                  class="case-card__link"
+                  href="#contacts"
+                  aria-label="Обсудить проект, похожий на сайт для частного эксперта"
+                >
+                  Обсудить похожий проект
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+
+            <article
+              class="case-card case-card--service"
+              aria-labelledby="caseServiceTitle"
+              data-case-card
+              data-case-title="Страница для сервисной компании"
+            >
+              <div class="case-card__top">
+                <span class="case-card__number" aria-hidden="true">03</span>
+                <span class="case-card__category">Сервисная компания</span>
+              </div>
+
+              <h3 id="caseServiceTitle">Страница для сервисной компании</h3>
+
+              <p class="case-card__lead">
+                Коммерческая страница для команды по обслуживанию техники с несколькими услугами,
+                зонами выезда и разными сценариями обращения.
+              </p>
+
+              <div class="case-card__story">
+                <section class="case-card__block">
+                  <h4>Задача</h4>
+                  <p>
+                    Понятно разделить направления обслуживания, показать условия работы и сократить
+                    путь до заявки со смартфона.
+                  </p>
+                </section>
+
+                <section class="case-card__block">
+                  <h4>Решение</h4>
+                  <p>
+                    Построить модульную страницу с каталогом услуг, калькулятором, блоком доверия и
+                    формой с уже выбранной конфигурацией.
+                  </p>
+                </section>
+              </div>
+
+              <div class="case-card__work">
+                <h4>Основные работы</h4>
+
+                <ul>
+                  <li>структура для нескольких услуг</li>
+                  <li>калькулятор предварительной стоимости</li>
+                  <li>mobile-first сценарий обращения</li>
+                </ul>
+              </div>
+
+              <div class="case-card__result">
+                <h4>Результат</h4>
+                <p>
+                  Клиент выбирает услугу, видит предварительную стоимость и отправляет подробную
+                  заявку без повторного ввода параметров.
+                </p>
+              </div>
+
+              <dl class="case-card__metrics">
+                <div>
+                  <dt>Срок запуска</dt>
+                  <dd>16 дней</dd>
+                </div>
+
+                <div>
+                  <dt>Экранов</dt>
+                  <dd>10</dd>
+                </div>
+
+                <div>
+                  <dt>Рост заявок*</dt>
+                  <dd>+31%</dd>
+                </div>
+              </dl>
+
+              <div class="case-card__footer">
+                <span>Учебный пример</span>
+
+                <a
+                  class="case-card__link"
+                  href="#contacts"
+                  aria-label="Обсудить проект, похожий на страницу для сервисной компании"
+                >
+                  Обсудить похожий проект
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <div class="cases-note">
+            <p>
+              * Названия компаний, сроки и показатели приведены как демонстрационные данные учебного
+              проекта. Они показывают формат подачи кейса, а не реальные коммерческие результаты.
+            </p>
+
+            <a class="landing-button landing-button--secondary" href="#contacts">
+              Обсудить свой проект
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section class="landing-section landing-section--steps" id="steps">
         <div class="landing-container">
           <p class="landing-label">Этапы</p>
@@ -926,7 +1221,7 @@
                 <div class="faq-answer__inner">
                   <p>
                     Работают адаптивная верстка, мобильное меню, тарифы, калькулятор стоимости,
-                    перенос расчёта в заявку, клиентская валидация и отправка через Formspree.
+                    учебные кейсы, перенос расчёта в заявку, валидация и отправка через Formspree.
                   </p>
                 </div>
               </div>
@@ -958,8 +1253,8 @@
               >
                 <div class="faq-answer__inner">
                   <p>
-                    Отзывы клиентов, галерею работ, личный кабинет, расширенную аналитику,
-                    уведомления и дополнительные интеграции.
+                    Отзывы клиентов, подробные страницы проектов, личный кабинет, расширенную
+                    аналитику, уведомления и дополнительные интеграции.
                   </p>
                 </div>
               </div>
@@ -1150,6 +1445,7 @@
             <a href="#benefits">Преимущества</a>
             <a href="#pricing">Тарифы</a>
             <a href="#calculator">Калькулятор</a>
+            <a href="#cases">Кейсы</a>
             <a href="#steps">Этапы</a>
             <a href="#contacts">Заявка</a>
             <a href="index.html">Портфолио</a>

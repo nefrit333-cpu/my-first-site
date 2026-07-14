@@ -9,7 +9,7 @@
 
     <meta
       name="description"
-      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает оффер, преимущества, тарифы, калькулятор стоимости, кейсы, этапы работы, FAQ, форму заявки и адаптивную верстку."
+      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает оффер, преимущества, тарифы, калькулятор стоимости, кейсы, отзывы, FAQ, форму заявки и адаптивную верстку."
     />
 
     <meta
@@ -29,7 +29,7 @@
     <meta property="og:title" content="Сайт для малого бизнеса — учебный лендинг" />
     <meta
       property="og:description"
-      content="Учебный frontend-лендинг услуги для малого бизнеса: оффер, преимущества, тарифы, калькулятор стоимости, кейсы, FAQ, форма заявки и адаптивная верстка."
+      content="Учебный frontend-лендинг услуги для малого бизнеса: оффер, преимущества, тарифы, калькулятор стоимости, кейсы, отзывы, FAQ, форма заявки и адаптивная верстка."
     />
     <meta property="og:url" content="https://nefrit333-cpu.github.io/my-first-site/landing.html" />
     <meta
@@ -45,7 +45,7 @@
     <meta name="twitter:title" content="Сайт для малого бизнеса — учебный лендинг" />
     <meta
       name="twitter:description"
-      content="Учебный frontend-лендинг услуги с тарифами, калькулятором стоимости, кейсами, адаптивной версткой и формой заявки."
+      content="Учебный frontend-лендинг услуги с тарифами, калькулятором стоимости, кейсами, отзывами и формой заявки."
     />
     <meta
       name="twitter:image"
@@ -58,6 +58,7 @@
     <link rel="stylesheet" href="pricing.css" />
     <link rel="stylesheet" href="calculator.css" />
     <link rel="stylesheet" href="cases.css" />
+    <link rel="stylesheet" href="testimonials.css" />
     <script src="landing.js" defer></script>
   </head>
 
@@ -88,6 +89,7 @@
           <a href="#pricing">Тарифы</a>
           <a href="#calculator">Калькулятор</a>
           <a href="#cases">Кейсы</a>
+          <a href="#testimonials">Отзывы</a>
           <a href="#steps">Этапы</a>
           <a href="#contacts">Заявка</a>
           <a class="landing-nav__portfolio" href="index.html">Портфолио</a>
@@ -160,7 +162,7 @@
 
             <p class="landing-hero__text">
               Это учебный лендинг услуги. Он показывает, как можно собрать коммерческую страницу: с
-              понятным оффером, преимуществами, тарифами, калькулятором, кейсами, FAQ и формой
+              понятным оффером, преимуществами, тарифами, калькулятором, кейсами, отзывами и формой
               заявки.
             </p>
 
@@ -179,6 +181,7 @@
               <span>Тарифы</span>
               <span>Калькулятор</span>
               <span>Кейсы</span>
+              <span>Отзывы</span>
               <span>Форма</span>
             </div>
           </div>
@@ -206,7 +209,7 @@
 
               <li>
                 <span>✓</span>
-                Кейсы, калькулятор и форма
+                Кейсы, отзывы и форма
               </li>
             </ul>
           </aside>
@@ -1046,6 +1049,298 @@
         </div>
       </section>
 
+      <section
+        class="landing-section landing-section--testimonials"
+        id="testimonials"
+        aria-labelledby="testimonialsTitle"
+      >
+        <div class="landing-container">
+          <div class="testimonials-heading">
+            <div>
+              <p class="landing-label">Отзывы</p>
+
+              <h2 class="landing-title" id="testimonialsTitle">
+                Что ценят клиенты после запуска проекта
+              </h2>
+            </div>
+
+            <p class="landing-section__text testimonials-heading__text">
+              Три учебных отзыва продолжают истории из блока кейсов и показывают, как клиент может
+              описать результат совместной работы.
+            </p>
+          </div>
+
+          <div
+            class="testimonials"
+            aria-label="Учебные отзывы о проектах"
+            aria-roledescription="карусель"
+            data-testimonials
+          >
+            <div class="testimonials__stage" data-testimonials-stage>
+              <figure
+                class="testimonial-slide testimonial-slide--studio"
+                data-testimonial-slide
+                data-testimonial-title="Лендинг для локальной студии"
+                data-testimonial-author="Анна Морозова"
+              >
+                <div class="testimonial-slide__quote">
+                  <span class="testimonial-slide__mark" aria-hidden="true">“</span>
+
+                  <p class="testimonial-slide__eyebrow">Отзыв о первом кейсе</p>
+
+                  <blockquote>
+                    До запуска информация о студии была разбросана по социальным сетям. На новой
+                    странице клиент сразу понимает наш стиль, видит этапы работы и без лишних
+                    вопросов переходит к консультации. Особенно понравилось, что сайт выглядит
+                    спокойно и дорого, но остаётся простым для посетителя.
+                  </blockquote>
+
+                  <div class="testimonial-slide__rating" aria-label="Оценка: 5 из 5">
+                    <span aria-hidden="true">★★★★★</span>
+                    <strong>5 из 5</strong>
+                  </div>
+                </div>
+
+                <figcaption class="testimonial-slide__author">
+                  <div class="testimonial-author">
+                    <span class="testimonial-author__avatar" aria-hidden="true">АМ</span>
+
+                    <div>
+                      <strong>Анна Морозова</strong>
+                      <span>Владелица интерьерной студии</span>
+                    </div>
+                  </div>
+
+                  <dl class="testimonial-meta">
+                    <div>
+                      <dt>Тип проекта</dt>
+                      <dd>Лендинг студии</dd>
+                    </div>
+
+                    <div>
+                      <dt>Учебный результат</dt>
+                      <dd>+27% заявок</dd>
+                    </div>
+
+                    <div>
+                      <dt>Главная ценность</dt>
+                      <dd>Понятная подача</dd>
+                    </div>
+                  </dl>
+
+                  <div class="testimonial-result">
+                    <span>После запуска</span>
+                    <strong>Единая точка презентации и записи на консультацию</strong>
+                  </div>
+
+                  <p class="testimonial-slide__disclaimer">Демонстрационный учебный отзыв</p>
+                </figcaption>
+              </figure>
+
+              <figure
+                class="testimonial-slide testimonial-slide--expert"
+                data-testimonial-slide
+                data-testimonial-title="Сайт для частного эксперта"
+                data-testimonial-author="Михаил Соколов"
+              >
+                <div class="testimonial-slide__quote">
+                  <span class="testimonial-slide__mark" aria-hidden="true">“</span>
+
+                  <p class="testimonial-slide__eyebrow">Отзыв о втором кейсе</p>
+
+                  <blockquote>
+                    Раньше мне приходилось отдельно объяснять программы, формат работы и стоимость.
+                    Теперь сайт делает большую часть этой работы заранее. Люди приходят на встречу
+                    подготовленными и уже понимают, какая консультация им подходит. Страница точно
+                    передаёт мой подход и не выглядит как типовой шаблон.
+                  </blockquote>
+
+                  <div class="testimonial-slide__rating" aria-label="Оценка: 5 из 5">
+                    <span aria-hidden="true">★★★★★</span>
+                    <strong>5 из 5</strong>
+                  </div>
+                </div>
+
+                <figcaption class="testimonial-slide__author">
+                  <div class="testimonial-author">
+                    <span class="testimonial-author__avatar" aria-hidden="true">МС</span>
+
+                    <div>
+                      <strong>Михаил Соколов</strong>
+                      <span>Консультант по развитию бизнеса</span>
+                    </div>
+                  </div>
+
+                  <dl class="testimonial-meta">
+                    <div>
+                      <dt>Тип проекта</dt>
+                      <dd>Сайт эксперта</dd>
+                    </div>
+
+                    <div>
+                      <dt>Учебный результат</dt>
+                      <dd>94 / 100</dd>
+                    </div>
+
+                    <div>
+                      <dt>Главная ценность</dt>
+                      <dd>Точная структура</dd>
+                    </div>
+                  </dl>
+
+                  <div class="testimonial-result">
+                    <span>После запуска</span>
+                    <strong>Клиенты заранее выбирают подходящий формат консультации</strong>
+                  </div>
+
+                  <p class="testimonial-slide__disclaimer">Демонстрационный учебный отзыв</p>
+                </figcaption>
+              </figure>
+
+              <figure
+                class="testimonial-slide testimonial-slide--service"
+                data-testimonial-slide
+                data-testimonial-title="Страница для сервисной компании"
+                data-testimonial-author="Илья Воронцов"
+              >
+                <div class="testimonial-slide__quote">
+                  <span class="testimonial-slide__mark" aria-hidden="true">“</span>
+
+                  <p class="testimonial-slide__eyebrow">Отзыв о третьем кейсе</p>
+
+                  <blockquote>
+                    Для нас было важно сократить путь от вопроса клиента до подробной заявки.
+                    Калькулятор и форма решили эту задачу: менеджер сразу получает выбранную услугу
+                    и предварительный расчёт. На телефоне всё работает так же понятно, как на
+                    компьютере, а сама страница выглядит заметно сильнее прежней.
+                  </blockquote>
+
+                  <div class="testimonial-slide__rating" aria-label="Оценка: 5 из 5">
+                    <span aria-hidden="true">★★★★★</span>
+                    <strong>5 из 5</strong>
+                  </div>
+                </div>
+
+                <figcaption class="testimonial-slide__author">
+                  <div class="testimonial-author">
+                    <span class="testimonial-author__avatar" aria-hidden="true">ИВ</span>
+
+                    <div>
+                      <strong>Илья Воронцов</strong>
+                      <span>Руководитель сервисной компании</span>
+                    </div>
+                  </div>
+
+                  <dl class="testimonial-meta">
+                    <div>
+                      <dt>Тип проекта</dt>
+                      <dd>Сервисная страница</dd>
+                    </div>
+
+                    <div>
+                      <dt>Учебный результат</dt>
+                      <dd>+31% заявок</dd>
+                    </div>
+
+                    <div>
+                      <dt>Главная ценность</dt>
+                      <dd>Быстрый сценарий</dd>
+                    </div>
+                  </dl>
+
+                  <div class="testimonial-result">
+                    <span>После запуска</span>
+                    <strong>Подробная заявка формируется без повторного ввода параметров</strong>
+                  </div>
+
+                  <p class="testimonial-slide__disclaimer">Демонстрационный учебный отзыв</p>
+                </figcaption>
+              </figure>
+            </div>
+
+            <div
+              class="testimonials__controls"
+              aria-label="Управление отзывами"
+              data-testimonials-controls
+            >
+              <button
+                class="testimonials-arrow"
+                type="button"
+                aria-label="Показать предыдущий отзыв"
+                data-testimonials-prev
+              >
+                <span aria-hidden="true">←</span>
+              </button>
+
+              <div class="testimonials-progress">
+                <p class="testimonials-counter" aria-hidden="true">
+                  <span data-testimonials-current>1</span>
+                  <span>/</span>
+                  <span>3</span>
+                </p>
+
+                <div
+                  class="testimonials-dots"
+                  role="group"
+                  aria-label="Выбор отзыва"
+                  data-testimonials-dots
+                >
+                  <button
+                    type="button"
+                    aria-label="Показать отзыв 1: Лендинг для локальной студии"
+                    aria-current="true"
+                    aria-pressed="true"
+                    data-testimonials-dot
+                    data-slide-index="0"
+                  ></button>
+
+                  <button
+                    type="button"
+                    aria-label="Показать отзыв 2: Сайт для частного эксперта"
+                    aria-pressed="false"
+                    data-testimonials-dot
+                    data-slide-index="1"
+                  ></button>
+
+                  <button
+                    type="button"
+                    aria-label="Показать отзыв 3: Страница для сервисной компании"
+                    aria-pressed="false"
+                    data-testimonials-dot
+                    data-slide-index="2"
+                  ></button>
+                </div>
+              </div>
+
+              <button
+                class="testimonials-arrow"
+                type="button"
+                aria-label="Показать следующий отзыв"
+                data-testimonials-next
+              >
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="testimonials-note">
+            <p>
+              Имена, должности, тексты и показатели созданы для учебного проекта. Они демонстрируют
+              структуру блока отзывов и не являются реальными рекомендациями клиентов.
+            </p>
+
+            <a class="landing-button" href="#contacts">Обсудить свой проект</a>
+          </div>
+
+          <p
+            class="visually-hidden"
+            aria-live="polite"
+            aria-atomic="true"
+            data-testimonials-status
+          ></p>
+        </div>
+      </section>
+
       <section class="landing-section landing-section--steps" id="steps">
         <div class="landing-container">
           <p class="landing-label">Этапы</p>
@@ -1221,7 +1516,7 @@
                 <div class="faq-answer__inner">
                   <p>
                     Работают адаптивная верстка, мобильное меню, тарифы, калькулятор стоимости,
-                    учебные кейсы, перенос расчёта в заявку, валидация и отправка через Formspree.
+                    кейсы, отзывы, перенос расчёта в заявку, валидация и отправка через Formspree.
                   </p>
                 </div>
               </div>
@@ -1253,8 +1548,8 @@
               >
                 <div class="faq-answer__inner">
                   <p>
-                    Отзывы клиентов, подробные страницы проектов, личный кабинет, расширенную
-                    аналитику, уведомления и дополнительные интеграции.
+                    Подробные страницы проектов, личный кабинет, расширенную аналитику, уведомления
+                    и дополнительные интеграции.
                   </p>
                 </div>
               </div>
@@ -1446,6 +1741,7 @@
             <a href="#pricing">Тарифы</a>
             <a href="#calculator">Калькулятор</a>
             <a href="#cases">Кейсы</a>
+            <a href="#testimonials">Отзывы</a>
             <a href="#steps">Этапы</a>
             <a href="#contacts">Заявка</a>
             <a href="index.html">Портфолио</a>

@@ -232,7 +232,7 @@ syncNavigationAccessibility();
 updateLandingInterface();
 
 const observedSections = document.querySelectorAll(
-  "#service, #benefits, #pricing, #calculator, #cases, #steps, #contacts"
+  "#service, #benefits, #pricing, #calculator, #cases, #testimonials, #steps, #contacts"
 );
 
 const navigationSectionLinks = landingNavigation
@@ -406,6 +406,143 @@ faqLists.forEach((faqList) => {
     passive: true
   });
 });
+
+const testimonials = document.querySelector("[data-testimonials]");
+
+if (testimonials) {
+  const slides = Array.from(testimonials.querySelectorAll("[data-testimonial-slide]"));
+  const previousButton = testimonials.querySelector("[data-testimonials-prev]");
+  const nextButton = testimonials.querySelector("[data-testimonials-next]");
+  const controls = testimonials.querySelector("[data-testimonials-controls]");
+  const dots = Array.from(testimonials.querySelectorAll("[data-testimonials-dot]"));
+  const currentOutput = testimonials.querySelector("[data-testimonials-current]");
+  const status = document.querySelector("[data-testimonials-status]");
+  let currentSlideIndex = 0;
+
+  const normalizeSlideIndex = (index) => {
+    if (slides.length === 0) {
+      return 0;
+    }
+
+    return (index + slides.length) % slides.length;
+  };
+
+  const setSlideAccessibility = (slide, isActive) => {
+    slide.classList.toggle("is-active", isActive);
+    slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+
+    if ("inert" in slide) {
+      slide.inert = !isActive;
+    }
+  };
+
+  const showTestimonial = (
+    requestedIndex,
+    { announce = true, moveIndicatorFocus = false } = {}
+  ) => {
+    if (slides.length === 0) {
+      return;
+    }
+
+    currentSlideIndex = normalizeSlideIndex(requestedIndex);
+
+    slides.forEach((slide, index) => {
+      setSlideAccessibility(slide, index === currentSlideIndex);
+    });
+
+    dots.forEach((dot, index) => {
+      const isCurrent = index === currentSlideIndex;
+
+      dot.setAttribute("aria-pressed", isCurrent ? "true" : "false");
+      dot.tabIndex = isCurrent ? 0 : -1;
+
+      if (isCurrent) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
+    });
+
+    if (currentOutput) {
+      currentOutput.textContent = String(currentSlideIndex + 1);
+    }
+
+    const activeSlide = slides[currentSlideIndex];
+    const slideTitle = activeSlide.dataset.testimonialTitle || "Учебный проект";
+    const slideAuthor = activeSlide.dataset.testimonialAuthor || "Автор отзыва";
+
+    if (announce && status) {
+      status.textContent =
+        `Показан отзыв ${currentSlideIndex + 1} из ${slides.length}. ` +
+        `${slideAuthor}, проект «${slideTitle}».`;
+    }
+
+    if (moveIndicatorFocus && dots[currentSlideIndex]) {
+      dots[currentSlideIndex].focus();
+    }
+  };
+
+  testimonials.classList.add("is-enhanced");
+
+  slides.forEach((slide) => {
+    slide.setAttribute("aria-roledescription", "слайд");
+  });
+
+  if (previousButton) {
+    previousButton.addEventListener("click", () => {
+      showTestimonial(currentSlideIndex - 1);
+    });
+  }
+
+  if (nextButton) {
+    nextButton.addEventListener("click", () => {
+      showTestimonial(currentSlideIndex + 1);
+    });
+  }
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      showTestimonial(Number(dot.dataset.slideIndex));
+    });
+  });
+
+  if (controls) {
+    controls.addEventListener("keydown", (event) => {
+      const isIndicatorFocused = dots.includes(document.activeElement);
+      let nextIndex = null;
+
+      if (event.key === "ArrowLeft") {
+        nextIndex = currentSlideIndex - 1;
+      }
+
+      if (event.key === "ArrowRight") {
+        nextIndex = currentSlideIndex + 1;
+      }
+
+      if (event.key === "Home") {
+        nextIndex = 0;
+      }
+
+      if (event.key === "End") {
+        nextIndex = slides.length - 1;
+      }
+
+      if (nextIndex === null) {
+        return;
+      }
+
+      event.preventDefault();
+
+      showTestimonial(nextIndex, {
+        moveIndicatorFocus: isIndicatorFocused
+      });
+    });
+  }
+
+  showTestimonial(0, {
+    announce: false
+  });
+}
 
 const calculator = document.querySelector("[data-calculator]");
 const landingForm = document.querySelector("[data-landing-form]");

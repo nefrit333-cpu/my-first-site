@@ -408,6 +408,7 @@ faqLists.forEach((faqList) => {
 });
 
 const testimonials = document.querySelector("[data-testimonials]");
+let showTestimonial = () => {};
 
 if (testimonials) {
   const slides = Array.from(testimonials.querySelectorAll("[data-testimonial-slide]"));
@@ -436,10 +437,7 @@ if (testimonials) {
     }
   };
 
-  const showTestimonial = (
-    requestedIndex,
-    { announce = true, moveIndicatorFocus = false } = {}
-  ) => {
+  showTestimonial = (requestedIndex, { announce = true, moveIndicatorFocus = false } = {}) => {
     if (slides.length === 0) {
       return;
     }
@@ -548,6 +546,11 @@ const calculator = document.querySelector("[data-calculator]");
 const landingForm = document.querySelector("[data-landing-form]");
 const pricingSelectButtons = Array.from(document.querySelectorAll("[data-pricing-select]"));
 const calculatorApplyButton = document.querySelector("[data-calculator-apply]");
+const openTestimonialLinks = Array.from(document.querySelectorAll("[data-open-testimonial]"));
+const openCaseLinks = Array.from(document.querySelectorAll("[data-open-case]"));
+const referenceButtons = Array.from(document.querySelectorAll("[data-reference-cta]"));
+const testimonialsTitle = document.querySelector("#testimonialsTitle");
+const contactsTitle = document.querySelector("#contactsTitle");
 
 const currencyFormatter = new Intl.NumberFormat("ru-RU");
 const formatCurrency = (value) => `${currencyFormatter.format(Number(value) || 0)} ₽`;
@@ -562,7 +565,21 @@ const selectedPlanField = landingForm?.querySelector("[data-selected-plan-field]
 const selectedExtrasField = landingForm?.querySelector("[data-selected-extras-field]");
 const estimatedPriceField = landingForm?.querySelector("[data-estimated-price-field]");
 
+const selectedReference = landingForm?.querySelector("[data-selected-reference]");
+const selectedReferenceTitle = landingForm?.querySelector("#selectedReferenceTitle");
+const referenceSource = landingForm?.querySelector("[data-reference-source]");
+const referenceProject = landingForm?.querySelector("[data-reference-project]");
+const referenceType = landingForm?.querySelector("[data-reference-type]");
+const referenceResult = landingForm?.querySelector("[data-reference-result]");
+const referenceStatus = landingForm?.querySelector("[data-reference-status]");
+const clearReferenceButton = landingForm?.querySelector("[data-clear-reference]");
+const referenceSourceField = landingForm?.querySelector("[data-reference-source-field]");
+const referenceProjectField = landingForm?.querySelector("[data-reference-project-field]");
+const referenceTypeField = landingForm?.querySelector("[data-reference-type-field]");
+const referenceResultField = landingForm?.querySelector("[data-reference-result-field]");
+
 let activeFormConfiguration = null;
+let activeFormReference = null;
 
 const getExtrasText = (extras) =>
   extras.length > 0 ? extras.map((extra) => extra.name).join(", ") : "Без дополнительных услуг";
@@ -639,6 +656,138 @@ const clearFormConfiguration = ({ announce = true } = {}) => {
     configurationStatus.textContent = "Выбранная конфигурация удалена из заявки.";
   }
 };
+
+const getPreferredScrollBehavior = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+
+const updateHashWithoutJump = (hash) => {
+  if (hash && window.history?.pushState) {
+    window.history.pushState(null, "", hash);
+  }
+};
+
+const scrollToTrustTarget = (target, focusTarget, hash) => {
+  if (!target) {
+    return;
+  }
+
+  const behavior = getPreferredScrollBehavior();
+
+  target.scrollIntoView({
+    behavior,
+    block: "start"
+  });
+
+  updateHashWithoutJump(hash);
+
+  window.setTimeout(
+    () => {
+      focusTarget?.focus({
+        preventScroll: true
+      });
+    },
+    behavior === "smooth" ? 380 : 0
+  );
+};
+
+const getReferenceFromButton = (button) => ({
+  source: button.dataset.referenceSource || "Не указан",
+  project: button.dataset.referenceProject || "Учебный проект",
+  type: button.dataset.referenceType || "Сайт",
+  result: button.dataset.referenceResult || "Учебный результат"
+});
+
+const applyReferenceToForm = (reference, { announce = true } = {}) => {
+  if (
+    !reference ||
+    !selectedReference ||
+    !referenceSource ||
+    !referenceProject ||
+    !referenceType ||
+    !referenceResult ||
+    !referenceSourceField ||
+    !referenceProjectField ||
+    !referenceTypeField ||
+    !referenceResultField
+  ) {
+    return;
+  }
+
+  activeFormReference = reference;
+
+  referenceSourceField.value = reference.source;
+  referenceProjectField.value = reference.project;
+  referenceTypeField.value = reference.type;
+  referenceResultField.value = reference.result;
+
+  referenceSource.textContent = reference.source;
+  referenceProject.textContent = reference.project;
+  referenceType.textContent = reference.type;
+  referenceResult.textContent = reference.result;
+
+  selectedReference.hidden = false;
+
+  if (announce && referenceStatus) {
+    referenceStatus.textContent =
+      `В заявку добавлен пример проекта «${reference.project}». ` +
+      `Источник: ${reference.source}. Тип проекта: ${reference.type}. ` +
+      `Учебный результат: ${reference.result}.`;
+  }
+};
+
+const clearFormReference = ({ announce = true } = {}) => {
+  activeFormReference = null;
+
+  if (referenceSourceField) referenceSourceField.value = "";
+  if (referenceProjectField) referenceProjectField.value = "";
+  if (referenceTypeField) referenceTypeField.value = "";
+  if (referenceResultField) referenceResultField.value = "";
+
+  if (referenceSource) referenceSource.textContent = "";
+  if (referenceProject) referenceProject.textContent = "";
+  if (referenceType) referenceType.textContent = "";
+  if (referenceResult) referenceResult.textContent = "";
+
+  if (selectedReference) {
+    selectedReference.hidden = true;
+  }
+
+  if (announce && referenceStatus) {
+    referenceStatus.textContent = "Выбранный пример проекта удалён из заявки.";
+  }
+};
+
+openTestimonialLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    showTestimonial(Number(link.dataset.testimonialIndex));
+    scrollToTrustTarget(testimonials, testimonialsTitle, link.getAttribute("href"));
+  });
+});
+
+openCaseLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const caseCard = document.querySelector(`#${link.dataset.caseTarget}`);
+    const caseTitle = document.querySelector(`#${link.dataset.caseTitleTarget}`);
+
+    scrollToTrustTarget(caseCard, caseTitle, link.getAttribute("href"));
+  });
+});
+
+referenceButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    applyReferenceToForm(getReferenceFromButton(button));
+
+    window.requestAnimationFrame(() => {
+      selectedReferenceTitle?.focus({
+        preventScroll: true
+      });
+    });
+  });
+});
 
 let getCalculatorConfiguration = () => null;
 let updateCalculator = () => null;
@@ -813,6 +962,18 @@ if (clearConfigurationButton) {
   });
 }
 
+if (clearReferenceButton) {
+  clearReferenceButton.addEventListener("click", () => {
+    clearFormReference();
+
+    window.requestAnimationFrame(() => {
+      contactsTitle?.focus({
+        preventScroll: true
+      });
+    });
+  });
+}
+
 if (landingForm) {
   const formStatus = landingForm.querySelector("[data-form-status]");
   const submitButton = landingForm.querySelector("[data-form-submit]");
@@ -946,6 +1107,9 @@ if (landingForm) {
 
       landingForm.reset();
       clearFormConfiguration({
+        announce: false
+      });
+      clearFormReference({
         announce: false
       });
       clearAllErrors();

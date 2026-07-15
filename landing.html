@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="calculator.css" />
     <link rel="stylesheet" href="cases.css" />
     <link rel="stylesheet" href="testimonials.css" />
+    <link rel="stylesheet" href="trust-flow.css" />
     <script src="landing.js" defer></script>
   </head>
 
@@ -782,6 +783,7 @@
           <div class="cases-grid">
             <article
               class="case-card case-card--studio"
+              id="case-studio"
               aria-labelledby="caseStudioTitle"
               data-case-card
               data-case-title="Лендинг для локальной студии"
@@ -791,7 +793,7 @@
                 <span class="case-card__category">Локальный бизнес</span>
               </div>
 
-              <h3 id="caseStudioTitle">Лендинг для локальной студии</h3>
+              <h3 id="caseStudioTitle" tabindex="-1">Лендинг для локальной студии</h3>
 
               <p class="case-card__lead">
                 Страница для небольшой интерьерной студии, которой важно показать подход, услуги и
@@ -854,19 +856,38 @@
               <div class="case-card__footer">
                 <span>Учебный пример</span>
 
-                <a
-                  class="case-card__link"
-                  href="#contacts"
-                  aria-label="Обсудить проект, похожий на лендинг для локальной студии"
-                >
-                  Обсудить похожий проект
-                  <span aria-hidden="true">→</span>
-                </a>
+                <div class="trust-actions trust-actions--case">
+                  <a
+                    class="trust-action trust-action--secondary"
+                    href="#testimonials"
+                    aria-label="Открыть отзыв Анны Морозовой о проекте «Лендинг для локальной студии»"
+                    data-open-testimonial
+                    data-testimonial-index="0"
+                  >
+                    Посмотреть отзыв
+                    <span aria-hidden="true">↗</span>
+                  </a>
+
+                  <a
+                    class="case-card__link trust-action trust-action--primary"
+                    href="#contacts"
+                    aria-label="Добавить в заявку проект, похожий на «Лендинг для локальной студии»"
+                    data-reference-cta
+                    data-reference-source="Кейс"
+                    data-reference-project="Лендинг для локальной студии"
+                    data-reference-type="Лендинг студии"
+                    data-reference-result="+27% заявок"
+                  >
+                    Хочу похожий проект
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
               </div>
             </article>
 
             <article
               class="case-card case-card--expert"
+              id="case-expert"
               aria-labelledby="caseExpertTitle"
               data-case-card
               data-case-title="Сайт для частного эксперта"
@@ -876,7 +897,7 @@
                 <span class="case-card__category">Экспертная услуга</span>
               </div>
 
-              <h3 id="caseExpertTitle">Сайт для частного эксперта</h3>
+              <h3 id="caseExpertTitle" tabindex="-1">Сайт для частного эксперта</h3>
 
               <p class="case-card__lead">
                 Персональный сайт для консультанта, которому нужно представить метод работы,
@@ -939,19 +960,38 @@
               <div class="case-card__footer">
                 <span>Учебный пример</span>
 
-                <a
-                  class="case-card__link"
-                  href="#contacts"
-                  aria-label="Обсудить проект, похожий на сайт для частного эксперта"
-                >
-                  Обсудить похожий проект
-                  <span aria-hidden="true">→</span>
-                </a>
+                <div class="trust-actions trust-actions--case">
+                  <a
+                    class="trust-action trust-action--secondary"
+                    href="#testimonials"
+                    aria-label="Открыть отзыв Михаила Соколова о проекте «Сайт для частного эксперта»"
+                    data-open-testimonial
+                    data-testimonial-index="1"
+                  >
+                    Посмотреть отзыв
+                    <span aria-hidden="true">↗</span>
+                  </a>
+
+                  <a
+                    class="case-card__link trust-action trust-action--primary"
+                    href="#contacts"
+                    aria-label="Добавить в заявку проект, похожий на «Сайт для частного эксперта»"
+                    data-reference-cta
+                    data-reference-source="Кейс"
+                    data-reference-project="Сайт для частного эксперта"
+                    data-reference-type="Сайт эксперта"
+                    data-reference-result="94 / 100"
+                  >
+                    Хочу похожий проект
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
               </div>
             </article>
 
             <article
               class="case-card case-card--service"
+              id="case-service"
               aria-labelledby="caseServiceTitle"
               data-case-card
               data-case-title="Страница для сервисной компании"
@@ -961,7 +1001,7 @@
                 <span class="case-card__category">Сервисная компания</span>
               </div>
 
-              <h3 id="caseServiceTitle">Страница для сервисной компании</h3>
+              <h3 id="caseServiceTitle" tabindex="-1">Страница для сервисной компании</h3>
 
               <p class="case-card__lead">
                 Коммерческая страница для команды по обслуживанию техники с несколькими услугами,
@@ -1024,14 +1064,32 @@
               <div class="case-card__footer">
                 <span>Учебный пример</span>
 
-                <a
-                  class="case-card__link"
-                  href="#contacts"
-                  aria-label="Обсудить проект, похожий на страницу для сервисной компании"
-                >
-                  Обсудить похожий проект
-                  <span aria-hidden="true">→</span>
-                </a>
+                <div class="trust-actions trust-actions--case">
+                  <a
+                    class="trust-action trust-action--secondary"
+                    href="#testimonials"
+                    aria-label="Открыть отзыв Ильи Воронцова о проекте «Страница для сервисной компании»"
+                    data-open-testimonial
+                    data-testimonial-index="2"
+                  >
+                    Посмотреть отзыв
+                    <span aria-hidden="true">↗</span>
+                  </a>
+
+                  <a
+                    class="case-card__link trust-action trust-action--primary"
+                    href="#contacts"
+                    aria-label="Добавить в заявку проект, похожий на «Страница для сервисной компании»"
+                    data-reference-cta
+                    data-reference-source="Кейс"
+                    data-reference-project="Страница для сервисной компании"
+                    data-reference-type="Сервисная страница"
+                    data-reference-result="+31% заявок"
+                  >
+                    Хочу похожий проект
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
               </div>
             </article>
           </div>
@@ -1059,7 +1117,7 @@
             <div>
               <p class="landing-label">Отзывы</p>
 
-              <h2 class="landing-title" id="testimonialsTitle">
+              <h2 class="landing-title" id="testimonialsTitle" tabindex="-1">
                 Что ценят клиенты после запуска проекта
               </h2>
             </div>
@@ -1103,8 +1161,6 @@
 
                 <figcaption class="testimonial-slide__author">
                   <div class="testimonial-author">
-                    <span class="testimonial-author__avatar" aria-hidden="true">АМ</span>
-
                     <div>
                       <strong>Анна Морозова</strong>
                       <span>Владелица интерьерной студии</span>
@@ -1131,6 +1187,34 @@
                   <div class="testimonial-result">
                     <span>После запуска</span>
                     <strong>Единая точка презентации и записи на консультацию</strong>
+                  </div>
+
+                  <div class="trust-actions trust-actions--testimonial">
+                    <a
+                      class="trust-action trust-action--secondary"
+                      href="#case-studio"
+                      aria-label="Вернуться к кейсу «Лендинг для локальной студии»"
+                      data-open-case
+                      data-case-target="case-studio"
+                      data-case-title-target="caseStudioTitle"
+                    >
+                      Посмотреть кейс
+                      <span aria-hidden="true">↖</span>
+                    </a>
+
+                    <a
+                      class="trust-action trust-action--primary"
+                      href="#contacts"
+                      aria-label="Добавить в заявку проект, похожий на «Лендинг для локальной студии»"
+                      data-reference-cta
+                      data-reference-source="Отзыв"
+                      data-reference-project="Лендинг для локальной студии"
+                      data-reference-type="Лендинг студии"
+                      data-reference-result="+27% заявок"
+                    >
+                      Хочу похожий проект
+                      <span aria-hidden="true">→</span>
+                    </a>
                   </div>
 
                   <p class="testimonial-slide__disclaimer">Демонстрационный учебный отзыв</p>
@@ -1163,8 +1247,6 @@
 
                 <figcaption class="testimonial-slide__author">
                   <div class="testimonial-author">
-                    <span class="testimonial-author__avatar" aria-hidden="true">МС</span>
-
                     <div>
                       <strong>Михаил Соколов</strong>
                       <span>Консультант по развитию бизнеса</span>
@@ -1191,6 +1273,34 @@
                   <div class="testimonial-result">
                     <span>После запуска</span>
                     <strong>Клиенты заранее выбирают подходящий формат консультации</strong>
+                  </div>
+
+                  <div class="trust-actions trust-actions--testimonial">
+                    <a
+                      class="trust-action trust-action--secondary"
+                      href="#case-expert"
+                      aria-label="Вернуться к кейсу «Сайт для частного эксперта»"
+                      data-open-case
+                      data-case-target="case-expert"
+                      data-case-title-target="caseExpertTitle"
+                    >
+                      Посмотреть кейс
+                      <span aria-hidden="true">↖</span>
+                    </a>
+
+                    <a
+                      class="trust-action trust-action--primary"
+                      href="#contacts"
+                      aria-label="Добавить в заявку проект, похожий на «Сайт для частного эксперта»"
+                      data-reference-cta
+                      data-reference-source="Отзыв"
+                      data-reference-project="Сайт для частного эксперта"
+                      data-reference-type="Сайт эксперта"
+                      data-reference-result="94 / 100"
+                    >
+                      Хочу похожий проект
+                      <span aria-hidden="true">→</span>
+                    </a>
                   </div>
 
                   <p class="testimonial-slide__disclaimer">Демонстрационный учебный отзыв</p>
@@ -1223,8 +1333,6 @@
 
                 <figcaption class="testimonial-slide__author">
                   <div class="testimonial-author">
-                    <span class="testimonial-author__avatar" aria-hidden="true">ИВ</span>
-
                     <div>
                       <strong>Илья Воронцов</strong>
                       <span>Руководитель сервисной компании</span>
@@ -1251,6 +1359,34 @@
                   <div class="testimonial-result">
                     <span>После запуска</span>
                     <strong>Подробная заявка формируется без повторного ввода параметров</strong>
+                  </div>
+
+                  <div class="trust-actions trust-actions--testimonial">
+                    <a
+                      class="trust-action trust-action--secondary"
+                      href="#case-service"
+                      aria-label="Вернуться к кейсу «Страница для сервисной компании»"
+                      data-open-case
+                      data-case-target="case-service"
+                      data-case-title-target="caseServiceTitle"
+                    >
+                      Посмотреть кейс
+                      <span aria-hidden="true">↖</span>
+                    </a>
+
+                    <a
+                      class="trust-action trust-action--primary"
+                      href="#contacts"
+                      aria-label="Добавить в заявку проект, похожий на «Страница для сервисной компании»"
+                      data-reference-cta
+                      data-reference-source="Отзыв"
+                      data-reference-project="Страница для сервисной компании"
+                      data-reference-type="Сервисная страница"
+                      data-reference-result="+31% заявок"
+                    >
+                      Хочу похожий проект
+                      <span aria-hidden="true">→</span>
+                    </a>
                   </div>
 
                   <p class="testimonial-slide__disclaimer">Демонстрационный учебный отзыв</p>
@@ -1563,11 +1699,13 @@
           <div>
             <p class="landing-label">Заявка</p>
 
-            <h2 class="landing-title">Обсудить сайт для бизнеса</h2>
+            <h2 class="landing-title" id="contactsTitle" tabindex="-1">
+              Обсудить сайт для бизнеса
+            </h2>
 
             <p class="landing-section__text">
-              Выбранный тариф и предварительный расчёт можно перенести в заявку. Форма проверяет
-              поля, показывает ошибки и отправляет данные через Formspree без перезагрузки страницы.
+              Выбранный тариф, предварительный расчёт и понравившийся пример проекта можно перенести
+              в заявку. Форма отправляет весь контекст через Formspree без перезагрузки.
             </p>
           </div>
 
@@ -1592,6 +1730,14 @@
             <input type="hidden" name="selected_extras" value="" data-selected-extras-field />
 
             <input type="hidden" name="estimated_price" value="" data-estimated-price-field />
+
+            <input type="hidden" name="reference_source" value="" data-reference-source-field />
+
+            <input type="hidden" name="reference_project" value="" data-reference-project-field />
+
+            <input type="hidden" name="reference_type" value="" data-reference-type-field />
+
+            <input type="hidden" name="reference_result" value="" data-reference-result-field />
 
             <div class="landing-form__trap" aria-hidden="true">
               <label for="landingTrap">Не заполняйте это поле</label>
@@ -1653,6 +1799,59 @@
               aria-live="polite"
               aria-atomic="true"
               data-configuration-status
+            ></p>
+
+            <section
+              class="landing-reference"
+              aria-labelledby="selectedReferenceTitle"
+              data-selected-reference
+              hidden
+            >
+              <div class="landing-reference__header">
+                <div>
+                  <p class="landing-reference__kicker">Вы выбрали пример проекта</p>
+
+                  <h3 id="selectedReferenceTitle" tabindex="-1">Контекст добавлен в заявку</h3>
+                </div>
+
+                <button
+                  class="landing-reference__clear"
+                  type="button"
+                  aria-label="Удалить выбранный пример проекта из заявки"
+                  data-clear-reference
+                >
+                  Очистить
+                </button>
+              </div>
+
+              <dl class="landing-reference__details">
+                <div class="landing-reference__item">
+                  <dt>Источник</dt>
+                  <dd data-reference-source></dd>
+                </div>
+
+                <div class="landing-reference__item landing-reference__item--project">
+                  <dt>Проект</dt>
+                  <dd data-reference-project></dd>
+                </div>
+
+                <div class="landing-reference__item">
+                  <dt>Тип</dt>
+                  <dd data-reference-type></dd>
+                </div>
+
+                <div class="landing-reference__item landing-reference__item--result">
+                  <dt>Учебный результат</dt>
+                  <dd data-reference-result></dd>
+                </div>
+              </dl>
+            </section>
+
+            <p
+              class="visually-hidden"
+              aria-live="polite"
+              aria-atomic="true"
+              data-reference-status
             ></p>
 
             <div class="landing-form__group">

@@ -232,7 +232,7 @@ syncNavigationAccessibility();
 updateLandingInterface();
 
 const observedSections = document.querySelectorAll(
-  "#service, #benefits, #pricing, #calculator, #cases, #testimonials, #steps, #contacts"
+  "#service, #benefits, #pricing, #calculator, #cases, #testimonials, #brief, #steps, #contacts"
 );
 
 const navigationSectionLinks = landingNavigation
@@ -543,6 +543,7 @@ if (testimonials) {
 }
 
 const calculator = document.querySelector("[data-calculator]");
+const projectBrief = document.querySelector("[data-project-brief]");
 const landingForm = document.querySelector("[data-landing-form]");
 const pricingSelectButtons = Array.from(document.querySelectorAll("[data-pricing-select]"));
 const calculatorApplyButton = document.querySelector("[data-calculator-apply]");
@@ -788,6 +789,464 @@ referenceButtons.forEach((button) => {
     });
   });
 });
+
+if (projectBrief) {
+  const steps = Array.from(projectBrief.querySelectorAll("[data-brief-step]"));
+  const indicators = Array.from(projectBrief.querySelectorAll("[data-brief-indicator]"));
+  const progress = projectBrief.querySelector("[data-brief-progress]");
+  const progressBar = projectBrief.querySelector("[data-brief-progress-bar]");
+  const progressCurrent = projectBrief.querySelector("[data-brief-progress-current]");
+  const progressText = projectBrief.querySelector("[data-brief-progress-text]");
+  const status = projectBrief.querySelector("[data-brief-status]");
+  const controls = projectBrief.querySelector("[data-brief-controls]");
+  const previousButton = projectBrief.querySelector("[data-brief-previous]");
+  const nextButton = projectBrief.querySelector("[data-brief-next]");
+  const summary = projectBrief.querySelector("[data-brief-summary]");
+  const summaryTitle = projectBrief.querySelector("#briefSummaryTitle");
+  const editButton = projectBrief.querySelector("[data-brief-edit]");
+  const applyButton = projectBrief.querySelector("[data-brief-apply]");
+  const messageField = landingForm?.querySelector('[data-form-field="message"]');
+
+  const summaryFields = {
+    siteType: projectBrief.querySelector("[data-brief-summary-site]"),
+    goal: projectBrief.querySelector("[data-brief-summary-goal]"),
+    features: projectBrief.querySelector("[data-brief-summary-features]"),
+    timeline: projectBrief.querySelector("[data-brief-summary-timeline]"),
+    budget: projectBrief.querySelector("[data-brief-summary-budget]")
+  };
+
+  const briefStartMarker = "=== Бриф проекта ===";
+  const briefEndMarker = "=== Конец брифа ===";
+  let currentStepIndex = 0;
+
+  const setBriefElementActive = (element, isActive) => {
+    element.hidden = !isActive;
+    element.setAttribute("aria-hidden", isActive ? "false" : "true");
+
+    if ("inert" in element) {
+      element.inert = !isActive;
+    }
+  };
+
+  const getSelectedInputs = (step) =>
+    Array.from(step.querySelectorAll('input[type="radio"], input[type="checkbox"]')).filter(
+      (input) => input.checked
+    );
+
+  const getBriefData = () => {
+    const formData = new FormData(projectBrief);
+
+    return {
+      siteType: String(formData.get("brief_site_type") || ""),
+      goal: String(formData.get("brief_goal") || ""),
+      features: formData.getAll("brief_features").map(String),
+      timeline: String(formData.get("brief_timeline") || ""),
+      budget: String(formData.get("brief_budget") || "")
+    };
+  };
+
+  const getFirstIncompleteStepIndex = () =>
+    steps.findIndex((step) => getSelectedInputs(step).length === 0);
+
+  const clearStepError = (step) => {
+    const error = step.querySelector("[data-brief-step-error]");
+
+    step.classList.remove("is-invalid");
+
+    if (error) {
+      error.textContent = "";
+    }
+  };
+
+  const setStepError = (step) => {
+    const error = step.querySelector("[data-brief-step-error]");
+    const message = step.dataset.briefErrorMessage || "Выберите подходящий вариант.";
+
+    step.classList.add("is-invalid");
+
+    if (error) {
+      error.textContent = message;
+    }
+
+    if (status) {
+      status.textContent = message;
+    }
+
+    const firstInput = step.querySelector('input[type="radio"], input[type="checkbox"]');
+    firstInput?.focus();
+  };
+
+  const updateBriefProgress = (stepIndex, { completed = false } = {}) => {
+    const currentValue = completed ? steps.length : stepIndex + 1;
+    const percentage = (currentValue / steps.length) * 100;
+    const visibleText = completed
+      ? "Все 5 шагов заполнены"
+      : `Шаг ${currentValue} из ${steps.length}`;
+
+    if (progress) {
+      progress.setAttribute("aria-valuenow", String(currentValue));
+      progress.setAttribute("aria-valuetext", visibleText);
+    }
+
+    if (progressBar) {
+      progressBar.style.width = `${percentage}%`;
+    }
+
+    if (progressCurrent) {
+      progressCurrent.textContent = String(currentValue);
+    }
+
+    if (progressText) {
+      progressText.textContent = visibleText;
+    }
+
+    indicators.forEach((indicator, index) => {
+      const isActive = !completed && index === stepIndex;
+      const isComplete = completed || index < stepIndex;
+
+      indicator.classList.toggle("is-active", isActive);
+      indicator.classList.toggle("is-complete", isComplete);
+
+      if (isActive) {
+        indicator.setAttribute("aria-current", "step");
+      } else {
+        indicator.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  const showBriefStep = (requestedIndex, { announce = true, moveFocus = true } = {}) => {
+    if (steps.length === 0) {
+      return;
+    }
+
+    currentStepIndex = Math.min(Math.max(requestedIndex, 0), steps.length - 1);
+
+    projectBrief.classList.remove("is-complete");
+
+    steps.forEach((step, index) => {
+      setBriefElementActive(step, index === currentStepIndex);
+    });
+
+    if (summary) {
+      setBriefElementActive(summary, false);
+    }
+
+    if (controls) {
+      controls.hidden = false;
+    }
+
+    if (previousButton) {
+      previousButton.disabled = currentStepIndex === 0;
+    }
+
+    if (nextButton) {
+      nextButton.innerHTML =
+        currentStepIndex === steps.length - 1
+          ? 'Показать итог <span aria-hidden="true">→</span>'
+          : 'Продолжить <span aria-hidden="true">→</span>';
+    }
+
+    updateBriefProgress(currentStepIndex);
+
+    if (announce && status) {
+      const stepName = steps[currentStepIndex].dataset.briefStepName || "Шаг брифа";
+      status.textContent = `Открыт шаг ${currentStepIndex + 1} из ${steps.length}: ${stepName}.`;
+    }
+
+    if (moveFocus) {
+      const title = steps[currentStepIndex].querySelector("[data-brief-step-title]");
+
+      window.requestAnimationFrame(() => {
+        title?.focus({
+          preventScroll: true
+        });
+      });
+    }
+  };
+
+  const validateCurrentBriefStep = () => {
+    const currentStep = steps[currentStepIndex];
+
+    if (!currentStep) {
+      return false;
+    }
+
+    clearStepError(currentStep);
+
+    if (getSelectedInputs(currentStep).length > 0) {
+      return true;
+    }
+
+    setStepError(currentStep);
+    return false;
+  };
+
+  const createBriefSummaryText = (data) =>
+    [
+      briefStartMarker,
+      `Тип сайта: ${data.siteType}`,
+      `Основная задача: ${data.goal}`,
+      `Возможности: ${data.features.join(", ")}`,
+      `Желаемый срок: ${data.timeline}`,
+      `Ориентировочный бюджет: ${data.budget}`,
+      briefEndMarker
+    ].join("\n");
+
+  const renderBriefSummary = () => {
+    const data = getBriefData();
+
+    if (summaryFields.siteType) {
+      summaryFields.siteType.textContent = data.siteType;
+    }
+
+    if (summaryFields.goal) {
+      summaryFields.goal.textContent = data.goal;
+    }
+
+    if (summaryFields.features) {
+      summaryFields.features.textContent = data.features.join(", ");
+    }
+
+    if (summaryFields.timeline) {
+      summaryFields.timeline.textContent = data.timeline;
+    }
+
+    if (summaryFields.budget) {
+      summaryFields.budget.textContent = data.budget;
+    }
+
+    projectBrief.dataset.briefSummary = createBriefSummaryText(data);
+  };
+
+  const showBriefSummary = () => {
+    renderBriefSummary();
+
+    steps.forEach((step) => {
+      setBriefElementActive(step, false);
+    });
+
+    if (summary) {
+      setBriefElementActive(summary, true);
+    }
+
+    if (controls) {
+      controls.hidden = true;
+    }
+
+    projectBrief.classList.add("is-complete");
+    updateBriefProgress(steps.length - 1, {
+      completed: true
+    });
+
+    if (status) {
+      status.textContent =
+        "Бриф заполнен. Проверьте сводку, измените ответы или добавьте её в заявку.";
+    }
+
+    window.requestAnimationFrame(() => {
+      summaryTitle?.focus({
+        preventScroll: true
+      });
+    });
+  };
+
+  const removePreviousBriefFromMessage = (message) => {
+    const startIndex = message.indexOf(briefStartMarker);
+
+    if (startIndex === -1) {
+      return message.trim();
+    }
+
+    const endIndex = message.indexOf(briefEndMarker, startIndex);
+
+    if (endIndex === -1) {
+      return message.slice(0, startIndex).trim();
+    }
+
+    return `${message.slice(0, startIndex)}${message.slice(
+      endIndex + briefEndMarker.length
+    )}`.trim();
+  };
+
+  const applyBriefToMessage = () => {
+    const briefSummaryText = projectBrief.dataset.briefSummary;
+
+    if (!briefSummaryText || !messageField) {
+      return;
+    }
+
+    const messageWithoutPreviousBrief = removePreviousBriefFromMessage(messageField.value);
+
+    messageField.value = [messageWithoutPreviousBrief, briefSummaryText]
+      .filter(Boolean)
+      .join("\n\n");
+
+    messageField.dispatchEvent(
+      new Event("input", {
+        bubbles: true
+      })
+    );
+
+    if (status) {
+      status.textContent =
+        "Сводка брифа добавлена в поле задачи. Можно дополнить сообщение и отправить заявку.";
+    }
+
+    scrollToTrustTarget(landingForm, messageField, "#contacts");
+  };
+
+  if (previousButton) {
+    previousButton.addEventListener("click", () => {
+      showBriefStep(currentStepIndex - 1);
+    });
+  }
+
+  if (nextButton) {
+    nextButton.addEventListener("click", () => {
+      if (!validateCurrentBriefStep()) {
+        return;
+      }
+
+      if (currentStepIndex === steps.length - 1) {
+        showBriefSummary();
+        return;
+      }
+
+      showBriefStep(currentStepIndex + 1);
+    });
+  }
+
+  if (editButton) {
+    editButton.addEventListener("click", () => {
+      showBriefStep(0);
+    });
+  }
+
+  if (applyButton) {
+    applyButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      applyBriefToMessage();
+    });
+  }
+
+  if (controls) {
+    controls.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+
+        if (currentStepIndex > 0) {
+          showBriefStep(currentStepIndex - 1);
+        }
+
+        return;
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        nextButton?.click();
+        return;
+      }
+
+      if (event.key === "Home") {
+        event.preventDefault();
+        showBriefStep(0);
+        return;
+      }
+
+      if (event.key === "End") {
+        event.preventDefault();
+
+        const incompleteStepIndex = getFirstIncompleteStepIndex();
+
+        if (incompleteStepIndex === -1) {
+          showBriefStep(steps.length - 1);
+          return;
+        }
+
+        showBriefStep(incompleteStepIndex);
+
+        if (status) {
+          status.textContent = `Сначала заполните шаг ${incompleteStepIndex + 1} из ${steps.length}.`;
+        }
+      }
+    });
+  }
+
+  projectBrief.addEventListener("change", (event) => {
+    const changedStep = event.target.closest("[data-brief-step]");
+
+    if (changedStep) {
+      clearStepError(changedStep);
+
+      if (status) {
+        status.textContent = "";
+      }
+    }
+  });
+
+  projectBrief.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") {
+      return;
+    }
+
+    if (projectBrief.classList.contains("is-complete")) {
+      event.preventDefault();
+      showBriefStep(steps.length - 1);
+      return;
+    }
+
+    if (currentStepIndex > 0) {
+      event.preventDefault();
+      showBriefStep(currentStepIndex - 1);
+    }
+  });
+
+  projectBrief.addEventListener("reset", () => {
+    window.requestAnimationFrame(() => {
+      projectBrief.dataset.briefSummary = "";
+
+      Object.values(summaryFields).forEach((field) => {
+        if (field) {
+          field.textContent = "";
+        }
+      });
+
+      steps.forEach(clearStepError);
+
+      showBriefStep(0, {
+        announce: false,
+        moveFocus: false
+      });
+
+      if (status) {
+        status.textContent = "Бриф очищен. Открыт первый шаг.";
+      }
+
+      const firstTitle = steps[0]?.querySelector("[data-brief-step-title]");
+
+      firstTitle?.focus({
+        preventScroll: true
+      });
+    });
+  });
+
+  projectBrief.classList.add("is-enhanced");
+
+  if (summary) {
+    summary.hidden = true;
+    summary.setAttribute("aria-hidden", "true");
+
+    if ("inert" in summary) {
+      summary.inert = true;
+    }
+  }
+
+  showBriefStep(0, {
+    announce: false,
+    moveFocus: false
+  });
+}
 
 let getCalculatorConfiguration = () => null;
 let updateCalculator = () => null;

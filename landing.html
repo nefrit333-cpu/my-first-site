@@ -9,7 +9,7 @@
 
     <meta
       name="description"
-      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает оффер, преимущества, тарифы, калькулятор стоимости, кейсы, отзывы, FAQ, форму заявки и адаптивную верстку."
+      content="Учебный лендинг услуги по созданию сайта для малого бизнеса. Страница показывает оффер, преимущества, тарифы, калькулятор стоимости, кейсы, отзывы, пошаговый бриф, FAQ, форму заявки и адаптивную верстку."
     />
 
     <meta
@@ -29,7 +29,7 @@
     <meta property="og:title" content="Сайт для малого бизнеса — учебный лендинг" />
     <meta
       property="og:description"
-      content="Учебный frontend-лендинг услуги для малого бизнеса: оффер, преимущества, тарифы, калькулятор стоимости, кейсы, отзывы, FAQ, форма заявки и адаптивная верстка."
+      content="Учебный frontend-лендинг услуги для малого бизнеса: оффер, преимущества, тарифы, калькулятор стоимости, кейсы, отзывы, пошаговый бриф, FAQ, форма заявки и адаптивная верстка."
     />
     <meta property="og:url" content="https://nefrit333-cpu.github.io/my-first-site/landing.html" />
     <meta
@@ -45,7 +45,7 @@
     <meta name="twitter:title" content="Сайт для малого бизнеса — учебный лендинг" />
     <meta
       name="twitter:description"
-      content="Учебный frontend-лендинг услуги с тарифами, калькулятором стоимости, кейсами, отзывами и формой заявки."
+      content="Учебный frontend-лендинг услуги с тарифами, калькулятором стоимости, кейсами, отзывами, пошаговым брифом и формой заявки."
     />
     <meta
       name="twitter:image"
@@ -60,6 +60,7 @@
     <link rel="stylesheet" href="cases.css" />
     <link rel="stylesheet" href="testimonials.css" />
     <link rel="stylesheet" href="trust-flow.css" />
+    <link rel="stylesheet" href="brief.css" />
     <script src="landing.js" defer></script>
   </head>
 
@@ -91,6 +92,7 @@
           <a href="#calculator">Калькулятор</a>
           <a href="#cases">Кейсы</a>
           <a href="#testimonials">Отзывы</a>
+          <a href="#brief">Бриф</a>
           <a href="#steps">Этапы</a>
           <a href="#contacts">Заявка</a>
           <a class="landing-nav__portfolio" href="index.html">Портфолио</a>
@@ -163,8 +165,8 @@
 
             <p class="landing-hero__text">
               Это учебный лендинг услуги. Он показывает, как можно собрать коммерческую страницу: с
-              понятным оффером, преимуществами, тарифами, калькулятором, кейсами, отзывами и формой
-              заявки.
+              понятным оффером, преимуществами, тарифами, калькулятором, кейсами, отзывами,
+              пошаговым брифом и формой заявки.
             </p>
 
             <div class="landing-hero__actions">
@@ -183,6 +185,7 @@
               <span>Калькулятор</span>
               <span>Кейсы</span>
               <span>Отзывы</span>
+              <span>Бриф</span>
               <span>Форма</span>
             </div>
           </div>
@@ -1477,6 +1480,600 @@
         </div>
       </section>
 
+      <section
+        class="landing-section landing-section--brief"
+        id="brief"
+        aria-labelledby="briefTitle"
+      >
+        <div class="landing-container">
+          <div class="brief-heading">
+            <div>
+              <p class="landing-label">Бриф проекта</p>
+
+              <h2 class="landing-title" id="briefTitle">
+                Подготовьте основу будущего сайта за пять шагов
+              </h2>
+            </div>
+
+            <p class="landing-section__text brief-heading__text">
+              Выберите тип сайта, главную задачу, нужные возможности, срок и ориентировочный бюджет.
+              В конце появится готовая сводка, которую можно добавить в текст заявки.
+            </p>
+          </div>
+
+          <form class="project-brief" novalidate data-project-brief>
+            <div class="brief-progress" aria-label="Прогресс заполнения брифа">
+              <div class="brief-progress__header">
+                <div>
+                  <span class="brief-progress__eyebrow">Текущий прогресс</span>
+
+                  <strong data-brief-progress-text>Шаг 1 из 5</strong>
+                </div>
+
+                <span class="brief-progress__counter">
+                  <span data-brief-progress-current>1</span>
+                  <span aria-hidden="true">/</span>
+                  <span>5</span>
+                </span>
+              </div>
+
+              <div
+                class="brief-progress__track"
+                role="progressbar"
+                aria-label="Заполнение брифа"
+                aria-valuemin="1"
+                aria-valuemax="5"
+                aria-valuenow="1"
+                aria-valuetext="Шаг 1 из 5"
+                data-brief-progress
+              >
+                <span data-brief-progress-bar></span>
+              </div>
+
+              <ol class="brief-progress__steps" aria-label="Шаги брифа">
+                <li aria-current="step" data-brief-indicator>
+                  <span>01</span>
+                  <strong>Тип сайта</strong>
+                </li>
+
+                <li data-brief-indicator>
+                  <span>02</span>
+                  <strong>Задача</strong>
+                </li>
+
+                <li data-brief-indicator>
+                  <span>03</span>
+                  <strong>Возможности</strong>
+                </li>
+
+                <li data-brief-indicator>
+                  <span>04</span>
+                  <strong>Срок</strong>
+                </li>
+
+                <li data-brief-indicator>
+                  <span>05</span>
+                  <strong>Бюджет</strong>
+                </li>
+              </ol>
+            </div>
+
+            <p class="brief-status" aria-live="polite" aria-atomic="true" data-brief-status></p>
+
+            <div
+              class="brief-step"
+              data-brief-step
+              data-brief-step-name="Тип сайта"
+              data-brief-error-message="Выберите один вариант типа сайта."
+            >
+              <div class="brief-step__heading">
+                <span>Шаг 1</span>
+
+                <div>
+                  <h3 tabindex="-1" data-brief-step-title>Какой сайт вам нужен?</h3>
+
+                  <p>Выберите наиболее подходящий формат. Ответ можно изменить позже.</p>
+                </div>
+              </div>
+
+              <fieldset aria-describedby="briefStepOneHint briefStepOneError">
+                <legend class="visually-hidden">Выберите тип сайта</legend>
+
+                <p class="brief-step__hint" id="briefStepOneHint">Нужно выбрать один вариант.</p>
+
+                <div class="brief-options brief-options--radio">
+                  <label class="brief-option">
+                    <input type="radio" name="brief_site_type" value="Лендинг" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Лендинг</strong>
+                      <span>Одна страница для услуги, продукта или рекламного предложения.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_site_type" value="Многостраничный сайт" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Многостраничный сайт</strong>
+                      <span
+                        >Несколько разделов для компании, направлений и подробной информации.</span
+                      >
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_site_type" value="Сайт специалиста" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Сайт специалиста</strong>
+                      <span
+                        >Экспертная подача, услуги, опыт, материалы и запись на консультацию.</span
+                      >
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_site_type" value="Сайт компании" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Сайт компании</strong>
+                      <span>Презентация команды, услуг, преимуществ, кейсов и контактов.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option brief-option--wide">
+                    <input type="radio" name="brief_site_type" value="Ещё не определился" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Ещё не определился</strong>
+                      <span>Формат можно подобрать после обсуждения задачи и аудитории.</span>
+                    </span>
+                  </label>
+                </div>
+
+                <p class="brief-step__error" id="briefStepOneError" data-brief-step-error></p>
+              </fieldset>
+            </div>
+
+            <div
+              class="brief-step"
+              data-brief-step
+              data-brief-step-name="Основная задача"
+              data-brief-error-message="Выберите основную задачу будущего сайта."
+            >
+              <div class="brief-step__heading">
+                <span>Шаг 2</span>
+
+                <div>
+                  <h3 tabindex="-1" data-brief-step-title>Какую задачу должен решать сайт?</h3>
+
+                  <p>
+                    От главной цели зависит структура страницы и основное действие пользователя.
+                  </p>
+                </div>
+              </div>
+
+              <fieldset aria-describedby="briefStepTwoHint briefStepTwoError">
+                <legend class="visually-hidden">Выберите основную задачу сайта</legend>
+
+                <p class="brief-step__hint" id="briefStepTwoHint">Нужно выбрать один вариант.</p>
+
+                <div class="brief-options brief-options--radio">
+                  <label class="brief-option">
+                    <input type="radio" name="brief_goal" value="Получение заявок" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Получение заявок</strong>
+                      <span>Подвести посетителя к форме, звонку или сообщению.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_goal" value="Презентация услуг" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Презентация услуг</strong>
+                      <span>Понятно объяснить направления работы, пользу и процесс.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_goal" value="Продажа товаров или услуг" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Продажа товаров или услуг</strong>
+                      <span>Показать предложение, стоимость и привести к покупке.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_goal" value="Запись на консультацию" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Запись на консультацию</strong>
+                      <span>Объяснить подход и помочь выбрать удобный способ связи.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option brief-option--wide">
+                    <input type="radio" name="brief_goal" value="Информационная страница" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Информационная страница</strong>
+                      <span>Собрать важные сведения в одном доступном месте.</span>
+                    </span>
+                  </label>
+                </div>
+
+                <p class="brief-step__error" id="briefStepTwoError" data-brief-step-error></p>
+              </fieldset>
+            </div>
+
+            <div
+              class="brief-step"
+              data-brief-step
+              data-brief-step-name="Возможности"
+              data-brief-error-message="Выберите минимум одну возможность."
+            >
+              <div class="brief-step__heading">
+                <span>Шаг 3</span>
+
+                <div>
+                  <h3 tabindex="-1" data-brief-step-title>Какие возможности понадобятся?</h3>
+
+                  <p>
+                    Можно выбрать несколько функций. Точный состав уточняется перед разработкой.
+                  </p>
+                </div>
+              </div>
+
+              <fieldset aria-describedby="briefStepThreeHint briefStepThreeError">
+                <legend class="visually-hidden">Выберите необходимые возможности</legend>
+
+                <p class="brief-step__hint" id="briefStepThreeHint">
+                  Выберите один или несколько вариантов.
+                </p>
+
+                <div class="brief-options brief-options--checkbox">
+                  <label class="brief-option">
+                    <input type="checkbox" name="brief_features" value="Форма заявки" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Форма заявки</strong>
+                      <span>Сбор имени, контакта и описания задачи.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="checkbox" name="brief_features" value="Калькулятор стоимости" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Калькулятор стоимости</strong>
+                      <span>Предварительный расчёт цены по выбранным параметрам.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="checkbox" name="brief_features" value="Каталог услуг" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Каталог услуг</strong>
+                      <span>Структурированный список направлений и предложений.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="checkbox" name="brief_features" value="Отзывы и кейсы" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Отзывы и кейсы</strong>
+                      <span>Социальное доказательство и примеры выполненной работы.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="checkbox" name="brief_features" value="FAQ" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>FAQ</strong>
+                      <span>Ответы на частые вопросы перед обращением.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="checkbox" name="brief_features" value="Интеграция с аналитикой" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Интеграция с аналитикой</strong>
+                      <span>Подготовка к измерению посещений и действий пользователей.</span>
+                    </span>
+                  </label>
+                </div>
+
+                <p class="brief-step__error" id="briefStepThreeError" data-brief-step-error></p>
+              </fieldset>
+            </div>
+
+            <div
+              class="brief-step"
+              data-brief-step
+              data-brief-step-name="Желаемый срок"
+              data-brief-error-message="Выберите желаемый срок запуска."
+            >
+              <div class="brief-step__heading">
+                <span>Шаг 4</span>
+
+                <div>
+                  <h3 tabindex="-1" data-brief-step-title>Когда желательно запустить сайт?</h3>
+
+                  <p>Срок помогает определить объём первого этапа и последовательность работ.</p>
+                </div>
+              </div>
+
+              <fieldset aria-describedby="briefStepFourHint briefStepFourError">
+                <legend class="visually-hidden">Выберите желаемый срок</legend>
+
+                <p class="brief-step__hint" id="briefStepFourHint">Нужно выбрать один вариант.</p>
+
+                <div class="brief-options brief-options--radio">
+                  <label class="brief-option">
+                    <input type="radio" name="brief_timeline" value="До 2 недель" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>До 2 недель</strong>
+                      <span>Приоритетный запуск с заранее согласованным объёмом.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_timeline" value="От 2 до 4 недель" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>От 2 до 4 недель</strong>
+                      <span>Комфортный срок для проработки структуры и адаптива.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_timeline" value="От 1 до 2 месяцев" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>От 1 до 2 месяцев</strong>
+                      <span>Подходит для расширенного сайта и нескольких этапов.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_timeline" value="Срок пока не определён" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Срок пока не определён</strong>
+                      <span>Сначала нужно оценить задачу, материалы и приоритеты.</span>
+                    </span>
+                  </label>
+                </div>
+
+                <p class="brief-step__error" id="briefStepFourError" data-brief-step-error></p>
+              </fieldset>
+            </div>
+
+            <div
+              class="brief-step"
+              data-brief-step
+              data-brief-step-name="Ориентировочный бюджет"
+              data-brief-error-message="Выберите ориентировочный бюджет или консультацию."
+            >
+              <div class="brief-step__heading">
+                <span>Шаг 5</span>
+
+                <div>
+                  <h3 tabindex="-1" data-brief-step-title>Какой бюджет планируется?</h3>
+
+                  <p>Ответ нужен только для выбора реалистичного объёма и приоритетов проекта.</p>
+                </div>
+              </div>
+
+              <fieldset aria-describedby="briefStepFiveHint briefStepFiveError">
+                <legend class="visually-hidden">Выберите ориентировочный бюджет</legend>
+
+                <p class="brief-step__hint" id="briefStepFiveHint">Нужно выбрать один вариант.</p>
+
+                <div class="brief-options brief-options--radio">
+                  <label class="brief-option">
+                    <input type="radio" name="brief_budget" value="До 30 000 ₽" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>До 30 000 ₽</strong>
+                      <span>Минимальный объём с фокусом на главной задаче.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_budget" value="30 000–50 000 ₽" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>30 000–50 000 ₽</strong>
+                      <span>Полноценный лендинг или компактный сайт специалиста.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_budget" value="50 000–80 000 ₽" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>50 000–80 000 ₽</strong>
+                      <span>Расширенная структура, дополнительные блоки и интеграции.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option">
+                    <input type="radio" name="brief_budget" value="Более 80 000 ₽" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Более 80 000 ₽</strong>
+                      <span>Многостраничный проект или сложный набор возможностей.</span>
+                    </span>
+                  </label>
+
+                  <label class="brief-option brief-option--wide">
+                    <input type="radio" name="brief_budget" value="Нужна консультация" />
+
+                    <span class="brief-option__control" aria-hidden="true"></span>
+
+                    <span class="brief-option__content">
+                      <strong>Нужна консультация</strong>
+                      <span>Сначала нужно сопоставить задачи, сроки и возможный объём.</span>
+                    </span>
+                  </label>
+                </div>
+
+                <p class="brief-step__error" id="briefStepFiveError" data-brief-step-error></p>
+              </fieldset>
+            </div>
+
+            <section
+              class="brief-summary"
+              aria-labelledby="briefSummaryTitle"
+              data-brief-summary
+              hidden
+            >
+              <div class="brief-summary__heading">
+                <div>
+                  <span class="brief-summary__eyebrow">Бриф заполнен</span>
+
+                  <h3 id="briefSummaryTitle" tabindex="-1">Основные параметры проекта</h3>
+                </div>
+
+                <span class="brief-summary__mark" aria-hidden="true">✓</span>
+              </div>
+
+              <dl class="brief-summary__list">
+                <div>
+                  <dt>Тип сайта</dt>
+                  <dd data-brief-summary-site></dd>
+                </div>
+
+                <div>
+                  <dt>Основная задача</dt>
+                  <dd data-brief-summary-goal></dd>
+                </div>
+
+                <div class="brief-summary__item--wide">
+                  <dt>Возможности</dt>
+                  <dd data-brief-summary-features></dd>
+                </div>
+
+                <div>
+                  <dt>Желаемый срок</dt>
+                  <dd data-brief-summary-timeline></dd>
+                </div>
+
+                <div>
+                  <dt>Ориентировочный бюджет</dt>
+                  <dd data-brief-summary-budget></dd>
+                </div>
+              </dl>
+
+              <p class="brief-summary__note">
+                Сейчас сводка добавляется в текст сообщения. Структурированная передача полей через
+                Formspree будет расширена в следующих этапах релиза v3.2.
+              </p>
+
+              <div class="brief-summary__actions">
+                <button class="brief-button brief-button--secondary" type="button" data-brief-edit>
+                  Изменить ответы
+                </button>
+
+                <button class="brief-button brief-button--ghost" type="reset" data-brief-reset>
+                  Очистить бриф
+                </button>
+
+                <a class="brief-button brief-button--primary" href="#contacts" data-brief-apply>
+                  Добавить бриф в заявку
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </section>
+
+            <div class="brief-controls" data-brief-controls>
+              <button
+                class="brief-button brief-button--secondary"
+                type="button"
+                data-brief-previous
+              >
+                <span aria-hidden="true">←</span>
+                Назад
+              </button>
+
+              <div class="brief-controls__end">
+                <button class="brief-button brief-button--ghost" type="reset" data-brief-reset>
+                  Очистить бриф
+                </button>
+
+                <button class="brief-button brief-button--primary" type="button" data-brief-next>
+                  Продолжить
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <p class="brief-note">
+            Бриф использует демонстрационный сценарий учебного проекта. Ответы остаются в браузере
+            только до обновления страницы; сохранение черновика будет добавлено следующим этапом.
+          </p>
+        </div>
+      </section>
+
       <section class="landing-section landing-section--steps" id="steps">
         <div class="landing-container">
           <p class="landing-label">Этапы</p>
@@ -1704,8 +2301,9 @@
             </h2>
 
             <p class="landing-section__text">
-              Выбранный тариф, предварительный расчёт и понравившийся пример проекта можно перенести
-              в заявку. Форма отправляет весь контекст через Formspree без перезагрузки.
+              Выбранный тариф, предварительный расчёт, понравившийся пример проекта и заполненный
+              бриф можно перенести в заявку. Форма отправляет контекст через Formspree без
+              перезагрузки.
             </p>
           </div>
 
@@ -1941,6 +2539,7 @@
             <a href="#calculator">Калькулятор</a>
             <a href="#cases">Кейсы</a>
             <a href="#testimonials">Отзывы</a>
+            <a href="#brief">Бриф</a>
             <a href="#steps">Этапы</a>
             <a href="#contacts">Заявка</a>
             <a href="index.html">Портфолио</a>

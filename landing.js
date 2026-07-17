@@ -805,7 +805,14 @@ if (projectBrief) {
   const summaryTitle = projectBrief.querySelector("#briefSummaryTitle");
   const editButton = projectBrief.querySelector("[data-brief-edit]");
   const applyButton = projectBrief.querySelector("[data-brief-apply]");
+  const draftPanel = projectBrief.querySelector("[data-brief-draft]");
+  const draftStatus = projectBrief.querySelector("[data-brief-draft-status]");
+  const draftTime = projectBrief.querySelector("[data-brief-draft-time]");
+  const deleteDraftButton = projectBrief.querySelector("[data-brief-draft-delete]");
   const messageField = landingForm?.querySelector('[data-form-field="message"]');
+  const briefInputs = Array.from(
+    projectBrief.querySelectorAll('input[type="radio"], input[type="checkbox"]')
+  );
 
   const summaryFields = {
     siteType: projectBrief.querySelector("[data-brief-summary-site]"),
@@ -817,7 +824,34 @@ if (projectBrief) {
 
   const briefStartMarker = "=== Бриф проекта ===";
   const briefEndMarker = "=== Конец брифа ===";
+  const briefStorageKey = "dmitriy-web-project-brief-v1";
+  const briefStorageVersion = 1;
+  const briefDraftLifetime = 30 * 24 * 60 * 60 * 1000;
+  const briefStorageTestKey = `${briefStorageKey}-availability-test`;
+  const briefTimeFormatter = new Intl.DateTimeFormat("ru-RU", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+  const briefDateFormatter = new Intl.DateTimeFormat("ru-RU", {
+    day: "numeric",
+    month: "long"
+  });
+
+  const getAllowedValues = (name) =>
+    new Set(briefInputs.filter((input) => input.name === name).map((input) => input.value));
+
+  const allowedBriefValues = {
+    siteType: getAllowedValues("brief_site_type"),
+    goal: getAllowedValues("brief_goal"),
+    features: getAllowedValues("brief_features"),
+    timeline: getAllowedValues("brief_timeline"),
+    budget: getAllowedValues("brief_budget")
+  };
+
   let currentStepIndex = 0;
+  let briefStorage = null;
+  let isBriefDraftReady = false;
+  let isRestoringBriefDraft = false;
 
   const setBriefElementActive = (element, isActive) => {
     element.hidden = !isActive;
@@ -844,6 +878,12 @@ if (projectBrief) {
       budget: String(formData.get("brief_budget") || "")
     };
   };
+
+  const hasBriefAnswers = (data) =>
+    Boolean(data.siteType || data.goal || data.features.length > 0 || data.timeline || data.budget);
+
+  const hasCompleteBrief = (data) =>
+    Boolean(data.siteType && data.goal && data.features.length > 0 && data.timeline && data.budget);
 
   const getFirstIncompleteStepIndex = () =>
     steps.findIndex((step) => getSelectedInputs(step).length === 0);
@@ -874,6 +914,188 @@ if (projectBrief) {
 
     const firstInput = step.querySelector('input[type="radio"], input[type="checkbox"]');
     firstInput?.focus();
+  };
+
+  const formatBriefDraftTime = (date) => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const draftDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const dayDifference = Math.round((today.getTime() - draftDay.getTime()) / 86400000);
+    const time = briefTimeFormatter.format(date);
+
+    if (dayDifference === 0) {
+      return `сегодня, ${time}`;
+    }
+
+    if (dayDifference === 1) {
+      return `вчера, ${time}`;
+    }
+
+    return `${briefDateFormatter.format(date)}, ${time}`;
+  };
+
+  const updateBriefDraftUi = (message, { state = "idle", updatedAt = null } = {}) => {
+    if (draftPanel) {
+      draftPanel.dataset.briefDraftState = state;
+    }
+
+    if (draftStatus) {
+      draftStatus.textContent = message;
+    }
+
+    if (!draftTime) {
+      return;
+    }
+
+    const date = updatedAt ? new Date(updatedAt) : null;
+
+    if (!date || Number.isNaN(date.getTime())) {
+      draftTime.hidden = true;
+      draftTime.dateTime = "";
+      draftTime.textContent = "";
+      return;
+    }
+
+    draftTime.hidden = false;
+    draftTime.dateTime = date.toISOString();
+    draftTime.textContent = `Последнее сохранение: ${formatBriefDraftTime(date)}`;
+  };
+
+  const setDeleteDraftButtonAvailability = ({ available, keepFocusable = false }) => {
+    if (!deleteDraftButton) {
+      return;
+    }
+
+    if (available) {
+      deleteDraftButton.disabled = false;
+      deleteDraftButton.removeAttribute("aria-disabled");
+      return;
+    }
+
+    if (keepFocusable) {
+      deleteDraftButton.disabled = false;
+      deleteDraftButton.setAttribute("aria-disabled", "true");
+      return;
+    }
+
+    deleteDraftButton.disabled = true;
+    deleteDraftButton.removeAttribute("aria-disabled");
+  };
+
+  const disableBriefDraftStorage = () => {
+    briefStorage = null;
+    setDeleteDraftButtonAvailability({
+      available: false
+    });
+
+    updateBriefDraftUi("Сохранение недоступно в этом браузере", {
+      state: "unavailable"
+    });
+  };
+
+  const getBriefStorage = () => {
+    try {
+      const storage = window.localStorage;
+      const testValue = String(Date.now());
+
+      storage.setItem(briefStorageTestKey, testValue);
+      storage.removeItem(briefStorageTestKey);
+
+      return storage;
+    } catch {
+      return null;
+    }
+  };
+
+  const removeBriefDraftFromStorage = () => {
+    if (!briefStorage) {
+      return false;
+    }
+
+    try {
+      briefStorage.removeItem(briefStorageKey);
+      return true;
+    } catch {
+      disableBriefDraftStorage();
+      return false;
+    }
+  };
+
+  const removeBriefDraft = ({
+    message = "Черновик удалён. Текущие ответы остаются на экране.",
+    state = "deleted",
+    keepDeleteButtonFocusable = false
+  } = {}) => {
+    if (!briefStorage) {
+      disableBriefDraftStorage();
+      return;
+    }
+
+    if (!removeBriefDraftFromStorage()) {
+      return;
+    }
+
+    setDeleteDraftButtonAvailability({
+      available: false,
+      keepFocusable: keepDeleteButtonFocusable
+    });
+
+    updateBriefDraftUi(message, {
+      state
+    });
+  };
+
+  const createBriefDraft = () => {
+    const data = getBriefData();
+    const updatedAt = new Date().toISOString();
+
+    return {
+      version: briefStorageVersion,
+      updatedAt,
+      currentStepIndex,
+      isComplete: projectBrief.classList.contains("is-complete") && hasCompleteBrief(data),
+      answers: data
+    };
+  };
+
+  const saveBriefDraft = ({ message = "Черновик сохранён" } = {}) => {
+    if (!isBriefDraftReady || isRestoringBriefDraft || !briefStorage) {
+      return;
+    }
+
+    const data = getBriefData();
+
+    if (!hasBriefAnswers(data)) {
+      if (!removeBriefDraftFromStorage()) {
+        return;
+      }
+
+      setDeleteDraftButtonAvailability({
+        available: false
+      });
+
+      updateBriefDraftUi("Черновик сохраняется автоматически", {
+        state: "idle"
+      });
+      return;
+    }
+
+    const draft = createBriefDraft();
+
+    try {
+      briefStorage.setItem(briefStorageKey, JSON.stringify(draft));
+
+      setDeleteDraftButtonAvailability({
+        available: true
+      });
+
+      updateBriefDraftUi(message, {
+        state: "saved",
+        updatedAt: draft.updatedAt
+      });
+    } catch {
+      disableBriefDraftStorage();
+    }
   };
 
   const updateBriefProgress = (stepIndex, { completed = false } = {}) => {
@@ -915,7 +1137,10 @@ if (projectBrief) {
     });
   };
 
-  const showBriefStep = (requestedIndex, { announce = true, moveFocus = true } = {}) => {
+  const showBriefStep = (
+    requestedIndex,
+    { announce = true, moveFocus = true, saveDraft = true } = {}
+  ) => {
     if (steps.length === 0) {
       return;
     }
@@ -952,6 +1177,10 @@ if (projectBrief) {
     if (announce && status) {
       const stepName = steps[currentStepIndex].dataset.briefStepName || "Шаг брифа";
       status.textContent = `Открыт шаг ${currentStepIndex + 1} из ${steps.length}: ${stepName}.`;
+    }
+
+    if (saveDraft) {
+      saveBriefDraft();
     }
 
     if (moveFocus) {
@@ -1019,7 +1248,7 @@ if (projectBrief) {
     projectBrief.dataset.briefSummary = createBriefSummaryText(data);
   };
 
-  const showBriefSummary = () => {
+  const showBriefSummary = ({ announce = true, moveFocus = true, saveDraft = true } = {}) => {
     renderBriefSummary();
 
     steps.forEach((step) => {
@@ -1039,16 +1268,22 @@ if (projectBrief) {
       completed: true
     });
 
-    if (status) {
+    if (announce && status) {
       status.textContent =
         "Бриф заполнен. Проверьте сводку, измените ответы или добавьте её в заявку.";
     }
 
-    window.requestAnimationFrame(() => {
-      summaryTitle?.focus({
-        preventScroll: true
+    if (saveDraft) {
+      saveBriefDraft();
+    }
+
+    if (moveFocus) {
+      window.requestAnimationFrame(() => {
+        summaryTitle?.focus({
+          preventScroll: true
+        });
       });
-    });
+    }
   };
 
   const removePreviousBriefFromMessage = (message) => {
@@ -1096,6 +1331,207 @@ if (projectBrief) {
     scrollToTrustTarget(landingForm, messageField, "#contacts");
   };
 
+  const isAllowedBriefValue = (value, allowedValues) =>
+    value === "" || (typeof value === "string" && allowedValues.has(value));
+
+  const normalizeBriefDraft = (draft) => {
+    if (
+      !draft ||
+      typeof draft !== "object" ||
+      draft.version !== briefStorageVersion ||
+      typeof draft.updatedAt !== "string" ||
+      !Number.isInteger(draft.currentStepIndex) ||
+      typeof draft.isComplete !== "boolean" ||
+      !draft.answers ||
+      typeof draft.answers !== "object"
+    ) {
+      return null;
+    }
+
+    const updatedAt = new Date(draft.updatedAt);
+    const answers = draft.answers;
+    const draftKeys = Object.keys(draft).sort();
+    const answerKeys = Object.keys(answers).sort();
+    const expectedDraftKeys = ["answers", "currentStepIndex", "isComplete", "updatedAt", "version"];
+    const expectedAnswerKeys = ["budget", "features", "goal", "siteType", "timeline"];
+
+    if (
+      JSON.stringify(draftKeys) !== JSON.stringify(expectedDraftKeys) ||
+      JSON.stringify(answerKeys) !== JSON.stringify(expectedAnswerKeys) ||
+      Number.isNaN(updatedAt.getTime()) ||
+      updatedAt.getTime() > Date.now() + 5 * 60 * 1000 ||
+      draft.currentStepIndex < 0 ||
+      draft.currentStepIndex >= steps.length ||
+      typeof answers.siteType !== "string" ||
+      typeof answers.goal !== "string" ||
+      !Array.isArray(answers.features) ||
+      typeof answers.timeline !== "string" ||
+      typeof answers.budget !== "string"
+    ) {
+      return null;
+    }
+
+    const features = [...new Set(answers.features)];
+
+    if (
+      !features.every(
+        (feature) => typeof feature === "string" && allowedBriefValues.features.has(feature)
+      ) ||
+      !isAllowedBriefValue(answers.siteType, allowedBriefValues.siteType) ||
+      !isAllowedBriefValue(answers.goal, allowedBriefValues.goal) ||
+      !isAllowedBriefValue(answers.timeline, allowedBriefValues.timeline) ||
+      !isAllowedBriefValue(answers.budget, allowedBriefValues.budget)
+    ) {
+      return null;
+    }
+
+    const normalizedAnswers = {
+      siteType: answers.siteType,
+      goal: answers.goal,
+      features,
+      timeline: answers.timeline,
+      budget: answers.budget
+    };
+
+    return {
+      version: briefStorageVersion,
+      updatedAt: updatedAt.toISOString(),
+      currentStepIndex: draft.currentStepIndex,
+      isComplete: draft.isComplete && hasCompleteBrief(normalizedAnswers),
+      answers: normalizedAnswers
+    };
+  };
+
+  const clearBriefInputs = () => {
+    briefInputs.forEach((input) => {
+      input.checked = false;
+    });
+  };
+
+  const restoreBriefInputs = (answers) => {
+    briefInputs.forEach((input) => {
+      if (input.name === "brief_site_type") {
+        input.checked = input.value === answers.siteType;
+        return;
+      }
+
+      if (input.name === "brief_goal") {
+        input.checked = input.value === answers.goal;
+        return;
+      }
+
+      if (input.name === "brief_features") {
+        input.checked = answers.features.includes(input.value);
+        return;
+      }
+
+      if (input.name === "brief_timeline") {
+        input.checked = input.value === answers.timeline;
+        return;
+      }
+
+      if (input.name === "brief_budget") {
+        input.checked = input.value === answers.budget;
+      }
+    });
+  };
+
+  const restoreBriefDraft = () => {
+    if (!briefStorage) {
+      return false;
+    }
+
+    let rawDraft = "";
+
+    try {
+      rawDraft = briefStorage.getItem(briefStorageKey) || "";
+    } catch {
+      disableBriefDraftStorage();
+      return false;
+    }
+
+    if (!rawDraft) {
+      updateBriefDraftUi("Черновик сохраняется автоматически", {
+        state: "idle"
+      });
+      return false;
+    }
+
+    let parsedDraft;
+
+    try {
+      parsedDraft = JSON.parse(rawDraft);
+    } catch {
+      removeBriefDraftFromStorage();
+      clearBriefInputs();
+
+      updateBriefDraftUi("Черновик не удалось восстановить. Начат новый бриф.", {
+        state: "error"
+      });
+      return false;
+    }
+
+    const draft = normalizeBriefDraft(parsedDraft);
+
+    if (!draft) {
+      removeBriefDraftFromStorage();
+      clearBriefInputs();
+
+      updateBriefDraftUi("Черновик не удалось восстановить. Начат новый бриф.", {
+        state: "error"
+      });
+      return false;
+    }
+
+    const draftAge = Date.now() - new Date(draft.updatedAt).getTime();
+
+    if (draftAge > briefDraftLifetime) {
+      removeBriefDraftFromStorage();
+      clearBriefInputs();
+
+      updateBriefDraftUi("Черновик сохраняется автоматически", {
+        state: "idle"
+      });
+      return false;
+    }
+
+    isRestoringBriefDraft = true;
+    restoreBriefInputs(draft.answers);
+
+    if (draft.isComplete) {
+      showBriefSummary({
+        announce: false,
+        moveFocus: false,
+        saveDraft: false
+      });
+    } else {
+      const firstIncompleteStepIndex = getFirstIncompleteStepIndex();
+      const restoredStepIndex =
+        firstIncompleteStepIndex !== -1 && draft.currentStepIndex > firstIncompleteStepIndex
+          ? firstIncompleteStepIndex
+          : draft.currentStepIndex;
+
+      showBriefStep(restoredStepIndex, {
+        announce: false,
+        moveFocus: false,
+        saveDraft: false
+      });
+    }
+
+    isRestoringBriefDraft = false;
+
+    setDeleteDraftButtonAvailability({
+      available: true
+    });
+
+    updateBriefDraftUi("Черновик восстановлен", {
+      state: "restored",
+      updatedAt: draft.updatedAt
+    });
+
+    return true;
+  };
+
   if (previousButton) {
     previousButton.addEventListener("click", () => {
       showBriefStep(currentStepIndex - 1);
@@ -1127,6 +1563,18 @@ if (projectBrief) {
     applyButton.addEventListener("click", (event) => {
       event.preventDefault();
       applyBriefToMessage();
+    });
+  }
+
+  if (deleteDraftButton) {
+    deleteDraftButton.addEventListener("click", () => {
+      if (deleteDraftButton.getAttribute("aria-disabled") === "true") {
+        return;
+      }
+
+      removeBriefDraft({
+        keepDeleteButtonFocusable: true
+      });
     });
   }
 
@@ -1182,6 +1630,8 @@ if (projectBrief) {
       if (status) {
         status.textContent = "";
       }
+
+      saveBriefDraft();
     }
   });
 
@@ -1216,8 +1666,16 @@ if (projectBrief) {
 
       showBriefStep(0, {
         announce: false,
-        moveFocus: false
+        moveFocus: false,
+        saveDraft: false
       });
+
+      if (briefStorage) {
+        removeBriefDraft({
+          message: "Черновик удалён вместе с ответами брифа.",
+          state: "deleted"
+        });
+      }
 
       if (status) {
         status.textContent = "Бриф очищен. Открыт первый шаг.";
@@ -1231,6 +1689,23 @@ if (projectBrief) {
     });
   });
 
+  window.addEventListener("storage", (event) => {
+    if (event.key !== briefStorageKey) {
+      return;
+    }
+
+    setDeleteDraftButtonAvailability({
+      available: event.newValue !== null
+    });
+
+    updateBriefDraftUi(
+      "Черновик изменён в другой вкладке. Обновите страницу, чтобы восстановить новую версию.",
+      {
+        state: "external"
+      }
+    );
+  });
+
   projectBrief.classList.add("is-enhanced");
 
   if (summary) {
@@ -1242,12 +1717,28 @@ if (projectBrief) {
     }
   }
 
-  showBriefStep(0, {
-    announce: false,
-    moveFocus: false
-  });
-}
+  briefStorage = getBriefStorage();
 
+  if (!briefStorage) {
+    disableBriefDraftStorage();
+  } else {
+    updateBriefDraftUi("Черновик сохраняется автоматически", {
+      state: "idle"
+    });
+  }
+
+  const briefDraftRestored = restoreBriefDraft();
+
+  if (!briefDraftRestored) {
+    showBriefStep(0, {
+      announce: false,
+      moveFocus: false,
+      saveDraft: false
+    });
+  }
+
+  isBriefDraftReady = true;
+}
 let getCalculatorConfiguration = () => null;
 let updateCalculator = () => null;
 let selectCalculatorPlan = () => null;

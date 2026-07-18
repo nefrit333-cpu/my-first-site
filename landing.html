@@ -1558,6 +1558,33 @@
               </ol>
             </div>
 
+            <div class="brief-draft" data-brief-draft data-brief-draft-state="idle">
+              <div class="brief-draft__main">
+                <span class="brief-draft__indicator" aria-hidden="true"></span>
+
+                <div>
+                  <strong
+                    class="brief-draft__status"
+                    aria-live="polite"
+                    aria-atomic="true"
+                    data-brief-draft-status
+                  >
+                    Черновик сохраняется автоматически
+                  </strong>
+
+                  <time class="brief-draft__time" data-brief-draft-time datetime="" hidden></time>
+
+                  <p class="brief-draft__privacy">
+                    Черновик хранится только в этом браузере и не отправляется на сервер.
+                  </p>
+                </div>
+              </div>
+
+              <button class="brief-draft__delete" type="button" data-brief-draft-delete disabled>
+                Удалить черновик
+              </button>
+            </div>
+
             <p class="brief-status" aria-live="polite" aria-atomic="true" data-brief-status></p>
 
             <div
@@ -2068,8 +2095,9 @@
           </form>
 
           <p class="brief-note">
-            Бриф использует демонстрационный сценарий учебного проекта. Ответы остаются в браузере
-            только до обновления страницы; сохранение черновика будет добавлено следующим этапом.
+            Бриф использует демонстрационный сценарий учебного проекта. Ответы автоматически
+            сохраняются в этом браузере на срок до 30 дней и не отправляются на сервер до отправки
+            заявки.
           </p>
         </div>
       </section>

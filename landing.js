@@ -579,8 +579,28 @@ const referenceProjectField = landingForm?.querySelector("[data-reference-projec
 const referenceTypeField = landingForm?.querySelector("[data-reference-type-field]");
 const referenceResultField = landingForm?.querySelector("[data-reference-result-field]");
 
+const selectedBrief = landingForm?.querySelector("[data-selected-brief]");
+const selectedBriefTitle = landingForm?.querySelector("#selectedBriefTitle");
+const formBriefSite = landingForm?.querySelector("[data-form-brief-site]");
+const formBriefGoal = landingForm?.querySelector("[data-form-brief-goal]");
+const formBriefFeatures = landingForm?.querySelector("[data-form-brief-features]");
+const formBriefTimeline = landingForm?.querySelector("[data-form-brief-timeline]");
+const formBriefBudget = landingForm?.querySelector("[data-form-brief-budget]");
+const briefFormStatus = landingForm?.querySelector("[data-brief-form-status]");
+const editFormBriefButton = landingForm?.querySelector("[data-edit-form-brief]");
+const clearFormBriefButton = landingForm?.querySelector("[data-clear-form-brief]");
+const briefSiteTypeField = landingForm?.querySelector("[data-brief-site-type-field]");
+const briefGoalField = landingForm?.querySelector("[data-brief-goal-field]");
+const briefFeaturesField = landingForm?.querySelector("[data-brief-features-field]");
+const briefTimelineField = landingForm?.querySelector("[data-brief-timeline-field]");
+const briefBudgetField = landingForm?.querySelector("[data-brief-budget-field]");
+const briefStatusField = landingForm?.querySelector("[data-brief-status-field]");
+const formMessageField = landingForm?.querySelector('[data-form-field="message"]');
+
 let activeFormConfiguration = null;
 let activeFormReference = null;
+let activeFormBrief = null;
+let openProjectBriefEditor = () => {};
 
 const getExtrasText = (extras) =>
   extras.length > 0 ? extras.map((extra) => extra.name).join(", ") : "Без дополнительных услуг";
@@ -758,6 +778,174 @@ const clearFormReference = ({ announce = true } = {}) => {
   }
 };
 
+const briefStartMarker = "=== Бриф проекта ===";
+const briefEndMarker = "=== Конец брифа ===";
+
+const createBriefFormSummaryText = (data) =>
+  [
+    briefStartMarker,
+    `Тип сайта: ${data.siteType}`,
+    `Основная задача: ${data.goal}`,
+    `Возможности: ${data.features.join(", ")}`,
+    `Желаемый срок: ${data.timeline}`,
+    `Ориентировочный бюджет: ${data.budget}`,
+    briefEndMarker
+  ].join("\n");
+
+const removeBriefSummaryFromMessage = (message) => {
+  let result = String(message || "");
+
+  while (result.includes(briefStartMarker)) {
+    const startIndex = result.indexOf(briefStartMarker);
+    const endIndex = result.indexOf(briefEndMarker, startIndex);
+
+    if (endIndex === -1) {
+      result = result.slice(0, startIndex);
+      break;
+    }
+
+    const before = result.slice(0, startIndex).trimEnd();
+    const after = result.slice(endIndex + briefEndMarker.length).trimStart();
+
+    result = [before, after].filter(Boolean).join("\n\n");
+  }
+
+  return result.replace(/\n{3,}/g, "\n\n").trim();
+};
+
+const dispatchFormMessageInput = () => {
+  formMessageField?.dispatchEvent(
+    new Event("input", {
+      bubbles: true
+    })
+  );
+};
+
+const applyBriefToForm = (brief, { announce = true, moveFocus = true } = {}) => {
+  if (
+    !brief ||
+    !brief.siteType ||
+    !brief.goal ||
+    !Array.isArray(brief.features) ||
+    brief.features.length === 0 ||
+    !brief.timeline ||
+    !brief.budget ||
+    !selectedBrief ||
+    !formBriefSite ||
+    !formBriefGoal ||
+    !formBriefFeatures ||
+    !formBriefTimeline ||
+    !formBriefBudget ||
+    !briefSiteTypeField ||
+    !briefGoalField ||
+    !briefFeaturesField ||
+    !briefTimelineField ||
+    !briefBudgetField ||
+    !briefStatusField
+  ) {
+    return false;
+  }
+
+  const wasAlreadyAdded = Boolean(activeFormBrief);
+  const featuresText = brief.features.join(", ");
+
+  activeFormBrief = {
+    siteType: brief.siteType,
+    goal: brief.goal,
+    features: [...brief.features],
+    timeline: brief.timeline,
+    budget: brief.budget
+  };
+
+  briefSiteTypeField.value = brief.siteType;
+  briefGoalField.value = brief.goal;
+  briefFeaturesField.value = featuresText;
+  briefTimelineField.value = brief.timeline;
+  briefBudgetField.value = brief.budget;
+  briefStatusField.value = "Бриф заполнен";
+
+  formBriefSite.textContent = brief.siteType;
+  formBriefGoal.textContent = brief.goal;
+  formBriefFeatures.textContent = featuresText;
+  formBriefTimeline.textContent = brief.timeline;
+  formBriefBudget.textContent = brief.budget;
+
+  selectedBrief.hidden = false;
+
+  if (formMessageField) {
+    const userMessage = removeBriefSummaryFromMessage(formMessageField.value);
+    const summaryText = createBriefFormSummaryText(brief);
+
+    formMessageField.value = [userMessage, summaryText].filter(Boolean).join("\n\n");
+    dispatchFormMessageInput();
+  }
+
+  if (announce && briefFormStatus) {
+    briefFormStatus.textContent = wasAlreadyAdded
+      ? "Данные брифа в заявке обновлены. Текст пользователя и другие выбранные параметры сохранены."
+      : "Бриф добавлен в заявку отдельными полями Formspree и текстовой сводкой.";
+  }
+
+  if (moveFocus) {
+    scrollToTrustTarget(selectedBrief, selectedBriefTitle, "#contacts");
+  }
+
+  return true;
+};
+
+const clearFormBrief = ({ announce = true, moveFocus = false, removeMessage = true } = {}) => {
+  activeFormBrief = null;
+
+  if (briefSiteTypeField) briefSiteTypeField.value = "";
+  if (briefGoalField) briefGoalField.value = "";
+  if (briefFeaturesField) briefFeaturesField.value = "";
+  if (briefTimelineField) briefTimelineField.value = "";
+  if (briefBudgetField) briefBudgetField.value = "";
+  if (briefStatusField) briefStatusField.value = "";
+
+  if (formBriefSite) formBriefSite.textContent = "";
+  if (formBriefGoal) formBriefGoal.textContent = "";
+  if (formBriefFeatures) formBriefFeatures.textContent = "";
+  if (formBriefTimeline) formBriefTimeline.textContent = "";
+  if (formBriefBudget) formBriefBudget.textContent = "";
+
+  if (selectedBrief) {
+    selectedBrief.hidden = true;
+  }
+
+  if (removeMessage && formMessageField) {
+    const updatedMessage = removeBriefSummaryFromMessage(formMessageField.value);
+
+    if (updatedMessage !== formMessageField.value) {
+      formMessageField.value = updatedMessage;
+      dispatchFormMessageInput();
+    }
+  }
+
+  if (announce && briefFormStatus) {
+    briefFormStatus.textContent =
+      "Бриф убран из заявки. Исходные ответы и локальный черновик сохранены.";
+  }
+
+  if (moveFocus) {
+    window.requestAnimationFrame(() => {
+      formMessageField?.focus({
+        preventScroll: true
+      });
+    });
+  }
+};
+
+editFormBriefButton?.addEventListener("click", () => {
+  openProjectBriefEditor();
+});
+
+clearFormBriefButton?.addEventListener("click", () => {
+  clearFormBrief({
+    moveFocus: true
+  });
+});
+
 openTestimonialLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
@@ -809,7 +997,6 @@ if (projectBrief) {
   const draftStatus = projectBrief.querySelector("[data-brief-draft-status]");
   const draftTime = projectBrief.querySelector("[data-brief-draft-time]");
   const deleteDraftButton = projectBrief.querySelector("[data-brief-draft-delete]");
-  const messageField = landingForm?.querySelector('[data-form-field="message"]');
   const briefInputs = Array.from(
     projectBrief.querySelectorAll('input[type="radio"], input[type="checkbox"]')
   );
@@ -822,8 +1009,6 @@ if (projectBrief) {
     budget: projectBrief.querySelector("[data-brief-summary-budget]")
   };
 
-  const briefStartMarker = "=== Бриф проекта ===";
-  const briefEndMarker = "=== Конец брифа ===";
   const briefStorageKey = "dmitriy-web-project-brief-v1";
   const briefStorageVersion = 1;
   const briefDraftLifetime = 30 * 24 * 60 * 60 * 1000;
@@ -1211,16 +1396,7 @@ if (projectBrief) {
     return false;
   };
 
-  const createBriefSummaryText = (data) =>
-    [
-      briefStartMarker,
-      `Тип сайта: ${data.siteType}`,
-      `Основная задача: ${data.goal}`,
-      `Возможности: ${data.features.join(", ")}`,
-      `Желаемый срок: ${data.timeline}`,
-      `Ориентировочный бюджет: ${data.budget}`,
-      briefEndMarker
-    ].join("\n");
+  const createBriefSummaryText = createBriefFormSummaryText;
 
   const renderBriefSummary = () => {
     const data = getBriefData();
@@ -1286,49 +1462,38 @@ if (projectBrief) {
     }
   };
 
-  const removePreviousBriefFromMessage = (message) => {
-    const startIndex = message.indexOf(briefStartMarker);
+  openProjectBriefEditor = () => {
+    showBriefStep(0, {
+      announce: true,
+      moveFocus: false
+    });
 
-    if (startIndex === -1) {
-      return message.trim();
+    const firstTitle = steps[0]?.querySelector("[data-brief-step-title]");
+
+    if (briefFormStatus) {
+      briefFormStatus.textContent =
+        "Открыт бриф для редактирования. Контекст в заявке будет обновлён после повторного добавления.";
     }
 
-    const endIndex = message.indexOf(briefEndMarker, startIndex);
-
-    if (endIndex === -1) {
-      return message.slice(0, startIndex).trim();
-    }
-
-    return `${message.slice(0, startIndex)}${message.slice(
-      endIndex + briefEndMarker.length
-    )}`.trim();
+    scrollToTrustTarget(projectBrief, firstTitle, "#brief");
   };
 
   const applyBriefToMessage = () => {
-    const briefSummaryText = projectBrief.dataset.briefSummary;
+    const data = getBriefData();
+    const wasApplied = applyBriefToForm(data);
 
-    if (!briefSummaryText || !messageField) {
+    if (!wasApplied) {
+      if (status) {
+        status.textContent = "Не удалось добавить бриф. Проверьте, что заполнены все пять шагов.";
+      }
+
       return;
     }
 
-    const messageWithoutPreviousBrief = removePreviousBriefFromMessage(messageField.value);
-
-    messageField.value = [messageWithoutPreviousBrief, briefSummaryText]
-      .filter(Boolean)
-      .join("\n\n");
-
-    messageField.dispatchEvent(
-      new Event("input", {
-        bubbles: true
-      })
-    );
-
     if (status) {
       status.textContent =
-        "Сводка брифа добавлена в поле задачи. Можно дополнить сообщение и отправить заявку.";
+        "Бриф добавлен в заявку. Отдельные поля Formspree и текстовая сводка обновлены.";
     }
-
-    scrollToTrustTarget(landingForm, messageField, "#contacts");
   };
 
   const isAllowedBriefValue = (value, allowedValues) =>
@@ -2061,6 +2226,10 @@ if (landingForm) {
       });
       clearFormReference({
         announce: false
+      });
+      clearFormBrief({
+        announce: false,
+        removeMessage: false
       });
       clearAllErrors();
 

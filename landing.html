@@ -2051,8 +2051,8 @@
               </dl>
 
               <p class="brief-summary__note">
-                Сейчас сводка добавляется в текст сообщения. Структурированная передача полей через
-                Formspree будет расширена в следующих этапах релиза v3.2.
+                После добавления ответы появятся возле формы, попадут в отдельные поля Formspree и
+                сохранятся в текстовой сводке.
               </p>
 
               <div class="brief-summary__actions">
@@ -2365,6 +2365,18 @@
 
             <input type="hidden" name="reference_result" value="" data-reference-result-field />
 
+            <input type="hidden" name="brief_site_type" value="" data-brief-site-type-field />
+
+            <input type="hidden" name="brief_goal" value="" data-brief-goal-field />
+
+            <input type="hidden" name="brief_features" value="" data-brief-features-field />
+
+            <input type="hidden" name="brief_timeline" value="" data-brief-timeline-field />
+
+            <input type="hidden" name="brief_budget" value="" data-brief-budget-field />
+
+            <input type="hidden" name="brief_status" value="" data-brief-status-field />
+
             <div class="landing-form__trap" aria-hidden="true">
               <label for="landingTrap">Не заполняйте это поле</label>
 
@@ -2478,6 +2490,74 @@
               aria-live="polite"
               aria-atomic="true"
               data-reference-status
+            ></p>
+
+            <section
+              class="landing-brief-context"
+              aria-labelledby="selectedBriefTitle"
+              data-selected-brief
+              hidden
+            >
+              <div class="landing-brief-context__header">
+                <div>
+                  <p class="landing-brief-context__kicker">Заполненный бриф</p>
+
+                  <h3 id="selectedBriefTitle" tabindex="-1">Бриф добавлен в заявку</h3>
+                </div>
+
+                <div class="landing-brief-context__actions">
+                  <button
+                    class="landing-brief-context__action landing-brief-context__action--edit"
+                    type="button"
+                    data-edit-form-brief
+                  >
+                    Изменить бриф
+                  </button>
+
+                  <button
+                    class="landing-brief-context__action landing-brief-context__action--clear"
+                    type="button"
+                    aria-label="Убрать заполненный бриф из заявки"
+                    data-clear-form-brief
+                  >
+                    Убрать из заявки
+                  </button>
+                </div>
+              </div>
+
+              <dl class="landing-brief-context__details">
+                <div class="landing-brief-context__item">
+                  <dt>Тип сайта</dt>
+                  <dd data-form-brief-site></dd>
+                </div>
+
+                <div class="landing-brief-context__item">
+                  <dt>Основная задача</dt>
+                  <dd data-form-brief-goal></dd>
+                </div>
+
+                <div class="landing-brief-context__item landing-brief-context__item--features">
+                  <dt>Возможности</dt>
+                  <dd data-form-brief-features></dd>
+                </div>
+
+                <div class="landing-brief-context__item">
+                  <dt>Желаемый срок</dt>
+                  <dd data-form-brief-timeline></dd>
+                </div>
+
+                <div class="landing-brief-context__item landing-brief-context__item--budget">
+                  <dt>Ориентировочный бюджет</dt>
+                  <dd data-form-brief-budget></dd>
+                </div>
+              </dl>
+            </section>
+
+            <p
+              class="visually-hidden"
+              aria-live="polite"
+              aria-atomic="true"
+              data-brief-form-status
             ></p>
 
             <div class="landing-form__group">

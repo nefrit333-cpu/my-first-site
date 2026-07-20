@@ -2092,7 +2092,12 @@ if (clearReferenceButton) {
 if (landingForm) {
   const formStatus = landingForm.querySelector("[data-form-status]");
   const submitButton = landingForm.querySelector("[data-form-submit]");
-  const submitButtonDefaultText = submitButton.textContent;
+  const submitButtonText = landingForm.querySelector("[data-form-submit-text]");
+  const submitIndicator = landingForm.querySelector("[data-form-submit-indicator]");
+  const retryButton = landingForm.querySelector("[data-form-retry]");
+  const submitButtonDefaultText = submitButtonText.textContent.trim();
+  const requestTimeout = 15000;
+  let isSubmitting = false;
 
   const fields = {
     name: landingForm.querySelector('[data-form-field="name"]'),
@@ -2128,16 +2133,50 @@ if (landingForm) {
     Object.keys(fields).forEach(clearFieldError);
   };
 
-  const setStatus = (message, type) => {
-    formStatus.textContent = message;
-    formStatus.classList.remove("is-success", "is-error");
-
-    if (!message) {
-      formStatus.classList.remove("is-visible");
+  const focusElement = (element) => {
+    if (!element) {
       return;
     }
 
-    formStatus.classList.add("is-visible", type === "success" ? "is-success" : "is-error");
+    window.requestAnimationFrame(() => {
+      element.focus({
+        preventScroll: true
+      });
+    });
+  };
+
+  const setFormState = (
+    state,
+    { message = "", showRetry = false, focusStatus = false, focusRetry = false } = {}
+  ) => {
+    const isSending = state === "sending";
+
+    landingForm.dataset.formState = state;
+    landingForm.setAttribute("aria-busy", isSending ? "true" : "false");
+
+    submitButton.disabled = isSending;
+    submitButton.setAttribute("aria-disabled", isSending ? "true" : "false");
+    submitButtonText.textContent = isSending ? "Отправляем заявку…" : submitButtonDefaultText;
+    submitIndicator.hidden = !isSending;
+
+    retryButton.hidden = !showRetry || isSending;
+
+    formStatus.textContent = message;
+    formStatus.classList.remove("is-visible", "is-sending", "is-success", "is-error");
+    formStatus.setAttribute("role", state === "error" ? "alert" : "status");
+    formStatus.setAttribute("aria-live", state === "error" ? "assertive" : "polite");
+
+    if (message) {
+      formStatus.classList.add("is-visible", `is-${state}`);
+    }
+
+    if (focusStatus) {
+      focusElement(formStatus);
+    }
+
+    if (focusRetry && !retryButton.hidden) {
+      focusElement(retryButton);
+    }
   };
 
   const validateForm = () => {
@@ -2167,57 +2206,107 @@ if (landingForm) {
     return isValid;
   };
 
-  const setLoading = (isLoading) => {
-    submitButton.disabled = isLoading;
-    submitButton.textContent = isLoading ? "Отправляем..." : submitButtonDefaultText;
+  const createSubmissionError = (code) => {
+    const error = new Error(code);
+    error.code = code;
+    return error;
+  };
+
+  const getSubmissionErrorMessage = (error, didTimeout) => {
+    if (didTimeout || error?.name === "AbortError") {
+      return "Сервер отвечает слишком долго. Проверьте интернет и повторите отправку.";
+    }
+
+    if (error instanceof TypeError) {
+      return "Не удалось связаться с сервером. Проверьте подключение к интернету.";
+    }
+
+    if (error?.code === "invalid-json") {
+      return "Не удалось подтвердить отправку. Повторите попытку.";
+    }
+
+    if (error?.code === "http") {
+      return "Сервер временно не принял заявку. Повторите попытку.";
+    }
+
+    return "Не удалось отправить заявку. Данные сохранены — повторите попытку.";
   };
 
   Object.keys(fields).forEach((fieldName) => {
     fields[fieldName].addEventListener("input", () => {
       clearFieldError(fieldName);
-      setStatus("", "error");
+
+      if (!isSubmitting) {
+        setFormState("idle");
+      }
     });
   });
 
-  landingForm.addEventListener("submit", async (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    setStatus("", "error");
+    if (isSubmitting) {
+      return;
+    }
 
     const trapField = landingForm.querySelector('[name="contact_trap"]');
 
     if (trapField && trapField.value.trim()) {
+      setFormState("idle");
       return;
     }
+
+    setFormState("validating");
 
     if (!validateForm()) {
-      setStatus("Проверьте поля формы и исправьте ошибки.", "error");
+      setFormState("error", {
+        message: "Проверьте поля формы и исправьте ошибки."
+      });
 
       const firstInvalidField = landingForm.querySelector('[aria-invalid="true"]');
-
-      if (firstInvalidField) {
-        firstInvalidField.focus();
-      }
-
+      focusElement(firstInvalidField);
       return;
     }
+
+    isSubmitting = true;
+    setFormState("sending", {
+      message: "Отправляем заявку. Пожалуйста, подождите."
+    });
 
     const formData = new FormData(landingForm);
     formData.delete("contact_trap");
 
-    try {
-      setLoading(true);
+    const controller = new AbortController();
+    let didTimeout = false;
+    const timeoutId = window.setTimeout(() => {
+      didTimeout = true;
+      controller.abort();
+    }, requestTimeout);
 
+    try {
       const response = await fetch(landingForm.action, {
         method: "POST",
         body: formData,
         headers: {
           Accept: "application/json"
-        }
+        },
+        signal: controller.signal
       });
 
       if (!response.ok) {
-        throw new Error("Formspree request failed");
+        throw createSubmissionError("http");
+      }
+
+      let responseData;
+
+      try {
+        responseData = await response.json();
+      } catch {
+        throw createSubmissionError("invalid-json");
+      }
+
+      if (!responseData || typeof responseData !== "object") {
+        throw createSubmissionError("invalid-json");
       }
 
       landingForm.reset();
@@ -2233,17 +2322,31 @@ if (landingForm) {
       });
       clearAllErrors();
 
-      setStatus(
-        "Заявка отправлена. Это учебная форма, но логика отправки работает как в реальном проекте.",
-        "success"
-      );
+      setFormState("success", {
+        message:
+          "Заявка отправлена. Это учебная форма, но логика отправки работает как в реальном проекте.",
+        focusStatus: true
+      });
     } catch (error) {
-      setStatus(
-        "Не получилось отправить заявку. Проверьте интернет и попробуйте ещё раз.",
-        "error"
-      );
+      setFormState("error", {
+        message: getSubmissionErrorMessage(error, didTimeout),
+        showRetry: true,
+        focusRetry: true
+      });
     } finally {
-      setLoading(false);
+      window.clearTimeout(timeoutId);
+      isSubmitting = false;
     }
+  };
+
+  retryButton.addEventListener("click", () => {
+    if (isSubmitting) {
+      return;
+    }
+
+    landingForm.requestSubmit(submitButton);
   });
+
+  landingForm.addEventListener("submit", handleFormSubmit);
+  setFormState("idle");
 }

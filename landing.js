@@ -601,6 +601,7 @@ let activeFormConfiguration = null;
 let activeFormReference = null;
 let activeFormBrief = null;
 let openProjectBriefEditor = () => {};
+let openProjectBriefOverview = () => {};
 
 const getExtrasText = (extras) =>
   extras.length > 0 ? extras.map((extra) => extra.name).join(", ") : "Без дополнительных услуг";
@@ -1478,6 +1479,28 @@ if (projectBrief) {
     scrollToTrustTarget(projectBrief, firstTitle, "#brief");
   };
 
+  openProjectBriefOverview = () => {
+    const hasCompletedSummary =
+      projectBrief.classList.contains("is-complete") && hasCompleteBrief(getBriefData());
+
+    if (hasCompletedSummary) {
+      showBriefSummary({
+        announce: true,
+        moveFocus: false
+      });
+      scrollToTrustTarget(projectBrief, summaryTitle, "#brief");
+      return;
+    }
+
+    showBriefStep(currentStepIndex, {
+      announce: true,
+      moveFocus: false
+    });
+
+    const currentTitle = steps[currentStepIndex]?.querySelector("[data-brief-step-title]");
+    scrollToTrustTarget(projectBrief, currentTitle, "#brief");
+  };
+
   const applyBriefToMessage = () => {
     const data = getBriefData();
     const wasApplied = applyBriefToForm(data);
@@ -2095,9 +2118,39 @@ if (landingForm) {
   const submitButtonText = landingForm.querySelector("[data-form-submit-text]");
   const submitIndicator = landingForm.querySelector("[data-form-submit-indicator]");
   const retryButton = landingForm.querySelector("[data-form-retry]");
+  const confirmation = landingForm.querySelector("[data-form-confirmation]");
+  const confirmationTitle = landingForm.querySelector("#landingFormConfirmationTitle");
+  const confirmationLive = landingForm.querySelector("[data-confirmation-live]");
+  const newApplicationButton = landingForm.querySelector("[data-confirmation-new]");
+  const returnToBriefButton = landingForm.querySelector("[data-confirmation-brief-action]");
+  const confirmationItems = {
+    submittedAt: landingForm.querySelector('[data-confirmation-item="submitted-at"]'),
+    email: landingForm.querySelector('[data-confirmation-item="email"]'),
+    plan: landingForm.querySelector('[data-confirmation-item="plan"]'),
+    extras: landingForm.querySelector('[data-confirmation-item="extras"]'),
+    price: landingForm.querySelector('[data-confirmation-item="price"]'),
+    project: landingForm.querySelector('[data-confirmation-item="project"]'),
+    projectType: landingForm.querySelector('[data-confirmation-item="project-type"]'),
+    brief: landingForm.querySelector('[data-confirmation-item="brief"]')
+  };
+  const confirmationValues = {
+    submittedAt: landingForm.querySelector("[data-confirmation-submitted-at]"),
+    email: landingForm.querySelector("[data-confirmation-email]"),
+    plan: landingForm.querySelector("[data-confirmation-plan]"),
+    extras: landingForm.querySelector("[data-confirmation-extras]"),
+    price: landingForm.querySelector("[data-confirmation-price]"),
+    project: landingForm.querySelector("[data-confirmation-project]"),
+    projectType: landingForm.querySelector("[data-confirmation-project-type]"),
+    brief: landingForm.querySelector("[data-confirmation-brief]")
+  };
   const submitButtonDefaultText = submitButtonText.textContent.trim();
   const requestTimeout = 15000;
+  const confirmationDateFormatter = new Intl.DateTimeFormat("ru-RU", {
+    dateStyle: "long",
+    timeStyle: "short"
+  });
   let isSubmitting = false;
+  let lastSubmissionSnapshot = null;
 
   const fields = {
     name: landingForm.querySelector('[data-form-field="name"]'),
@@ -2179,6 +2232,85 @@ if (landingForm) {
     }
   };
 
+  const getFormDataText = (formData, name) => {
+    const value = formData.get(name);
+    return typeof value === "string" ? value.trim() : "";
+  };
+
+  const createSubmissionSnapshot = (formData, submittedAt) => ({
+    email: getFormDataText(formData, "email"),
+    selectedPlan: getFormDataText(formData, "selected_plan"),
+    selectedExtras: getFormDataText(formData, "selected_extras"),
+    estimatedPrice: getFormDataText(formData, "estimated_price"),
+    referenceSource: getFormDataText(formData, "reference_source"),
+    referenceProject: getFormDataText(formData, "reference_project"),
+    referenceType: getFormDataText(formData, "reference_type"),
+    referenceResult: getFormDataText(formData, "reference_result"),
+    briefSiteType: getFormDataText(formData, "brief_site_type"),
+    briefGoal: getFormDataText(formData, "brief_goal"),
+    briefFeatures: getFormDataText(formData, "brief_features"),
+    briefTimeline: getFormDataText(formData, "brief_timeline"),
+    briefBudget: getFormDataText(formData, "brief_budget"),
+    briefStatus: getFormDataText(formData, "brief_status"),
+    submittedAt
+  });
+
+  const setConfirmationValue = (key, value) => {
+    const item = confirmationItems[key];
+    const output = confirmationValues[key];
+    const hasValue = Boolean(value);
+
+    if (!item || !output) {
+      return;
+    }
+
+    item.hidden = !hasValue;
+    output.textContent = hasValue ? value : "";
+  };
+
+  const hideSubmissionConfirmation = ({ announce = false } = {}) => {
+    if (!confirmation) {
+      return;
+    }
+
+    confirmation.hidden = true;
+    lastSubmissionSnapshot = null;
+
+    Object.keys(confirmationValues).forEach((key) => {
+      setConfirmationValue(key, "");
+    });
+
+    if (announce && confirmationLive) {
+      confirmationLive.textContent = "Подтверждение скрыто. Форма готова для новой заявки.";
+    }
+  };
+
+  const showSubmissionConfirmation = (snapshot) => {
+    if (!confirmation || !snapshot) {
+      return;
+    }
+
+    lastSubmissionSnapshot = snapshot;
+
+    setConfirmationValue("submittedAt", confirmationDateFormatter.format(snapshot.submittedAt));
+    setConfirmationValue("email", snapshot.email);
+    setConfirmationValue("plan", snapshot.selectedPlan);
+    setConfirmationValue("extras", snapshot.selectedExtras);
+    setConfirmationValue("price", snapshot.estimatedPrice);
+    setConfirmationValue("project", snapshot.referenceProject);
+    setConfirmationValue("projectType", snapshot.referenceType);
+    setConfirmationValue("brief", snapshot.briefStatus ? "Добавлен к заявке" : "");
+
+    confirmation.hidden = false;
+
+    if (confirmationLive) {
+      confirmationLive.textContent =
+        "Заявка успешно отправлена. Показана сводка отправленных данных.";
+    }
+
+    focusElement(confirmationTitle);
+  };
+
   const validateForm = () => {
     let isValid = true;
 
@@ -2236,6 +2368,10 @@ if (landingForm) {
     fields[fieldName].addEventListener("input", () => {
       clearFieldError(fieldName);
 
+      if (confirmation && !confirmation.hidden) {
+        hideSubmissionConfirmation();
+      }
+
       if (!isSubmitting) {
         setFormState("idle");
       }
@@ -2254,6 +2390,10 @@ if (landingForm) {
     if (trapField && trapField.value.trim()) {
       setFormState("idle");
       return;
+    }
+
+    if (confirmation && !confirmation.hidden) {
+      hideSubmissionConfirmation();
     }
 
     setFormState("validating");
@@ -2309,6 +2449,8 @@ if (landingForm) {
         throw createSubmissionError("invalid-json");
       }
 
+      const submissionSnapshot = createSubmissionSnapshot(formData, new Date());
+
       landingForm.reset();
       clearFormConfiguration({
         announce: false
@@ -2323,10 +2465,9 @@ if (landingForm) {
       clearAllErrors();
 
       setFormState("success", {
-        message:
-          "Заявка отправлена. Это учебная форма, но логика отправки работает как в реальном проекте.",
-        focusStatus: true
+        message: "Заявка отправлена. Подробности показаны в подтверждении ниже."
       });
+      showSubmissionConfirmation(submissionSnapshot);
     } catch (error) {
       setFormState("error", {
         message: getSubmissionErrorMessage(error, didTimeout),
@@ -2345,6 +2486,22 @@ if (landingForm) {
     }
 
     landingForm.requestSubmit(submitButton);
+  });
+
+  newApplicationButton?.addEventListener("click", () => {
+    hideSubmissionConfirmation({
+      announce: true
+    });
+    setFormState("idle");
+    focusElement(fields.name);
+  });
+
+  returnToBriefButton?.addEventListener("click", () => {
+    if (!lastSubmissionSnapshot) {
+      return;
+    }
+
+    openProjectBriefOverview();
   });
 
   landingForm.addEventListener("submit", handleFormSubmit);

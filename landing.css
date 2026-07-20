@@ -3286,4 +3286,231 @@ textarea:focus-visible {
     transition: none !important;
   }
 }
+/* ===== FORM SUBMISSION CONFIRMATION START ===== */
+.landing-form-confirmation {
+  display: grid;
+  min-width: 0;
+  gap: 24px;
+  padding: clamp(22px, 4vw, 34px);
+  overflow: hidden;
+  border: 1px solid rgba(74, 222, 128, 0.34);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(20, 184, 166, 0.2), transparent 18rem),
+    linear-gradient(145deg, rgba(3, 18, 31, 0.98), rgba(8, 29, 43, 0.96));
+  box-shadow:
+    0 26px 70px rgba(2, 8, 23, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.landing-form-confirmation[hidden] {
+  display: none;
+}
+
+.landing-form-confirmation__header {
+  display: grid;
+  min-width: 0;
+  align-items: start;
+  gap: 16px;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.landing-form-confirmation__icon {
+  display: inline-flex;
+  width: 52px;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(134, 239, 172, 0.52);
+  border-radius: 18px;
+  color: #dcfce7;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(145deg, rgba(22, 163, 74, 0.72), rgba(13, 148, 136, 0.7));
+  box-shadow:
+    0 16px 34px rgba(20, 184, 166, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.landing-form-confirmation__kicker {
+  margin: 0 0 8px;
+  color: #86efac;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.landing-form-confirmation h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.landing-form-confirmation h3:focus {
+  border-radius: 8px;
+  outline: 3px solid #5eead4;
+  outline-offset: 6px;
+}
+
+.landing-form-confirmation__lead {
+  max-width: 760px;
+  margin: 12px 0 0;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.landing-form-confirmation__details {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.landing-form-confirmation__item {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.landing-form-confirmation__item[hidden] {
+  display: none;
+}
+
+.landing-form-confirmation__item--wide {
+  grid-column: 1 / -1;
+}
+
+.landing-form-confirmation__item dt {
+  margin: 0 0 7px;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.landing-form-confirmation__item dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #f8fafc;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.landing-form-confirmation__actions {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.landing-form-confirmation__new,
+.landing-form-confirmation__brief {
+  min-width: min(100%, 250px);
+}
+
+.landing-form-confirmation__brief {
+  color: #dbeafe;
+  border-color: rgba(147, 197, 253, 0.38);
+  background: rgba(15, 23, 42, 0.62);
+  box-shadow: 0 14px 32px rgba(2, 6, 23, 0.2);
+}
+
+.landing-form[data-form-state="success"] {
+  border-color: rgba(74, 222, 128, 0.5);
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.3),
+    0 0 0 4px rgba(34, 197, 94, 0.1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .landing-form-confirmation__brief:hover,
+  .landing-form-confirmation__brief:focus-visible {
+    color: #ffffff;
+    border-color: rgba(45, 212, 191, 0.68);
+    background: rgba(15, 23, 42, 0.84);
+    box-shadow: 0 18px 40px rgba(2, 6, 23, 0.28);
+  }
+
+  .landing-form-confirmation__item {
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .landing-form-confirmation__item:hover {
+    border-color: rgba(45, 212, 191, 0.4);
+    background: rgba(15, 35, 50, 0.74);
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 720px) {
+  .landing-form-confirmation {
+    gap: 20px;
+    padding: 22px 18px;
+    border-radius: 22px;
+  }
+
+  .landing-form-confirmation__header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .landing-form-confirmation__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .landing-form-confirmation__details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .landing-form-confirmation__item--wide {
+    grid-column: auto;
+  }
+
+  .landing-form-confirmation__actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .landing-form-confirmation__new,
+  .landing-form-confirmation__brief {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .landing-form-confirmation__new:active,
+  .landing-form-confirmation__brief:active {
+    transform: scale(0.99);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-form-confirmation__item,
+  .landing-form-confirmation__new,
+  .landing-form-confirmation__brief {
+    transition: none !important;
+  }
+
+  .landing-form-confirmation__item:hover,
+  .landing-form-confirmation__new:hover,
+  .landing-form-confirmation__brief:hover {
+    transform: none !important;
+  }
+}
+/* ===== FORM SUBMISSION CONFIRMATION END ===== */
+
 /* ===== RELIABLE FORM SUBMISSION STATES END ===== */

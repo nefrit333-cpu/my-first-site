@@ -2649,6 +2649,107 @@
                 data-form-status
               ></p>
             </div>
+
+            <section
+              class="landing-form-confirmation"
+              aria-labelledby="landingFormConfirmationTitle"
+              data-form-confirmation
+              hidden
+            >
+              <div class="landing-form-confirmation__header">
+                <span class="landing-form-confirmation__icon" aria-hidden="true">✓</span>
+
+                <div>
+                  <p class="landing-form-confirmation__kicker">Заявка принята</p>
+
+                  <h3 id="landingFormConfirmationTitle" tabindex="-1">Заявка успешно отправлена</h3>
+
+                  <p class="landing-form-confirmation__lead">
+                    Мы сохранили краткую сводку отправленных данных. Ответ придёт на указанный
+                    email.
+                  </p>
+                </div>
+              </div>
+
+              <dl class="landing-form-confirmation__details">
+                <div class="landing-form-confirmation__item" data-confirmation-item="submitted-at">
+                  <dt>Время отправки</dt>
+                  <dd data-confirmation-submitted-at></dd>
+                </div>
+
+                <div class="landing-form-confirmation__item" data-confirmation-item="email">
+                  <dt>Email для ответа</dt>
+                  <dd data-confirmation-email></dd>
+                </div>
+
+                <div class="landing-form-confirmation__item" data-confirmation-item="plan" hidden>
+                  <dt>Тариф</dt>
+                  <dd data-confirmation-plan></dd>
+                </div>
+
+                <div
+                  class="landing-form-confirmation__item landing-form-confirmation__item--wide"
+                  data-confirmation-item="extras"
+                  hidden
+                >
+                  <dt>Дополнительные услуги</dt>
+                  <dd data-confirmation-extras></dd>
+                </div>
+
+                <div class="landing-form-confirmation__item" data-confirmation-item="price" hidden>
+                  <dt>Предварительная стоимость</dt>
+                  <dd data-confirmation-price></dd>
+                </div>
+
+                <div
+                  class="landing-form-confirmation__item landing-form-confirmation__item--wide"
+                  data-confirmation-item="project"
+                  hidden
+                >
+                  <dt>Пример проекта</dt>
+                  <dd data-confirmation-project></dd>
+                </div>
+
+                <div
+                  class="landing-form-confirmation__item"
+                  data-confirmation-item="project-type"
+                  hidden
+                >
+                  <dt>Тип проекта</dt>
+                  <dd data-confirmation-project-type></dd>
+                </div>
+
+                <div class="landing-form-confirmation__item" data-confirmation-item="brief" hidden>
+                  <dt>Бриф</dt>
+                  <dd data-confirmation-brief></dd>
+                </div>
+              </dl>
+
+              <div class="landing-form-confirmation__actions">
+                <button
+                  class="landing-button landing-form-confirmation__new"
+                  type="button"
+                  data-confirmation-new
+                >
+                  Отправить ещё одну заявку
+                </button>
+
+                <button
+                  class="landing-button landing-button--secondary landing-form-confirmation__brief"
+                  type="button"
+                  data-confirmation-brief-action
+                >
+                  Вернуться к брифу
+                </button>
+              </div>
+            </section>
+
+            <p
+              class="visually-hidden"
+              aria-live="polite"
+              aria-atomic="true"
+              data-confirmation-live
+            ></p>
           </form>
         </div>
       </section>

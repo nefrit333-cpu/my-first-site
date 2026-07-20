@@ -2340,6 +2340,9 @@
             action="https://formspree.io/f/xbdvedyr"
             method="POST"
             novalidate
+            aria-busy="false"
+            aria-describedby="landingFormStatus"
+            data-form-state="idle"
             data-landing-form
           >
             <input type="hidden" name="_subject" value="Заявка с учебного лендинга услуги" />
@@ -2388,13 +2391,6 @@
                 autocomplete="off"
               />
             </div>
-
-            <p
-              class="landing-form__status"
-              id="landingFormStatus"
-              aria-live="polite"
-              data-form-status
-            ></p>
 
             <section
               class="landing-selection"
@@ -2615,7 +2611,44 @@
               <p class="landing-form__error" id="landingMessageError" data-form-error="message"></p>
             </div>
 
-            <button class="landing-button" type="submit" data-form-submit>Отправить заявку</button>
+            <div class="landing-form__submission" data-form-submission>
+              <div class="landing-form__submit-row">
+                <button
+                  class="landing-button landing-form__submit"
+                  type="submit"
+                  aria-disabled="false"
+                  data-form-submit
+                >
+                  <span
+                    class="landing-form__submit-indicator"
+                    aria-hidden="true"
+                    data-form-submit-indicator
+                    hidden
+                  ></span>
+
+                  <span data-form-submit-text>Отправить заявку</span>
+                </button>
+
+                <button
+                  class="landing-button landing-button--secondary landing-form__retry"
+                  type="button"
+                  data-form-retry
+                  hidden
+                >
+                  Повторить отправку
+                </button>
+              </div>
+
+              <p
+                class="landing-form__status"
+                id="landingFormStatus"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+                tabindex="-1"
+                data-form-status
+              ></p>
+            </div>
           </form>
         </div>
       </section>

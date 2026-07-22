@@ -2611,6 +2611,49 @@
               <p class="landing-form__error" id="landingMessageError" data-form-error="message"></p>
             </div>
 
+            <section
+              class="landing-form-draft"
+              aria-labelledby="applicationDraftTitle"
+              data-application-draft
+              data-draft-state="idle"
+              hidden
+            >
+              <div class="landing-form-draft__content">
+                <div class="landing-form-draft__copy">
+                  <p class="landing-form-draft__kicker">Черновик заявки</p>
+
+                  <h3 class="landing-form-draft__title" id="applicationDraftTitle">
+                    Продолжите после обновления страницы
+                  </h3>
+
+                  <p
+                    class="landing-form-draft__status"
+                    aria-live="polite"
+                    aria-atomic="true"
+                    data-application-draft-status
+                  >
+                    Черновик сохраняется в этой вкладке.
+                  </p>
+
+                  <p class="landing-form-draft__time" data-application-draft-time hidden></p>
+
+                  <p class="landing-form-draft__privacy">
+                    Черновик хранится только в этой вкладке браузера и не отправляется отдельно.
+                  </p>
+                </div>
+
+                <button
+                  class="landing-form-draft__clear"
+                  type="button"
+                  aria-disabled="true"
+                  data-application-draft-clear
+                  disabled
+                >
+                  Очистить черновик заявки
+                </button>
+              </div>
+            </section>
+
             <div class="landing-form__submission" data-form-submission>
               <div class="landing-form__submit-row">
                 <button

@@ -2123,6 +2123,11 @@ if (landingForm) {
   const confirmationLive = landingForm.querySelector("[data-confirmation-live]");
   const newApplicationButton = landingForm.querySelector("[data-confirmation-new]");
   const returnToBriefButton = landingForm.querySelector("[data-confirmation-brief-action]");
+
+  const applicationDraftPanel = landingForm.querySelector("[data-application-draft]");
+  const applicationDraftStatus = landingForm.querySelector("[data-application-draft-status]");
+  const applicationDraftTime = landingForm.querySelector("[data-application-draft-time]");
+  const applicationDraftClearButton = landingForm.querySelector("[data-application-draft-clear]");
   const confirmationItems = {
     submittedAt: landingForm.querySelector('[data-confirmation-item="submitted-at"]'),
     email: landingForm.querySelector('[data-confirmation-item="email"]'),
@@ -2152,6 +2157,29 @@ if (landingForm) {
   let isSubmitting = false;
   let lastSubmissionSnapshot = null;
 
+  const applicationDraftStorageKey = "dmitriy-web-application-draft-v1";
+  const applicationDraftStorageVersion = 1;
+  const applicationDraftLifetime = 24 * 60 * 60 * 1000;
+  const applicationDraftSaveDelay = 400;
+  const applicationDraftStorageTestKey = `${applicationDraftStorageKey}-availability-test`;
+  const applicationDraftTimeFormatter = new Intl.DateTimeFormat("ru-RU", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+  const applicationDraftLimits = {
+    name: 120,
+    email: 254,
+    message: 5000,
+    context: 1000
+  };
+  let applicationDraftStorage = null;
+  let applicationDraftTimer = null;
+  let applicationDraftReady = false;
+  let isRestoringApplicationDraft = false;
+  let isIgnoringApplicationDraftMutations = false;
+  let isApplicationDraftSuppressed = false;
+  let hasStoredApplicationDraft = false;
+
   const fields = {
     name: landingForm.querySelector('[data-form-field="name"]'),
     email: landingForm.querySelector('[data-form-field="email"]'),
@@ -2162,6 +2190,494 @@ if (landingForm) {
     name: landingForm.querySelector('[data-form-error="name"]'),
     email: landingForm.querySelector('[data-form-error="email"]'),
     message: landingForm.querySelector('[data-form-error="message"]')
+  };
+
+  const setApplicationDraftStatus = (message, { state = "idle", updatedAt = null } = {}) => {
+    if (!applicationDraftPanel || !applicationDraftStatus) {
+      return;
+    }
+
+    applicationDraftPanel.dataset.draftState = state;
+    applicationDraftStatus.textContent = message;
+
+    if (!applicationDraftTime) {
+      return;
+    }
+
+    const date = updatedAt instanceof Date ? updatedAt : updatedAt ? new Date(updatedAt) : null;
+    const hasValidDate = date && !Number.isNaN(date.getTime());
+
+    applicationDraftTime.hidden = !hasValidDate;
+    applicationDraftTime.textContent = hasValidDate
+      ? `Последнее сохранение: ${applicationDraftTimeFormatter.format(date)}`
+      : "";
+  };
+
+  const syncApplicationDraftClearButton = () => {
+    if (!applicationDraftClearButton) {
+      return;
+    }
+
+    const shouldDisable = !applicationDraftStorage || !hasStoredApplicationDraft || isSubmitting;
+
+    applicationDraftClearButton.disabled = shouldDisable;
+    applicationDraftClearButton.setAttribute("aria-disabled", shouldDisable ? "true" : "false");
+  };
+
+  const getApplicationDraftStorage = () => {
+    try {
+      const storage = window.sessionStorage;
+
+      storage.setItem(applicationDraftStorageTestKey, "1");
+      storage.removeItem(applicationDraftStorageTestKey);
+
+      return storage;
+    } catch {
+      return null;
+    }
+  };
+
+  const disableApplicationDraftStorage = () => {
+    applicationDraftStorage = null;
+    hasStoredApplicationDraft = false;
+    syncApplicationDraftClearButton();
+
+    if (applicationDraftPanel) {
+      applicationDraftPanel.hidden = false;
+    }
+
+    setApplicationDraftStatus("Сохранение недоступно в этом браузере.", {
+      state: "unavailable"
+    });
+  };
+
+  const removeApplicationDraftFromStorage = () => {
+    if (!applicationDraftStorage) {
+      return false;
+    }
+
+    try {
+      applicationDraftStorage.removeItem(applicationDraftStorageKey);
+      hasStoredApplicationDraft = false;
+      syncApplicationDraftClearButton();
+      return true;
+    } catch {
+      disableApplicationDraftStorage();
+      return false;
+    }
+  };
+
+  const getLimitedText = (value, limit) =>
+    typeof value === "string" ? value.trim().slice(0, limit) : "";
+
+  const getApplicationDraftContext = () => ({
+    selected_plan: getLimitedText(selectedPlanField?.value, applicationDraftLimits.context),
+    selected_extras: getLimitedText(selectedExtrasField?.value, applicationDraftLimits.context),
+    estimated_price: getLimitedText(estimatedPriceField?.value, applicationDraftLimits.context),
+    reference_source: getLimitedText(referenceSourceField?.value, applicationDraftLimits.context),
+    reference_project: getLimitedText(referenceProjectField?.value, applicationDraftLimits.context),
+    reference_type: getLimitedText(referenceTypeField?.value, applicationDraftLimits.context),
+    reference_result: getLimitedText(referenceResultField?.value, applicationDraftLimits.context),
+    brief_site_type: getLimitedText(briefSiteTypeField?.value, applicationDraftLimits.context),
+    brief_goal: getLimitedText(briefGoalField?.value, applicationDraftLimits.context),
+    brief_features: getLimitedText(briefFeaturesField?.value, applicationDraftLimits.context),
+    brief_timeline: getLimitedText(briefTimelineField?.value, applicationDraftLimits.context),
+    brief_budget: getLimitedText(briefBudgetField?.value, applicationDraftLimits.context),
+    brief_status: getLimitedText(briefStatusField?.value, applicationDraftLimits.context)
+  });
+
+  const createApplicationDraft = () => ({
+    version: applicationDraftStorageVersion,
+    updatedAt: new Date().toISOString(),
+    fields: {
+      name: getLimitedText(fields.name.value, applicationDraftLimits.name),
+      email: getLimitedText(fields.email.value, applicationDraftLimits.email),
+      message: getLimitedText(fields.message.value, applicationDraftLimits.message)
+    },
+    context: getApplicationDraftContext()
+  });
+
+  const hasApplicationDraftData = (draft) =>
+    [...Object.values(draft.fields), ...Object.values(draft.context)].some(Boolean);
+
+  const saveApplicationDraftNow = ({ announce = true, force = false } = {}) => {
+    if (
+      !applicationDraftReady ||
+      !applicationDraftStorage ||
+      isRestoringApplicationDraft ||
+      isApplicationDraftSuppressed ||
+      (isSubmitting && !force)
+    ) {
+      return false;
+    }
+
+    if (applicationDraftTimer !== null) {
+      window.clearTimeout(applicationDraftTimer);
+      applicationDraftTimer = null;
+    }
+
+    const draft = createApplicationDraft();
+
+    if (!hasApplicationDraftData(draft)) {
+      removeApplicationDraftFromStorage();
+
+      if (announce) {
+        setApplicationDraftStatus("Черновик сохраняется в этой вкладке.", {
+          state: "idle"
+        });
+      }
+
+      return false;
+    }
+
+    try {
+      applicationDraftStorage.setItem(applicationDraftStorageKey, JSON.stringify(draft));
+      hasStoredApplicationDraft = true;
+      syncApplicationDraftClearButton();
+
+      if (announce) {
+        setApplicationDraftStatus("Черновик сохранён.", {
+          state: "saved",
+          updatedAt: draft.updatedAt
+        });
+      }
+
+      return true;
+    } catch {
+      disableApplicationDraftStorage();
+      return false;
+    }
+  };
+
+  const scheduleApplicationDraftSave = () => {
+    if (
+      !applicationDraftReady ||
+      !applicationDraftStorage ||
+      isRestoringApplicationDraft ||
+      isApplicationDraftSuppressed ||
+      isSubmitting
+    ) {
+      return;
+    }
+
+    if (applicationDraftTimer !== null) {
+      window.clearTimeout(applicationDraftTimer);
+    }
+
+    setApplicationDraftStatus("Сохраняем черновик…", {
+      state: "saving"
+    });
+
+    applicationDraftTimer = window.setTimeout(() => {
+      applicationDraftTimer = null;
+      saveApplicationDraftNow();
+    }, applicationDraftSaveDelay);
+  };
+
+  const normalizeApplicationDraftString = (object, key, limit) => {
+    const value = object[key];
+
+    if (value === undefined) {
+      return "";
+    }
+
+    if (typeof value !== "string") {
+      return null;
+    }
+
+    return value.trim().slice(0, limit);
+  };
+
+  const normalizeApplicationDraft = (draft) => {
+    if (
+      !draft ||
+      typeof draft !== "object" ||
+      Array.isArray(draft) ||
+      draft.version !== applicationDraftStorageVersion ||
+      typeof draft.updatedAt !== "string" ||
+      !draft.fields ||
+      typeof draft.fields !== "object" ||
+      Array.isArray(draft.fields) ||
+      !draft.context ||
+      typeof draft.context !== "object" ||
+      Array.isArray(draft.context)
+    ) {
+      return null;
+    }
+
+    const updatedAt = new Date(draft.updatedAt);
+    const updatedAtTime = updatedAt.getTime();
+
+    if (
+      Number.isNaN(updatedAtTime) ||
+      updatedAtTime > Date.now() + 5 * 60 * 1000 ||
+      Date.now() - updatedAtTime > applicationDraftLifetime
+    ) {
+      return null;
+    }
+
+    const normalizedFields = {
+      name: normalizeApplicationDraftString(draft.fields, "name", applicationDraftLimits.name),
+      email: normalizeApplicationDraftString(draft.fields, "email", applicationDraftLimits.email),
+      message: normalizeApplicationDraftString(
+        draft.fields,
+        "message",
+        applicationDraftLimits.message
+      )
+    };
+
+    const contextKeys = [
+      "selected_plan",
+      "selected_extras",
+      "estimated_price",
+      "reference_source",
+      "reference_project",
+      "reference_type",
+      "reference_result",
+      "brief_site_type",
+      "brief_goal",
+      "brief_features",
+      "brief_timeline",
+      "brief_budget",
+      "brief_status"
+    ];
+
+    const normalizedContext = Object.fromEntries(
+      contextKeys.map((key) => [
+        key,
+        normalizeApplicationDraftString(draft.context, key, applicationDraftLimits.context)
+      ])
+    );
+
+    if (
+      Object.values(normalizedFields).some((value) => value === null) ||
+      Object.values(normalizedContext).some((value) => value === null)
+    ) {
+      return null;
+    }
+
+    return {
+      version: applicationDraftStorageVersion,
+      updatedAt: updatedAt.toISOString(),
+      fields: normalizedFields,
+      context: normalizedContext
+    };
+  };
+
+  const restoreApplicationDraftConfiguration = (context) => {
+    if (!context.selected_plan || !context.estimated_price) {
+      return;
+    }
+
+    activeFormConfiguration = {
+      planName: context.selected_plan,
+      extras: [],
+      totalPrice: Number(context.estimated_price.replace(/[^\d]/g, "")) || 0
+    };
+
+    if (selectedPlanField) selectedPlanField.value = context.selected_plan;
+    if (selectedExtrasField) selectedExtrasField.value = context.selected_extras;
+    if (estimatedPriceField) estimatedPriceField.value = context.estimated_price;
+
+    if (configurationPlan) configurationPlan.textContent = context.selected_plan;
+    if (configurationExtras) {
+      configurationExtras.textContent = context.selected_extras || "Без дополнительных услуг";
+    }
+    if (configurationPrice) configurationPrice.textContent = context.estimated_price;
+    if (selectedConfiguration) selectedConfiguration.hidden = false;
+  };
+
+  const restoreApplicationDraftReference = (context) => {
+    const reference = {
+      source: context.reference_source,
+      project: context.reference_project,
+      type: context.reference_type,
+      result: context.reference_result
+    };
+
+    if (Object.values(reference).every(Boolean)) {
+      applyReferenceToForm(reference, {
+        announce: false
+      });
+    }
+  };
+
+  const restoreApplicationDraftBrief = (context) => {
+    if (
+      !context.brief_status ||
+      !context.brief_site_type ||
+      !context.brief_goal ||
+      !context.brief_features ||
+      !context.brief_timeline ||
+      !context.brief_budget
+    ) {
+      return;
+    }
+
+    const features = context.brief_features
+      .split(",")
+      .map((feature) => feature.trim())
+      .filter(Boolean);
+
+    if (features.length === 0) {
+      return;
+    }
+
+    applyBriefToForm(
+      {
+        siteType: context.brief_site_type,
+        goal: context.brief_goal,
+        features,
+        timeline: context.brief_timeline,
+        budget: context.brief_budget
+      },
+      {
+        announce: false,
+        moveFocus: false
+      }
+    );
+  };
+
+  const restoreApplicationDraft = () => {
+    if (!applicationDraftStorage) {
+      return false;
+    }
+
+    let rawDraft = "";
+
+    try {
+      rawDraft = applicationDraftStorage.getItem(applicationDraftStorageKey) || "";
+    } catch {
+      disableApplicationDraftStorage();
+      return false;
+    }
+
+    if (!rawDraft) {
+      return false;
+    }
+
+    let parsedDraft;
+
+    try {
+      parsedDraft = JSON.parse(rawDraft);
+    } catch {
+      removeApplicationDraftFromStorage();
+      setApplicationDraftStatus("Повреждённый черновик удалён. Форма готова к новой заявке.", {
+        state: "idle"
+      });
+      return false;
+    }
+
+    const draft = normalizeApplicationDraft(parsedDraft);
+
+    if (!draft || !hasApplicationDraftData(draft)) {
+      removeApplicationDraftFromStorage();
+      setApplicationDraftStatus("Старый или некорректный черновик удалён.", {
+        state: "idle"
+      });
+      return false;
+    }
+
+    isRestoringApplicationDraft = true;
+    isIgnoringApplicationDraftMutations = true;
+    fields.name.value = draft.fields.name;
+    fields.email.value = draft.fields.email;
+    fields.message.value = draft.fields.message;
+
+    restoreApplicationDraftConfiguration(draft.context);
+    restoreApplicationDraftReference(draft.context);
+    restoreApplicationDraftBrief(draft.context);
+
+    clearAllErrors();
+    landingForm.dataset.formState = "idle";
+    landingForm.setAttribute("aria-busy", "false");
+
+    isRestoringApplicationDraft = false;
+    window.queueMicrotask(() => {
+      isIgnoringApplicationDraftMutations = false;
+    });
+    hasStoredApplicationDraft = true;
+    syncApplicationDraftClearButton();
+
+    setApplicationDraftStatus("Черновик заявки восстановлен после обновления страницы.", {
+      state: "restored",
+      updatedAt: draft.updatedAt
+    });
+
+    return true;
+  };
+
+  const initializeApplicationDraft = () => {
+    if (applicationDraftPanel) {
+      applicationDraftPanel.hidden = false;
+    }
+
+    applicationDraftStorage = getApplicationDraftStorage();
+    applicationDraftReady = true;
+
+    if (!applicationDraftStorage) {
+      disableApplicationDraftStorage();
+      return;
+    }
+
+    setApplicationDraftStatus("Черновик сохраняется в этой вкладке.", {
+      state: "idle"
+    });
+
+    restoreApplicationDraft();
+    syncApplicationDraftClearButton();
+  };
+
+  const clearApplicationDraftAfterSuccess = () => {
+    isApplicationDraftSuppressed = true;
+
+    if (applicationDraftTimer !== null) {
+      window.clearTimeout(applicationDraftTimer);
+      applicationDraftTimer = null;
+    }
+
+    if (removeApplicationDraftFromStorage()) {
+      setApplicationDraftStatus("Черновик удалён после успешной отправки.", {
+        state: "deleted"
+      });
+    }
+  };
+
+  const clearApplicationDraftForm = () => {
+    if (
+      !applicationDraftClearButton ||
+      applicationDraftClearButton.getAttribute("aria-disabled") === "true"
+    ) {
+      return;
+    }
+
+    isApplicationDraftSuppressed = true;
+
+    if (applicationDraftTimer !== null) {
+      window.clearTimeout(applicationDraftTimer);
+      applicationDraftTimer = null;
+    }
+
+    removeApplicationDraftFromStorage();
+    landingForm.reset();
+    clearFormConfiguration({
+      announce: false
+    });
+    clearFormReference({
+      announce: false
+    });
+    clearFormBrief({
+      announce: false,
+      removeMessage: false
+    });
+    clearAllErrors();
+    hideSubmissionConfirmation();
+    setFormState("idle");
+
+    setApplicationDraftStatus("Черновик удалён. Форма очищена.", {
+      state: "deleted"
+    });
+    focusElement(fields.name);
   };
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -2213,6 +2729,7 @@ if (landingForm) {
     submitIndicator.hidden = !isSending;
 
     retryButton.hidden = !showRetry || isSending;
+    syncApplicationDraftClearButton();
 
     formStatus.textContent = message;
     formStatus.classList.remove("is-visible", "is-sending", "is-success", "is-error");
@@ -2368,9 +2885,16 @@ if (landingForm) {
     fields[fieldName].addEventListener("input", () => {
       clearFieldError(fieldName);
 
+      if (isRestoringApplicationDraft) {
+        return;
+      }
+
       if (confirmation && !confirmation.hidden) {
         hideSubmissionConfirmation();
       }
+
+      isApplicationDraftSuppressed = false;
+      scheduleApplicationDraftSave();
 
       if (!isSubmitting) {
         setFormState("idle");
@@ -2407,6 +2931,11 @@ if (landingForm) {
       focusElement(firstInvalidField);
       return;
     }
+
+    saveApplicationDraftNow({
+      announce: false,
+      force: true
+    });
 
     isSubmitting = true;
     setFormState("sending", {
@@ -2451,6 +2980,7 @@ if (landingForm) {
 
       const submissionSnapshot = createSubmissionSnapshot(formData, new Date());
 
+      clearApplicationDraftAfterSuccess();
       landingForm.reset();
       clearFormConfiguration({
         announce: false
@@ -2469,6 +2999,12 @@ if (landingForm) {
       });
       showSubmissionConfirmation(submissionSnapshot);
     } catch (error) {
+      isApplicationDraftSuppressed = false;
+      saveApplicationDraftNow({
+        announce: false,
+        force: true
+      });
+
       setFormState("error", {
         message: getSubmissionErrorMessage(error, didTimeout),
         showRetry: true,
@@ -2477,6 +3013,7 @@ if (landingForm) {
     } finally {
       window.clearTimeout(timeoutId);
       isSubmitting = false;
+      syncApplicationDraftClearButton();
     }
   };
 
@@ -2492,6 +3029,10 @@ if (landingForm) {
     hideSubmissionConfirmation({
       announce: true
     });
+    isApplicationDraftSuppressed = true;
+    setApplicationDraftStatus("Черновик сохраняется в этой вкладке.", {
+      state: "idle"
+    });
     setFormState("idle");
     focusElement(fields.name);
   });
@@ -2504,6 +3045,37 @@ if (landingForm) {
     openProjectBriefOverview();
   });
 
+  applicationDraftClearButton?.addEventListener("click", clearApplicationDraftForm);
+
+  const applicationDraftObserver = new MutationObserver(() => {
+    if (isIgnoringApplicationDraftMutations) {
+      return;
+    }
+
+    scheduleApplicationDraftSave();
+  });
+
+  [selectedConfiguration, selectedReference, selectedBrief].filter(Boolean).forEach((element) => {
+    applicationDraftObserver.observe(element, {
+      attributes: true,
+      attributeFilter: ["hidden"],
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+  });
+
+  const flushApplicationDraft = () => {
+    saveApplicationDraftNow({
+      announce: false,
+      force: true
+    });
+  };
+
+  window.addEventListener("pagehide", flushApplicationDraft);
+  window.addEventListener("beforeunload", flushApplicationDraft);
+
   landingForm.addEventListener("submit", handleFormSubmit);
   setFormState("idle");
+  initializeApplicationDraft();
 }

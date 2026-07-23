@@ -27,3 +27,6 @@ jobs:
 
       - name: Check code formatting
         run: npm run format:check
+
+      - name: Smoke check landing page
+        run: npm run smoke:landing

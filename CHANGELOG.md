@@ -4,6 +4,107 @@
 
 ---
 
+## v3.4 — Автопроверки лендинга и стабильный релизный процесс
+
+Дата обновления: 2026-07-23
+
+### Добавлено
+
+#### Локальная smoke-проверка
+
+- файл `scripts/smoke-landing.mjs`
+- npm-команда `npm run smoke:landing`
+- проверка ключевых маркеров в `landing.html`
+- проверка ключевых маркеров в `landing.js`
+- проверка ключевых маркеров в `landing.css`
+- проверка формы заявки и Formspree action
+- проверка полей имени, email и сообщения
+- проверка honeypot-поля
+- проверка состояний отправки
+- проверка карточки подтверждения
+- проверка черновика заявки
+- проверка ключей `localStorage` и `sessionStorage`
+- проверка `fetch`, `FormData`, `AbortController` и `isSubmitting`
+- проверка `focus-visible` и `prefers-reduced-motion`
+- понятные PASS- и FAIL-сообщения
+- код завершения `1` при ошибке
+
+#### GitHub Actions
+
+- шаг `Smoke check landing page`
+- автоматический запуск `npm run smoke:landing`
+- проверка при Pull Request в `main`
+- проверка при push в `main`
+
+### Улучшено
+
+- Pull Request теперь проверяет не только форматирование, но и ключевую структуру лендинга
+- ошибки удаления важных HTML-, JavaScript- и CSS-маркеров обнаруживаются до merge
+- локальные и автоматические проверки используют одну npm-команду
+- релизный процесс стал предсказуемее
+
+### Технические детали
+
+- smoke-скрипт использует только встроенные модули Node.js
+- внешние зависимости не добавлены
+- браузер не запускается
+- сетевые запросы не выполняются
+- существующая Prettier-проверка сохранена
+- Node.js 20 и `npm ci` сохранены
+
+### Задачи
+
+```text
+#66 — Добавить smoke-проверку лендинга
+#68 — Подключить smoke-проверку лендинга к GitHub Actions
+```
+
+### Рабочие ветки
+
+```text
+feature/add-landing-smoke-test
+feature/add-landing-smoke-ci
+feature/update-docs-v3.4
+```
+
+### Pull Request
+
+```text
+#67 — Добавил smoke-проверку лендинга
+#69 — Подключил smoke-проверку лендинга к CI
+```
+
+### Основные изменённые файлы
+
+```text
+scripts/smoke-landing.mjs
+package.json
+.github/workflows/format-check.yml
+README.md
+CHANGELOG.md
+```
+
+### Проверено
+
+```text
+1. npm run smoke:landing запускается из корня проекта.
+2. landing.html проверяется.
+3. landing.js проверяется.
+4. landing.css проверяется.
+5. При успехе выводятся PASS-сообщения.
+6. При ошибке процесс завершается с кодом 1.
+7. Внешние зависимости не добавлены.
+8. GitHub Actions запускает npm run format:check.
+9. GitHub Actions запускает npm run smoke:landing.
+10. Проверки запускаются для Pull Request в main.
+11. Проверки запускаются для push в main.
+12. npm run format:check проходит.
+13. npm run smoke:landing проходит.
+14. Pull Request объединены с main.
+```
+
+---
+
 ## v3.3 — Надёжная отправка, подтверждение и восстановление заявки
 
 Дата обновления: 2026-07-22

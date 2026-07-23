@@ -6,7 +6,8 @@
   "scripts": {
     "format": "node scripts/format-changed.mjs",
     "format:all": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "smoke:landing": "node scripts/smoke-landing.mjs"
   },
   "keywords": [
     "html",

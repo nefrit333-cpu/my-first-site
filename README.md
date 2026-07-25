@@ -9,7 +9,7 @@
 ![Prettier](https://img.shields.io/badge/Prettier-formatting-pink)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-checks-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-v3.4-blue)
+![Version](https://img.shields.io/badge/version-v3.5-blue)
 
 Учебный сайт-портфолио начинающего frontend-разработчика. Проект развивается через реальные задачи, отдельные feature-ветки, Pull Request, автоматические проверки и релизы.
 
@@ -18,12 +18,12 @@
 - [Открыть сайт-портфолио](https://nefrit333-cpu.github.io/my-first-site/)
 - [Открыть учебный лендинг услуги](https://nefrit333-cpu.github.io/my-first-site/landing.html)
 - [Открыть репозиторий](https://github.com/nefrit333-cpu/my-first-site)
-- [Открыть релиз v3.4](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.4)
+- [Открыть релиз v3.5](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.5)
 
 ## Текущая версия
 
 ```text
-v3.4 — Автопроверки лендинга и стабильный релизный процесс
+v3.5 — Проверки целостности сайта и надёжная навигация
 ```
 
 ## Стек
@@ -130,6 +130,42 @@ brief.css
 cases.css
 testimonials.css
 trust-flow.css
+```
+
+## Релиз v3.5
+
+Релиз добавляет проверку целостности локальной навигации и подключает её к GitHub Actions.
+
+```text
+v3.5 — Проверки целостности сайта и надёжная навигация
+```
+
+### 1. Локальная проверка ссылок
+
+Добавлен скрипт:
+
+```text
+scripts/check-local-links.mjs
+```
+
+Команда:
+
+```text
+npm run check:links
+```
+
+Проверяются `index.html` и `landing.html`, локальные атрибуты `href` и `src`, существование файлов, якоря текущего документа и ссылки на якоря другого HTML-файла.
+
+Внешние адреса, `mailto:`, `tel:`, `data:` и `javascript:` игнорируются. Проверка не запускает браузер и не выполняет сетевые запросы.
+
+### 2. Проверка ссылок в GitHub Actions
+
+Workflow `.github/workflows/format-check.yml` теперь выполняет:
+
+```text
+npm run format:check
+npm run smoke:landing
+npm run check:links
 ```
 
 ## Релиз v3.4
@@ -587,6 +623,9 @@ npm run format:check
 
 npm run smoke:landing
 → проверяет ключевые маркеры учебного лендинга
+
+npm run check:links
+→ проверяет локальные файлы, ссылки и HTML-якоря
 ```
 
 ## Рабочий процесс
@@ -609,6 +648,9 @@ Issue → feature-ветка → изменения → Pull Request → merge �
 32. Smoke-проверка лендинга
 33. Smoke-проверка в GitHub Actions
 34. Документация релиза v3.4
+35. Проверка локальных ссылок
+36. Проверка ссылок в GitHub Actions
+37. Документация релиза v3.5
 ```
 
 Рабочие ветки последних релизов:
@@ -625,6 +667,9 @@ feature/update-docs-v3.3
 feature/add-landing-smoke-test
 feature/add-landing-smoke-ci
 feature/update-docs-v3.4
+feature/add-local-link-check
+feature/add-local-link-check-ci
+feature/update-docs-v3.5
 ```
 
 Pull Request последних релизов:
@@ -639,6 +684,8 @@ Pull Request последних релизов:
 #63 — восстановление черновика заявки
 #67 — smoke-проверка лендинга
 #69 — smoke-проверка лендинга в CI
+#73 — проверка локальных ссылок
+#75 — проверка локальных ссылок в CI
 ```
 
 ## Чему я научился
@@ -724,6 +771,7 @@ Pull Request последних релизов:
 - [v3.2](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.2) — пошаговый бриф и расширенная заявка
 - [v3.3](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.3) — надёжная отправка, подтверждение и восстановление заявки
 - [v3.4](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.4) — автопроверки лендинга и стабильный релизный процесс
+- [v3.5](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.5) — проверки целостности сайта и надёжная навигация
 
 ## Планы
 
@@ -744,7 +792,7 @@ Pull Request последних релизов:
 
 ```text
 Проект находится в активной разработке.
-Текущая версия: v3.4
+Текущая версия: v3.5
 ```
 
 ## Автор

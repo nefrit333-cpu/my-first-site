@@ -8,7 +8,8 @@
     "format:all": "prettier --write .",
     "format:check": "prettier --check .",
     "smoke:landing": "node scripts/smoke-landing.mjs",
-    "check:links": "node scripts/check-local-links.mjs"
+    "check:links": "node scripts/check-local-links.mjs",
+    "check:html": "node scripts/check-html-quality.mjs"
   },
   "keywords": [
     "html",

@@ -30,3 +30,6 @@ jobs:
 
       - name: Smoke check landing page
         run: npm run smoke:landing
+
+      - name: Check local links
+        run: npm run check:links

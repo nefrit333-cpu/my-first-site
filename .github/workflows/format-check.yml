@@ -33,3 +33,6 @@ jobs:
 
       - name: Check local links
         run: npm run check:links
+
+      - name: Check HTML quality
+        run: npm run check:html

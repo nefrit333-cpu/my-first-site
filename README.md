@@ -9,7 +9,7 @@
 ![Prettier](https://img.shields.io/badge/Prettier-formatting-pink)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-checks-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-v3.5-blue)
+![Version](https://img.shields.io/badge/version-v3.6-blue)
 
 Учебный сайт-портфолио начинающего frontend-разработчика. Проект развивается через реальные задачи, отдельные feature-ветки, Pull Request, автоматические проверки и релизы.
 
@@ -18,12 +18,12 @@
 - [Открыть сайт-портфолио](https://nefrit333-cpu.github.io/my-first-site/)
 - [Открыть учебный лендинг услуги](https://nefrit333-cpu.github.io/my-first-site/landing.html)
 - [Открыть репозиторий](https://github.com/nefrit333-cpu/my-first-site)
-- [Открыть релиз v3.5](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.5)
+- [Открыть релиз v3.6](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.6)
 
 ## Текущая версия
 
 ```text
-v3.5 — Проверки целостности сайта и надёжная навигация
+v3.6 — Автопроверки HTML и доступности интерфейса
 ```
 
 ## Стек
@@ -130,6 +130,43 @@ brief.css
 cases.css
 testimonials.css
 trust-flow.css
+```
+
+## Релиз v3.6
+
+Релиз добавляет автоматическую проверку базового качества HTML и доступности интерфейса.
+
+```text
+v3.6 — Автопроверки HTML и доступности интерфейса
+```
+
+### 1. Локальная проверка HTML
+
+Добавлен скрипт:
+
+```text
+scripts/check-html-quality.mjs
+```
+
+Команда:
+
+```text
+npm run check:html
+```
+
+Проверяются `index.html` и `landing.html`, повторяющиеся и пустые `id`, изображения без `alt`, кнопки без `type`, поля без доступного имени, связи `label for`, пустые ссылки, `lang` и `title`.
+
+Проверка учитывает как явные связи `label for`, так и элементы формы, вложенные внутрь `<label>`.
+
+### 2. Проверка HTML в GitHub Actions
+
+Workflow `.github/workflows/format-check.yml` теперь выполняет:
+
+```text
+npm run format:check
+npm run smoke:landing
+npm run check:links
+npm run check:html
 ```
 
 ## Релиз v3.5
@@ -626,6 +663,9 @@ npm run smoke:landing
 
 npm run check:links
 → проверяет локальные файлы, ссылки и HTML-якоря
+
+npm run check:html
+→ проверяет базовое качество HTML и доступность
 ```
 
 ## Рабочий процесс
@@ -651,6 +691,9 @@ Issue → feature-ветка → изменения → Pull Request → merge �
 35. Проверка локальных ссылок
 36. Проверка ссылок в GitHub Actions
 37. Документация релиза v3.5
+38. Проверка качества HTML
+39. Проверка HTML в GitHub Actions
+40. Документация релиза v3.6
 ```
 
 Рабочие ветки последних релизов:
@@ -670,6 +713,9 @@ feature/update-docs-v3.4
 feature/add-local-link-check
 feature/add-local-link-check-ci
 feature/update-docs-v3.5
+feature/add-html-quality-check
+feature/add-html-quality-check-ci
+feature/update-docs-v3.6
 ```
 
 Pull Request последних релизов:
@@ -686,6 +732,8 @@ Pull Request последних релизов:
 #69 — smoke-проверка лендинга в CI
 #73 — проверка локальных ссылок
 #75 — проверка локальных ссылок в CI
+#79 — проверка качества HTML
+#81 — проверка качества HTML в CI
 ```
 
 ## Чему я научился
@@ -772,6 +820,7 @@ Pull Request последних релизов:
 - [v3.3](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.3) — надёжная отправка, подтверждение и восстановление заявки
 - [v3.4](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.4) — автопроверки лендинга и стабильный релизный процесс
 - [v3.5](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.5) — проверки целостности сайта и надёжная навигация
+- [v3.6](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.6) — автопроверки HTML и доступности интерфейса
 
 ## Планы
 
@@ -792,7 +841,7 @@ Pull Request последних релизов:
 
 ```text
 Проект находится в активной разработке.
-Текущая версия: v3.5
+Текущая версия: v3.6
 ```
 
 ## Автор

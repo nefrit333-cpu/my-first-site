@@ -9,7 +9,7 @@
 ![Prettier](https://img.shields.io/badge/Prettier-formatting-pink)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-checks-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-v3.7-blue)
+![Version](https://img.shields.io/badge/version-v3.8-blue)
 
 Учебный сайт-портфолио начинающего frontend-разработчика. Проект развивается через реальные задачи, отдельные feature-ветки, Pull Request, автоматические проверки и релизы.
 
@@ -18,12 +18,12 @@
 - [Открыть сайт-портфолио](https://nefrit333-cpu.github.io/my-first-site/)
 - [Открыть учебный лендинг услуги](https://nefrit333-cpu.github.io/my-first-site/landing.html)
 - [Открыть репозиторий](https://github.com/nefrit333-cpu/my-first-site)
-- [Открыть релиз v3.7](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.7)
+- [Открыть релиз v3.8](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.8)
 
 ## Текущая версия
 
 ```text
-v3.7 — Проверки SEO-метаданных и предпросмотра страниц
+v3.8 — Единая команда качества и удобный локальный контроль
 ```
 
 ## Стек
@@ -131,6 +131,57 @@ cases.css
 testimonials.css
 trust-flow.css
 ```
+
+## Релиз v3.8
+
+Релиз добавляет единую команду качества для локальной проверки проекта и переводит GitHub Actions на этот единый вход.
+
+```text
+v3.8 — Единая команда качества и удобный локальный контроль
+```
+
+### 1. Единая локальная команда качества
+
+Добавлен скрипт:
+
+```text
+scripts/check-all.mjs
+```
+
+Команда:
+
+```text
+npm run check:all
+```
+
+Команда последовательно запускает:
+
+```text
+npm run format:check
+npm run smoke:landing
+npm run check:links
+npm run check:html
+npm run check:seo
+```
+
+Если одна проверка падает, выполнение останавливается, показывается название упавшей проверки, а процесс завершается с ненулевым кодом.
+
+При успехе выводится итог:
+
+```text
+All quality checks passed
+```
+
+### 2. Единая команда в GitHub Actions
+
+Workflow `.github/workflows/format-check.yml` теперь использует один шаг:
+
+```text
+Run all quality checks
+npm run check:all
+```
+
+В workflow сохранены `push` и `pull_request` для `main`, `actions/checkout@v4`, `actions/setup-node@v4`, Node.js 20 и `npm ci`.
 
 ## Релиз v3.7
 
@@ -717,6 +768,9 @@ npm run check:html
 
 npm run check:seo
 → проверяет SEO-метаданные и предпросмотр страниц
+
+npm run check:all
+→ запускает все проверки качества одной командой
 ```
 
 ## Рабочий процесс
@@ -748,6 +802,9 @@ Issue → feature-ветка → изменения → Pull Request → merge �
 41. Проверка SEO-метаданных
 42. Проверка SEO-метаданных в GitHub Actions
 43. Документация релиза v3.7
+44. Единая команда всех проверок
+45. Единая команда качества в GitHub Actions
+46. Документация релиза v3.8
 ```
 
 Рабочие ветки последних релизов:
@@ -773,6 +830,9 @@ feature/update-docs-v3.6
 feature/add-seo-meta-check
 feature/add-seo-meta-check-ci
 feature/update-docs-v3.7
+feature/add-check-all-command
+feature/use-check-all-in-ci
+feature/update-docs-v3.8
 ```
 
 Pull Request последних релизов:
@@ -793,6 +853,8 @@ Pull Request последних релизов:
 #81 — проверка качества HTML в CI
 #85 — проверка SEO-метаданных
 #87 — проверка SEO-метаданных в CI
+#91 — единая команда всех проверок
+#93 — единая команда качества в CI
 ```
 
 ## Чему я научился
@@ -881,6 +943,7 @@ Pull Request последних релизов:
 - [v3.5](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.5) — проверки целостности сайта и надёжная навигация
 - [v3.6](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.6) — автопроверки HTML и доступности интерфейса
 - [v3.7](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.7) — проверки SEO-метаданных и предпросмотра страниц
+- [v3.8](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.8) — единая команда качества и удобный локальный контроль
 
 ## Планы
 
@@ -901,7 +964,7 @@ Pull Request последних релизов:
 
 ```text
 Проект находится в активной разработке.
-Текущая версия: v3.7
+Текущая версия: v3.8
 ```
 
 ## Автор

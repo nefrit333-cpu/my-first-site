@@ -25,17 +25,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check code formatting
-        run: npm run format:check
-
-      - name: Smoke check landing page
-        run: npm run smoke:landing
-
-      - name: Check local links
-        run: npm run check:links
-
-      - name: Check HTML quality
-        run: npm run check:html
-
-      - name: Check SEO metadata
-        run: npm run check:seo
+      - name: Run all quality checks
+        run: npm run check:all

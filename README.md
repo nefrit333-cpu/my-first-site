@@ -9,7 +9,7 @@
 ![Prettier](https://img.shields.io/badge/Prettier-formatting-pink)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-checks-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-v3.6-blue)
+![Version](https://img.shields.io/badge/version-v3.7-blue)
 
 Учебный сайт-портфолио начинающего frontend-разработчика. Проект развивается через реальные задачи, отдельные feature-ветки, Pull Request, автоматические проверки и релизы.
 
@@ -18,12 +18,12 @@
 - [Открыть сайт-портфолио](https://nefrit333-cpu.github.io/my-first-site/)
 - [Открыть учебный лендинг услуги](https://nefrit333-cpu.github.io/my-first-site/landing.html)
 - [Открыть репозиторий](https://github.com/nefrit333-cpu/my-first-site)
-- [Открыть релиз v3.6](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.6)
+- [Открыть релиз v3.7](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.7)
 
 ## Текущая версия
 
 ```text
-v3.6 — Автопроверки HTML и доступности интерфейса
+v3.7 — Проверки SEO-метаданных и предпросмотра страниц
 ```
 
 ## Стек
@@ -131,6 +131,54 @@ cases.css
 testimonials.css
 trust-flow.css
 ```
+
+## Релиз v3.7
+
+Релиз добавляет автоматическую проверку SEO-метаданных и данных предпросмотра страниц.
+
+```text
+v3.7 — Проверки SEO-метаданных и предпросмотра страниц
+```
+
+### 1. Локальная проверка SEO-метаданных
+
+Добавлен скрипт:
+
+```text
+scripts/check-seo-meta.mjs
+```
+
+Команда:
+
+```text
+npm run check:seo
+```
+
+Проверяются `index.html` и `landing.html`, непустой `title`, `meta name="description"`, `meta name="viewport"`, `link rel="canonical"`, Open Graph-теги, Twitter Card и дубли SEO-тегов.
+
+При успехе:
+
+```text
+PASS index.html
+PASS landing.html
+SEO meta check passed
+```
+
+При ошибке выводится понятное `FAIL`-сообщение, а процесс завершается с кодом `1`.
+
+### 2. SEO-проверка в GitHub Actions
+
+Workflow `.github/workflows/format-check.yml` теперь выполняет:
+
+```text
+npm run format:check
+npm run smoke:landing
+npm run check:links
+npm run check:html
+npm run check:seo
+```
+
+Проверки автоматически запускаются при Pull Request в `main` и push в `main`.
 
 ## Релиз v3.6
 
@@ -666,6 +714,9 @@ npm run check:links
 
 npm run check:html
 → проверяет базовое качество HTML и доступность
+
+npm run check:seo
+→ проверяет SEO-метаданные и предпросмотр страниц
 ```
 
 ## Рабочий процесс
@@ -694,6 +745,9 @@ Issue → feature-ветка → изменения → Pull Request → merge �
 38. Проверка качества HTML
 39. Проверка HTML в GitHub Actions
 40. Документация релиза v3.6
+41. Проверка SEO-метаданных
+42. Проверка SEO-метаданных в GitHub Actions
+43. Документация релиза v3.7
 ```
 
 Рабочие ветки последних релизов:
@@ -716,6 +770,9 @@ feature/update-docs-v3.5
 feature/add-html-quality-check
 feature/add-html-quality-check-ci
 feature/update-docs-v3.6
+feature/add-seo-meta-check
+feature/add-seo-meta-check-ci
+feature/update-docs-v3.7
 ```
 
 Pull Request последних релизов:
@@ -734,6 +791,8 @@ Pull Request последних релизов:
 #75 — проверка локальных ссылок в CI
 #79 — проверка качества HTML
 #81 — проверка качества HTML в CI
+#85 — проверка SEO-метаданных
+#87 — проверка SEO-метаданных в CI
 ```
 
 ## Чему я научился
@@ -821,6 +880,7 @@ Pull Request последних релизов:
 - [v3.4](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.4) — автопроверки лендинга и стабильный релизный процесс
 - [v3.5](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.5) — проверки целостности сайта и надёжная навигация
 - [v3.6](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.6) — автопроверки HTML и доступности интерфейса
+- [v3.7](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.7) — проверки SEO-метаданных и предпросмотра страниц
 
 ## Планы
 
@@ -841,7 +901,7 @@ Pull Request последних релизов:
 
 ```text
 Проект находится в активной разработке.
-Текущая версия: v3.6
+Текущая версия: v3.7
 ```
 
 ## Автор

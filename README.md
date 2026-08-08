@@ -9,7 +9,7 @@
 ![Prettier](https://img.shields.io/badge/Prettier-formatting-pink)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-checks-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-v3.8-blue)
+![Version](https://img.shields.io/badge/version-v3.9-blue)
 
 Учебный сайт-портфолио начинающего frontend-разработчика. Проект развивается через реальные задачи, отдельные feature-ветки, Pull Request, автоматические проверки и релизы.
 
@@ -18,12 +18,12 @@
 - [Открыть сайт-портфолио](https://nefrit333-cpu.github.io/my-first-site/)
 - [Открыть учебный лендинг услуги](https://nefrit333-cpu.github.io/my-first-site/landing.html)
 - [Открыть репозиторий](https://github.com/nefrit333-cpu/my-first-site)
-- [Открыть релиз v3.8](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.8)
+- [Открыть релиз v3.9](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.9)
 
 ## Текущая версия
 
 ```text
-v3.8 — Единая команда качества и удобный локальный контроль
+v3.9 — Чистый запуск единой проверки без предупреждений Node.js
 ```
 
 ## Стек
@@ -130,6 +130,61 @@ brief.css
 cases.css
 testimonials.css
 trust-flow.css
+```
+
+## Релиз v3.9
+
+Релиз очищает запуск единой команды качества от предупреждения Node.js и сохраняет прежний сценарий проверки проекта.
+
+```text
+v3.9 — Чистый запуск единой проверки без предупреждений Node.js
+```
+
+### 1. Исправление `check:all`
+
+Обновлён скрипт:
+
+```text
+scripts/check-all.mjs
+```
+
+Команда остаётся прежней:
+
+```text
+npm run check:all
+```
+
+При обычном запуске через npm скрипт использует:
+
+```text
+process.execPath
+process.env.npm_execpath
+```
+
+Это позволяет запускать npm CLI напрямую через Node.js и не передавать аргументы в shell.
+
+### 2. Что исправлено
+
+Убран warning:
+
+```text
+[DEP0190] DeprecationWarning
+```
+
+При этом сохранены:
+
+```text
+последовательный запуск всех проверок
+остановка при первой ошибке
+ненулевой код завершения при ошибке
+понятное сообщение с названием упавшей проверки
+итоговое сообщение All quality checks passed
+```
+
+GitHub Actions по-прежнему запускает:
+
+```text
+npm run check:all
 ```
 
 ## Релиз v3.8
@@ -770,7 +825,7 @@ npm run check:seo
 → проверяет SEO-метаданные и предпросмотр страниц
 
 npm run check:all
-→ запускает все проверки качества одной командой
+→ запускает все проверки качества одной командой без предупреждения DEP0190
 ```
 
 ## Рабочий процесс
@@ -805,6 +860,8 @@ Issue → feature-ветка → изменения → Pull Request → merge �
 44. Единая команда всех проверок
 45. Единая команда качества в GitHub Actions
 46. Документация релиза v3.8
+47. Чистый запуск check:all без warning Node.js
+48. Документация релиза v3.9
 ```
 
 Рабочие ветки последних релизов:
@@ -833,6 +890,8 @@ feature/update-docs-v3.7
 feature/add-check-all-command
 feature/use-check-all-in-ci
 feature/update-docs-v3.8
+feature/remove-check-all-warning
+feature/update-docs-v3.9
 ```
 
 Pull Request последних релизов:
@@ -855,6 +914,7 @@ Pull Request последних релизов:
 #87 — проверка SEO-метаданных в CI
 #91 — единая команда всех проверок
 #93 — единая команда качества в CI
+#97 — чистый запуск check:all без warning Node.js
 ```
 
 ## Чему я научился
@@ -944,6 +1004,7 @@ Pull Request последних релизов:
 - [v3.6](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.6) — автопроверки HTML и доступности интерфейса
 - [v3.7](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.7) — проверки SEO-метаданных и предпросмотра страниц
 - [v3.8](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.8) — единая команда качества и удобный локальный контроль
+- [v3.9](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.9) — чистый запуск единой проверки без предупреждений Node.js
 
 ## Планы
 
@@ -964,7 +1025,7 @@ Pull Request последних релизов:
 
 ```text
 Проект находится в активной разработке.
-Текущая версия: v3.8
+Текущая версия: v3.9
 ```
 
 ## Автор

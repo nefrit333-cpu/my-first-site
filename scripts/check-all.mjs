@@ -8,16 +8,31 @@ const checks = [
   ["check:seo", "Проверка SEO-метаданных"]
 ];
 
+const runNpmScript = (scriptName) => {
+  const npmExecPath = process.env.npm_execpath;
+
+  if (npmExecPath) {
+    return spawnSync(process.execPath, [npmExecPath, "run", scriptName], {
+      stdio: "inherit"
+    });
+  }
+
+  const command =
+    process.platform === "win32" ? `npm.cmd run ${scriptName}` : `npm run ${scriptName}`;
+
+  return spawnSync(command, {
+    stdio: "inherit",
+    shell: true
+  });
+};
+
 console.log("Running quality checks...\n");
 
 for (const [index, [scriptName, description]] of checks.entries()) {
   console.log(`${index + 1}/${checks.length} ${scriptName}`);
   console.log(description);
 
-  const result = spawnSync("npm", ["run", scriptName], {
-    stdio: "inherit",
-    shell: process.platform === "win32"
-  });
+  const result = runNpmScript(scriptName);
 
   if (result.error) {
     console.error(`\nQuality check failed: ${scriptName}`);

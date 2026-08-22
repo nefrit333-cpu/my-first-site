@@ -18,7 +18,7 @@
 - [Открыть сайт-портфолио](https://nefrit333-cpu.github.io/my-first-site/)
 - [Открыть учебный лендинг услуги](https://nefrit333-cpu.github.io/my-first-site/landing.html)
 - [Открыть репозиторий](https://github.com/nefrit333-cpu/my-first-site)
-- [Открыть релиз v3.9](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.9)
+- [Открыть последний опубликованный тег v3.8](https://github.com/nefrit333-cpu/my-first-site/releases/tag/v3.8)
 
 ## Текущая версия
 

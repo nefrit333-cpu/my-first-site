@@ -11,7 +11,8 @@
     "check:links": "node scripts/check-local-links.mjs",
     "check:html": "node scripts/check-html-quality.mjs",
     "check:seo": "node scripts/check-seo-meta.mjs",
-    "check:all": "node scripts/check-all.mjs"
+    "check:all": "node scripts/check-all.mjs",
+    "test:e2e": "playwright test"
   },
   "keywords": [
     "html",
@@ -24,6 +25,8 @@
   "author": "Dmitriy Web",
   "license": "MIT",
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "http-server": "^14.1.1",
     "prettier": "^3.3.3"
   }
 }

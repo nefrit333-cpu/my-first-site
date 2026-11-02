@@ -1,3 +1,4 @@
+
 # =========================
 # System files
 # =========================
@@ -79,8 +80,12 @@ build/
 
 .cache/
 
-# Дополнения для безопасного переноса
-# Локальное окружение и секреты
+
+# =========================
+# Safe transfer between computers
+# =========================
+
+# Local environment and secrets
 .env
 .env.*
 !.env.example
@@ -91,7 +96,11 @@ auth.json
 *.pem
 *.pfx
 
-# Служебные данные Codex и рабочие кэши
+
+# =========================
+# Codex and agent temporary data
+# =========================
+
 .codex/
 .agent-work/
 .serena/
@@ -100,7 +109,11 @@ archived_sessions/
 backups/
 transactions/
 
-# Устанавливаемые зависимости
+
+# =========================
+# Installed dependencies
+# =========================
+
 node_modules/
 vendor/
 .venv/
@@ -111,9 +124,21 @@ __pycache__/
 .next/
 .astro/
 
-# Временные файлы
+
+# =========================
+# Temporary files
+# =========================
+
 *.log
 *.swp
 *.tmp
 Thumbs.db
 .DS_Store
+
+
+# =========================
+# Playwright automated tests
+# =========================
+
+playwright-report/
+test-results/
